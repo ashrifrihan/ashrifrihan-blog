@@ -1,0 +1,2751 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickStay - Hotel Booking System | Ashrif Rihan Blogs Case Study</title>
+  <meta name="description" content="QuickStay case study by Ashrif Rihan. A hotel booking and management system built with PHP, MySQL, Stripe, role-based access, and complete operational workflows." />
+  <meta name="author" content="Ashrif Rihan" />
+  <link rel="canonical" href="https://ashrifrihan.dev/blog-view.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    :root {
+      --ink: #0d1117;
+      --muted: #5c6676;
+      --line: #e8edf3;
+      --soft: #f4f7fb;
+      --white: #ffffff;
+      --blue: #1463ff;
+      --blue-2: #7bb5ff;
+      --green: #20a779;
+      --yellow: #f5d84c;
+      --red: #e5484d;
+      --radius: 24px;
+      --shadow: 0 24px 70px rgba(20, 99, 255, 0.13);
+      --font-body: "Manrope", Arial, sans-serif;
+      --font-display: "Space Grotesk", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: #f2f6fb;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .shell { width: min(1240px, calc(100% - clamp(16px, 4vw, 30px))); margin: 0 auto; }
+    .icon { width: 18px; height: 18px; stroke-width: 2.2; }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 68px;
+      width: 100%;
+      margin: 0;
+      padding: 0 18px 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(232,237,243,0.92);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.84);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 50px rgba(13,17,23,0.06);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      border-radius: 11px;
+      background: var(--ink);
+    }
+    .nav-links { display: flex; align-items: center; gap: 10px; }
+    .nav-links a, .menu-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 800;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .nav-links a:hover, .menu-link:hover { color: var(--ink); background: #f1f5fa; }
+    .nav-cta { color: #fff !important; background: var(--ink) !important; }
+
+    /* HAMBURGER BUTTON */
+    .menu-button {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 14px;
+      color: var(--ink);
+      background: #f3f6fa;
+      cursor: pointer;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+    }
+    .hamburger-icon, .close-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .close-icon {
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(-90deg) scale(0.7);
+    }
+    .menu-button.open .hamburger-icon {
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(90deg) scale(0.7);
+    }
+    .menu-button.open .close-icon {
+      opacity: 1;
+      transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      position: fixed;
+      top: 88px;
+      left: 16px;
+      right: 16px;
+      z-index: 90;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.97);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(-12px) scale(0.97);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.22,1,0.36,1);
+      display: grid;
+      gap: 6px;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 920px;
+      position: relative;
+      width: 100%;
+      margin: 0;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: clamp(22px, 4vw, 42px);
+      padding: clamp(54px, 8vw, 104px) clamp(14px, 2.5vw, 28px) clamp(64px, 10vw, 130px);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.78);
+      border-radius: 0;
+      background:
+        radial-gradient(circle at 78% 20%, rgba(255,255,255,0.86), transparent 17%),
+        linear-gradient(135deg, #1b8cff 0%, #8bc8ff 48%, #edf7ff 100%);
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -4% -20% -4%;
+      height: 56%;
+      background: linear-gradient(to top, rgba(255,255,255,0.96), rgba(255,255,255,0.08) 64%, rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: min(980px, 100%);
+      margin: 0 auto;
+      padding-top: 0;
+      text-align: center;
+      color: #fff;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border: 1px solid rgba(255,255,255,0.36);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(12px);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 20px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 7.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      text-wrap: balance;
+    }
+    .hero-text {
+      max-width: 680px;
+      margin: 22px auto 0;
+      color: rgba(255,255,255,0.9);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.78;
+    }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.92rem;
+      font-weight: 900;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-dark {
+      color: #fff;
+      background: #07111f;
+      box-shadow: 0 12px 36px rgba(7,17,31,0.24);
+    }
+    .btn-light {
+      color: #07111f;
+      background: rgba(255,255,255,0.92);
+      border-color: rgba(255,255,255,0.62);
+    }
+    .hero-dashboard {
+      position: relative;
+      z-index: 2;
+      width: min(980px, 100%);
+      min-height: auto;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 0.75fr;
+      gap: 14px;
+    }
+    .glass-card {
+      overflow: hidden;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.48);
+      border-radius: 22px;
+      color: #fff;
+      background: rgba(255,255,255,0.22);
+      backdrop-filter: blur(20px);
+    }
+    .glass-card.dark {
+      background: rgba(7,17,31,0.86);
+      border-color: rgba(7,17,31,0.18);
+    }
+    .mini-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 14px;
+      font-weight: 900;
+    }
+    .booking-lines { display: grid; gap: 10px; }
+    .line {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+    }
+    .line:nth-child(2) { width: 76%; }
+    .line:nth-child(3) { width: 58%; }
+    .status-list { display: grid; gap: 10px; }
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 11px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.14);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    /* TOC */
+    .toc-wrap {
+      position: sticky;
+      top: 92px;
+      z-index: 60;
+      margin-top: 20px;
+    }
+    .toc {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 12px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border: 1px solid rgba(218,226,236,0.96);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 60px rgba(13,17,23,0.08);
+    }
+    .toc::-webkit-scrollbar { display: none; }
+    .toc a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid rgba(220,228,239,0.95);
+      border-radius: 999px;
+      color: #435266;
+      white-space: nowrap;
+      font-size: 0.82rem;
+      font-weight: 900;
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8fd 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.94);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .toc a.active, .toc a:hover {
+      color: #fff;
+      border-color: rgba(20,99,255,0.3);
+      background: linear-gradient(135deg, #07111f 0%, #0f2f67 58%, #1463ff 100%);
+      box-shadow: 0 14px 34px rgba(20,99,255,0.22);
+      transform: translateY(-1px);
+    }
+
+    /* SECTIONS */
+    .section { padding: 96px 0 0; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 24px;
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 10px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+    }
+    .section-note {
+      max-width: 440px;
+      color: var(--muted);
+      line-height: 1.78;
+      margin: 0;
+    }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card {
+      min-height: 190px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: 0 16px 46px rgba(13,17,23,0.05);
+    }
+    .card.tint-blue { background: #edf6ff; }
+    .card.tint-green { background: #edfbf6; }
+    .card.tint-yellow { background: #fffbe7; }
+    .card.tint-red { background: #fff3f3; }
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 24px;
+      color: var(--blue);
+      border-radius: 15px;
+      background: rgba(20,99,255,0.09);
+    }
+    .card h3 { margin: 0; font-size: 1.05rem; line-height: 1.35; }
+    .card p { margin: 10px 0 0; color: var(--muted); line-height: 1.66; font-size: 0.92rem; }
+
+    .role-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .role-card {
+      min-height: 220px;
+      padding: 22px;
+      border-radius: 24px;
+      color: #fff;
+      background: #07111f;
+      box-shadow: 0 20px 60px rgba(13,17,23,0.1);
+    }
+    .role-card:nth-child(2) { background: #1463ff; }
+    .role-card:nth-child(3) { background: #20a779; }
+    .role-card:nth-child(4) { background: #232b37; }
+    .role-card p { color: rgba(255,255,255,0.74); }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .timeline { display: grid; gap: 12px; margin-top: 20px; }
+    .step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.72);
+    }
+    .step-num {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      border-radius: 50%;
+      background: #07111f;
+      font-weight: 900;
+    }
+    .step h4 { margin: 0; font-size: 0.95rem; }
+    .step p { margin: 4px 0 0; }
+
+    /* GALLERY */
+    .gallery {
+      width: 100%;
+      padding-top: 94px;
+    }
+    .gallery-intro {
+      min-height: 30vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding-bottom: 24px;
+    }
+    .gallery-track-container {
+      height: 400vh;
+      position: relative;
+    }
+    .gallery-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      background: #f2f6fb;
+    }
+    .gallery-track {
+      height: 100%;
+      display: flex;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      width: 100%;
+    }
+    .gallery-card {
+      width: 100vw;
+      height: 100%;
+      flex: 0 0 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 90px 24px 40px;
+    }
+    .gallery-panel {
+      width: min(760px, 100%);
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      border-radius: 32px;
+      overflow: hidden;
+      color: #fff;
+      background:
+        linear-gradient(145deg, rgba(7,17,31,0.08), rgba(7,17,31,0.9)),
+        radial-gradient(circle at 20% 22%, rgba(123,181,255,0.9), transparent 30%),
+        linear-gradient(135deg, #1463ff, #20a779);
+      box-shadow: var(--shadow);
+    }
+    .gallery-panel h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+    }
+    .gallery-panel p {
+      max-width: 540px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.72;
+    }
+
+    .role-card {
+      border: 1px solid rgba(216,226,240,0.95);
+      color: var(--ink);
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%) !important;
+      transform: rotate(var(--tilt, 0deg));
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .role-card:hover {
+      transform: translateY(-6px) rotate(0deg);
+      box-shadow: 0 28px 70px rgba(20,99,255,0.15);
+    }
+    .role-card:nth-child(1) { --tilt: -1.5deg; }
+    .role-card:nth-child(2) { --tilt: 1deg; }
+    .role-card:nth-child(3) { --tilt: -0.8deg; }
+    .role-card:nth-child(4) { --tilt: 1.6deg; }
+    .role-card p { color: var(--muted); }
+    .role-mini-screen {
+      min-height: 104px;
+      margin-bottom: 18px;
+      padding: 16px;
+      border-radius: 22px;
+      background: #edf5ff;
+      position: relative;
+      overflow: hidden;
+    }
+    .role-mini-screen::before,
+    .role-mini-screen::after {
+      content: "";
+      display: block;
+      height: 11px;
+      border-radius: 999px;
+      background: #d9e7fb;
+      margin-bottom: 10px;
+    }
+    .role-mini-screen::after { width: 64%; }
+    .role-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      color: #fff;
+      background: #07111f;
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+    .narrative-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .sticky-copy {
+      position: sticky;
+      top: 178px;
+      padding: 32px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #0a1628 0%, #0e2044 60%, #1463ff 140%);
+      color: #fff;
+      box-shadow: 0 32px 80px rgba(20,99,255,0.22), inset 0 1px 0 rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+    .sticky-copy::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 90% 10%, rgba(123,181,255,0.18), transparent 55%),
+                  radial-gradient(circle at 10% 90%, rgba(20,99,255,0.12), transparent 50%);
+      pointer-events: none;
+    }
+    .sticky-copy .kicker { position: relative; z-index: 1; }
+    .sticky-copy h3 { position: relative; z-index: 1; margin: 14px 0 0; font-family: var(--font-display); font-size: clamp(1.5rem, 2.8vw, 2.4rem); line-height: 1.05; letter-spacing: -0.04em; }
+    .sticky-copy p { position: relative; z-index: 1; color: rgba(255,255,255,0.72); line-height: 1.72; margin-top: 12px; }
+    .stacked-cards { display: grid; gap: 14px; }
+    .stack-card {
+      min-height: 150px;
+      padding: 26px;
+      border: 1px solid rgba(20,99,255,0.12);
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 10px 36px rgba(13,17,23,0.06);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .stack-card::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--blue), #20a779);
+      border-radius: 0 0 0 0;
+    }
+    .stack-card:hover { transform: translateX(4px); box-shadow: 0 18px 52px rgba(20,99,255,0.1); }
+    .stack-card h3 { margin: 0; font-size: 1.08rem; }
+    .stack-card p { color: var(--muted); line-height: 1.66; margin-bottom: 0; margin-top: 8px; }
+    .feature-showcase {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .feature-tile {
+      min-height: 280px;
+      padding: 32px;
+      border: 1px solid rgba(20,99,255,0.1);
+      border-radius: 28px;
+      background: linear-gradient(160deg, #f8fbff 0%, #edf3ff 100%);
+      box-shadow: 0 18px 52px rgba(20,99,255,0.07);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .feature-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 80% 20%, rgba(20,99,255,0.06), transparent 55%);
+      pointer-events: none;
+    }
+    .feature-tile:hover { transform: translateY(-4px); box-shadow: 0 28px 68px rgba(20,99,255,0.12); }
+    .feature-tile.dark {
+      color: #fff;
+      background: linear-gradient(140deg, #07111f 0%, #0e2352 50%, #1463ff 150%);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 24px 64px rgba(7,17,31,0.25);
+    }
+    .feature-tile.dark::after {
+      background: radial-gradient(circle at 20% 80%, rgba(123,181,255,0.15), transparent 50%);
+    }
+    .feature-tile.wide { grid-column: span 2; min-height: 240px; }
+    .feature-tile h3 { margin: 0; font-size: 1.25rem; font-family: var(--font-display); letter-spacing: -0.02em; position: relative; z-index: 1; }
+    .feature-tile p { max-width: 360px; margin: 10px 0 0; color: var(--muted); line-height: 1.68; position: relative; z-index: 1; }
+    .feature-tile.dark p { color: rgba(255,255,255,0.72); }
+    .floating-ui {
+      width: min(260px, 80%);
+      margin: 28px 0 0;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 12px 36px rgba(20,99,255,0.14), 0 2px 8px rgba(20,99,255,0.08);
+      border: 1px solid rgba(20,99,255,0.1);
+      transform: rotate(-2deg);
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 9px;
+    }
+    .floating-ui .line { background: #d4e4f7; height: 10px; }
+    .floating-ui .line:nth-child(1) { width: 100%; }
+    .floating-ui .line:nth-child(2) { width: 78%; }
+    .floating-ui .line:nth-child(3) { width: 52%; }
+    .gallery {
+      width: 100%;
+      padding-top: 94px;
+    }
+    .gallery-intro {
+      min-height: auto;
+      text-align: center;
+      padding-bottom: 36px;
+    }
+    .gallery-track-container {
+      height: auto;
+      position: relative;
+    }
+    .gallery-sticky {
+      position: relative;
+      top: auto;
+      height: auto;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+    }
+    .gallery-track {
+      height: auto;
+      width: min(1180px, calc(100% - 32px));
+      display: grid;
+      grid-template-columns: repeat(4, minmax(230px, 1fr));
+      gap: 20px;
+      padding: 0 0 20px;
+      margin: 0;
+      list-style: none;
+    }
+    .gallery-card {
+      width: auto;
+      height: auto;
+      flex: none;
+      display: block;
+      padding: 0;
+      transform: none !important;
+    }
+    .gallery-button {
+      width: 100%;
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+      padding: 16px;
+      border: 1px solid rgba(216,226,240,0.9);
+      border-radius: 28px;
+      overflow: hidden;
+      color: var(--ink);
+      background: #fff;
+      box-shadow: 0 16px 56px rgba(20,99,255,0.09);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .gallery-button:hover { transform: translateY(-10px); box-shadow: 0 32px 80px rgba(20,99,255,0.16); }
+    .gallery-button h3 { margin: 0; font-family: var(--font-display); font-size: 1.3rem; line-height: 1.05; letter-spacing: -0.025em; }
+    .gallery-button p { color: var(--muted); line-height: 1.58; margin: 8px 0 0; font-size: 0.88rem; }
+    .gallery-meta { padding: 18px 6px 4px; }
+    .screenshot-art {
+      min-height: 260px;
+      padding: 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #1463ff 0%, #1a7c88 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .screenshot-art::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      bottom: -30px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+    }
+    .screenshot-art .mock-rows {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .screenshot-art .mock-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 11px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(6px);
+    }
+    .screenshot-art .mock-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+      flex-shrink: 0;
+    }
+    .screenshot-art .mock-bar {
+      flex: 1;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.38);
+    }
+    .screenshot-art .mock-tag {
+      width: 44px; height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+      flex-shrink: 0;
+    }
+    .screenshot-art.manager { background: linear-gradient(140deg, #07111f 0%, #1463ff 100%); }
+    .screenshot-art.clerk { background: linear-gradient(140deg, #0a4a5c 0%, #20a779 100%); }
+    .screenshot-art.customer { background: linear-gradient(140deg, #1463ff 0%, #7bb5ff 100%); }
+    .screenshot-art.company { background: linear-gradient(140deg, #1a1a2e 0%, #7b5cff 100%); }
+    .screen-label {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+      font-size: 0.75rem;
+      font-weight: 900;
+      border: 1px solid rgba(255,255,255,0.2);
+      width: fit-content;
+    }
+    .gallery-button h3 { margin: 0; font-family: var(--font-display); font-size: 1.35rem; line-height: 1.05; letter-spacing: -0.025em; }
+    .gallery-button p { color: var(--muted); line-height: 1.58; margin: 8px 0 0; }
+    .gallery-meta { padding: 18px 4px 0; }
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 160;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(7,17,31,0.55);
+      backdrop-filter: blur(10px);
+    }
+    .modal.open { display: flex; }
+    .modal-panel {
+      width: min(980px, 100%);
+      max-height: min(760px, calc(100vh - 40px));
+      overflow: auto;
+      padding: 22px;
+      border-radius: 28px;
+      background: #fff;
+      box-shadow: 0 34px 90px rgba(7,17,31,0.28);
+    }
+    .modal-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    .modal-head h3 { margin: 0; font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.7rem); letter-spacing: -0.04em; }
+    .modal-close {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 0;
+      border-radius: 999px;
+      background: #eef4fb;
+      cursor: pointer;
+    }
+    .screen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .screen-shot {
+      min-height: 190px;
+      padding: 14px;
+      border-radius: 20px;
+      color: #fff;
+      background: linear-gradient(135deg, #1463ff, #0d5f73);
+      overflow: hidden;
+    }
+    .screen-shot h4 { margin: 0 0 44px; }
+    .screen-shot .line { background: rgba(255,255,255,0.62); }
+    .screen-shot p { margin: 12px 0 0; color: rgba(255,255,255,0.78); font-size: 0.84rem; line-height: 1.5; }
+    .database-map { display: grid; grid-template-columns: 1fr 1.1fr; gap: 18px; align-items: stretch; }
+    .entity-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .entity-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .data-diagram { min-height: 360px; padding: 24px; border-radius: 8px; background: #07111f; color: #fff; position: relative; overflow: hidden; }
+    .data-node {
+      position: absolute;
+      width: 150px;
+      min-height: 70px;
+      padding: 13px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(14px);
+      font-weight: 900;
+    }
+    .data-node span { display: block; margin-top: 6px; color: rgba(255,255,255,0.62); font-size: 0.72rem; }
+    .data-node:nth-child(1) { left: 24px; top: 24px; }
+    .data-node:nth-child(2) { right: 28px; top: 72px; }
+    .data-node:nth-child(3) { left: 40%; top: 150px; transform: translateX(-50%); background: rgba(20,99,255,0.58); }
+    .data-node:nth-child(4) { left: 36px; bottom: 30px; }
+    .data-node:nth-child(5) { right: 44px; bottom: 38px; }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 100;
+      height: 5px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+
+    .pill-cloud { display: flex; flex-wrap: wrap; gap: 9px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 0 13px;
+      border-radius: 999px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 0.84rem;
+      font-weight: 900;
+    }
+
+    .conclusion-card {
+      background: linear-gradient(135deg,#0a1628,#1a3a8f);
+      border-radius: 24px;
+      padding: 3rem;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .conclusion-card::before {
+      content: "";
+      position: absolute;
+      right: -50px;
+      top: -50px;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle,rgba(59,130,246,0.2) 0%,transparent 70%);
+    }
+    .conclusion-title {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 1rem;
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    .conclusion-title em { font-style: normal; color: var(--blue-2); }
+    .conclusion-text {
+      position: relative;
+      z-index: 1;
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .conclusion-cta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .limitations-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .limitations-banner {
+      padding: 32px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #0a1628 0%, #0e2044 60%, #1463ff 140%);
+      color: #fff;
+      box-shadow: 0 32px 80px rgba(20,99,255,0.22), inset 0 1px 0 rgba(255,255,255,0.1);
+      overflow: hidden;
+      position: relative;
+    }
+    .limitations-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 90% 10%, rgba(245,216,76,0.1), transparent 55%);
+      pointer-events: none;
+    }
+    .limitations-banner .kicker { position: relative; z-index: 1; }
+    .limitations-banner h3 { position: relative; z-index: 1; margin: 14px 0 0; font-family: var(--font-display); font-size: clamp(1.5rem, 2.8vw, 2.2rem); line-height: 1.08; letter-spacing: -0.04em; }
+    .limitations-banner p { position: relative; z-index: 1; color: rgba(255,255,255,0.72); line-height: 1.72; margin-top: 12px; }
+    .stack-card-num {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      margin-bottom: 10px;
+      opacity: 0.7;
+    }
+    .next-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .next-tile {
+      padding: 30px;
+      border: 1px solid rgba(20,99,255,0.1);
+      border-radius: 28px;
+      background: linear-gradient(160deg, #f8fbff 0%, #edf3ff 100%);
+      box-shadow: 0 14px 46px rgba(20,99,255,0.07);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .next-tile:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(20,99,255,0.12); }
+    .next-tile-wide {
+      grid-column: span 2;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      background: linear-gradient(140deg, #07111f 0%, #0e2352 50%, #1463ff 150%);
+      color: #fff;
+      border-color: rgba(255,255,255,0.08);
+    }
+    .next-tile-wide h3 { color: #fff; }
+    .next-tile-wide p { color: rgba(255,255,255,0.72); }
+    .next-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(20,99,255,0.1);
+      color: var(--blue);
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .next-icon-light {
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+      margin-bottom: 0;
+    }
+    .next-tile h3 { margin: 0; font-size: 1.12rem; font-family: var(--font-display); letter-spacing: -0.02em; }
+    .next-tile p { margin: 9px 0 0; color: var(--muted); line-height: 1.66; font-size: 0.92rem; }
+    .next-tile-wide p { color: rgba(255,255,255,0.72); }
+    .next-tag {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 16px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(20,99,255,0.2);
+      background: rgba(20,99,255,0.08);
+      color: var(--blue);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .problem-grid,
+    .workflow-shell,
+    .database-layout,
+    .security-shell,
+    .limitations-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .problem-hero,
+    .flow-overview,
+    .schema-panel,
+    .security-hero,
+    .limitations-overview {
+      padding: 32px;
+      border-radius: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .problem-hero,
+    .flow-overview,
+    .security-hero {
+      color: #fff;
+      background: linear-gradient(145deg, #07111f 0%, #0f2f67 55%, #1463ff 120%);
+      box-shadow: 0 30px 80px rgba(20,99,255,0.18);
+    }
+    .problem-hero::before,
+    .flow-overview::before,
+    .security-hero::before,
+    .limitations-overview::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .problem-hero::before,
+    .flow-overview::before,
+    .security-hero::before {
+      background:
+        radial-gradient(circle at 85% 15%, rgba(123,181,255,0.2), transparent 28%),
+        radial-gradient(circle at 10% 90%, rgba(255,255,255,0.08), transparent 24%);
+    }
+    .problem-hero h3,
+    .flow-overview h3,
+    .security-hero h3,
+    .limitations-overview h3 {
+      position: relative;
+      z-index: 1;
+      margin: 14px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+    }
+    .problem-hero p,
+    .flow-overview p,
+    .security-hero p,
+    .limitations-overview p {
+      position: relative;
+      z-index: 1;
+      margin: 14px 0 0;
+      line-height: 1.72;
+    }
+    .problem-hero p,
+    .flow-overview p,
+    .security-hero p {
+      color: rgba(255,255,255,0.76);
+    }
+    .problem-metrics,
+    .security-points {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .problem-metric,
+    .security-point {
+      min-height: 92px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.09);
+      backdrop-filter: blur(10px);
+    }
+    .problem-metric strong,
+    .security-point strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .problem-metric span,
+    .security-point span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.82rem;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+    .problem-stack,
+    .risk-list,
+    .flow-lanes,
+    .relationship-spine {
+      display: grid;
+      gap: 14px;
+    }
+    .problem-card,
+    .risk-card,
+    .relation-card,
+    .security-card {
+      padding: 24px;
+      border: 1px solid rgba(20,99,255,0.12);
+      border-radius: 24px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      box-shadow: 0 14px 40px rgba(13,17,23,0.05);
+    }
+    .problem-card-head,
+    .risk-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .problem-card-head h3,
+    .risk-card-head h3,
+    .relation-card h3,
+    .security-card h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.3;
+    }
+    .problem-card p,
+    .risk-card p,
+    .relation-card p,
+    .security-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.92rem;
+    }
+    .problem-badge,
+    .risk-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      height: 42px;
+      padding: 0 12px;
+      border-radius: 14px;
+      background: rgba(20,99,255,0.08);
+      color: var(--blue);
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+    .problem-tags,
+    .role-chip-row,
+    .flow-tags,
+    .risk-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .problem-tag,
+    .flow-tag,
+    .risk-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 900;
+      border: 1px solid rgba(20,99,255,0.12);
+      background: #f2f7ff;
+      color: #31548b;
+    }
+
+    .feature-matrix {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr 0.85fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .build-hero {
+      grid-row: span 2;
+      min-height: 100%;
+      padding: 32px;
+      border-radius: 30px;
+      color: #fff;
+      background: linear-gradient(150deg, #07111f 0%, #0f2f67 56%, #1463ff 100%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(20,99,255,0.18);
+    }
+    .build-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(123,181,255,0.24), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    .build-hero > * { position: relative; z-index: 1; }
+    .build-hero h3 {
+      margin: 16px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+    .build-hero p {
+      max-width: 420px;
+      margin: 14px 0 0;
+      color: rgba(255,255,255,0.74);
+      line-height: 1.74;
+    }
+    .build-hero-map {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .build-hero-step {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .build-hero-step strong {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.16);
+      font-family: var(--font-display);
+    }
+    .build-hero-step span {
+      display: block;
+      font-size: 0.86rem;
+      line-height: 1.56;
+      color: rgba(255,255,255,0.78);
+      font-weight: 700;
+    }
+    .build-card {
+      min-height: 220px;
+      padding: 26px;
+      border: 1px solid rgba(20,99,255,0.12);
+      border-radius: 28px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+      box-shadow: 0 16px 46px rgba(13,17,23,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    .build-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -30px -40px auto;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(20,99,255,0.08), transparent 68%);
+      pointer-events: none;
+    }
+    .build-card h3 {
+      margin: 0;
+      font-size: 1.12rem;
+      line-height: 1.3;
+      position: relative;
+      z-index: 1;
+    }
+    .build-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.66;
+      font-size: 0.92rem;
+      position: relative;
+      z-index: 1;
+    }
+    .build-card ul {
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .build-card li {
+      display: flex;
+      align-items: start;
+      gap: 10px;
+      color: #415063;
+      line-height: 1.55;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+    .build-card li i {
+      width: 18px;
+      height: 18px;
+      color: var(--blue);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .flow-overview-points {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .flow-point {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.86rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.82);
+    }
+    .flow-lane {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      padding: 22px;
+      border: 1px solid rgba(20,99,255,0.12);
+      border-radius: 26px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      box-shadow: 0 14px 40px rgba(13,17,23,0.05);
+    }
+    .flow-lane-side h3 {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+    .flow-lane-side p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.86rem;
+    }
+    .flow-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .flow-step {
+      flex: 1 1 150px;
+      min-height: 112px;
+      padding: 16px;
+      border: 1px solid rgba(216,226,240,0.95);
+      border-radius: 20px;
+      background: #fff;
+    }
+    .flow-step strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: rgba(20,99,255,0.08);
+      color: var(--blue);
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+    }
+    .flow-step h4 {
+      margin: 12px 0 0;
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+    .flow-step p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .gallery-intro {
+      min-height: auto;
+      text-align: center;
+      padding-bottom: 28px;
+    }
+    .gallery-shell {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      display: grid;
+      gap: 20px;
+    }
+    .gallery-note-bar {
+      display: grid;
+      grid-template-columns: 1.1fr repeat(3, minmax(0, 0.6fr));
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid rgba(216,226,240,0.96);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(244,248,253,0.96) 100%);
+      box-shadow: 0 18px 50px rgba(13,17,23,0.05);
+    }
+    .gallery-note-main {
+      text-align: left;
+      padding: 10px 12px;
+    }
+    .gallery-note-main h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      line-height: 1.25;
+    }
+    .gallery-note-main p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.66;
+      font-size: 0.92rem;
+    }
+    .gallery-stat {
+      padding: 16px;
+      border-radius: 22px;
+      background: #fff;
+      border: 1px solid rgba(220,228,239,0.96);
+      text-align: left;
+    }
+    .gallery-stat strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .gallery-stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      font-weight: 800;
+    }
+    .gallery-track {
+      height: auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      padding: 0 0 24px;
+      margin: 0;
+      list-style: none;
+    }
+    .gallery-button {
+      width: 100%;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+      padding: 16px;
+      border: 1px solid rgba(216,226,240,0.96);
+      border-radius: 30px;
+      overflow: hidden;
+      color: var(--ink);
+      background: linear-gradient(180deg, #ffffff 0%, #f6faff 100%);
+      box-shadow: 0 18px 56px rgba(20,99,255,0.08);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .gallery-button:hover {
+      transform: translateY(-8px);
+      border-color: rgba(20,99,255,0.22);
+      box-shadow: 0 34px 82px rgba(20,99,255,0.14);
+    }
+    .gallery-visual {
+      min-height: 292px;
+      padding: 18px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(180deg, rgba(7,17,31,0.18) 0%, rgba(7,17,31,0.64) 100%),
+        var(--gallery-image) center/cover no-repeat;
+      color: #fff;
+    }
+    .gallery-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(20,99,255,0.26), rgba(32,167,121,0.12));
+      pointer-events: none;
+    }
+    .gallery-visual > * {
+      position: relative;
+      z-index: 1;
+    }
+    .gallery-topline,
+    .gallery-bottomline {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .gallery-role-tag,
+    .gallery-page-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+    .gallery-count {
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(7,17,31,0.34);
+      border: 1px solid rgba(255,255,255,0.14);
+      text-align: right;
+    }
+    .gallery-count strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    .gallery-count span {
+      display: block;
+      margin-top: 6px;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+    .gallery-page-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .gallery-meta {
+      padding: 18px 4px 2px;
+    }
+    .gallery-meta h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+    }
+    .gallery-meta p {
+      color: var(--muted);
+      line-height: 1.62;
+      margin: 8px 0 0;
+      font-size: 0.9rem;
+    }
+
+    .screen-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .screen-shot {
+      min-height: 280px;
+      padding: 16px;
+      border-radius: 22px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background:
+        linear-gradient(180deg, rgba(7,17,31,0.1) 0%, rgba(7,17,31,0.74) 100%),
+        linear-gradient(135deg, var(--shot-tint, rgba(20,99,255,0.3)), rgba(7,17,31,0.12)),
+        var(--shot-image) center/cover no-repeat;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+    .screen-shot::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    .screen-shot > * {
+      position: relative;
+      z-index: 1;
+    }
+    .screen-shot-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      min-width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(7,17,31,0.38);
+      border: 1px solid rgba(255,255,255,0.16);
+      font-family: var(--font-display);
+      font-size: 0.84rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+    .screen-shot h4 {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.28;
+    }
+    .screen-shot p {
+      margin: 10px 0 0;
+      color: rgba(255,255,255,0.82);
+      font-size: 0.86rem;
+      line-height: 1.58;
+      max-width: 92%;
+    }
+
+    .database-layout {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    }
+    .schema-panel {
+      background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+      border: 1px solid rgba(20,99,255,0.12);
+      box-shadow: 0 18px 50px rgba(13,17,23,0.05);
+    }
+    .schema-panel h3,
+    .security-grid h3 {
+      margin: 0;
+      font-size: 1.12rem;
+      line-height: 1.3;
+    }
+    .schema-panel p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.92rem;
+    }
+    .schema-columns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .schema-group {
+      padding: 18px;
+      border: 1px solid rgba(216,226,240,0.96);
+      border-radius: 22px;
+      background: #fff;
+    }
+    .schema-group h4 {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+    .schema-group ul {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 9px;
+    }
+    .schema-group li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: #465568;
+      font-size: 0.84rem;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+    .schema-key {
+      color: var(--blue);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .relation-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .relation-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #1463ff, #20a779);
+    }
+    .relation-route {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .relation-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      background: #edf5ff;
+      border: 1px solid rgba(20,99,255,0.12);
+      color: #34558c;
+      font-size: 0.74rem;
+      font-weight: 900;
+    }
+
+    .security-shell {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    }
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .security-card {
+      min-height: 200px;
+    }
+    .security-card .card-icon {
+      margin-bottom: 18px;
+    }
+
+    .limitations-overview {
+      background: linear-gradient(180deg, #fffdf3 0%, #fff7da 100%);
+      border: 1px solid rgba(245,216,76,0.36);
+      box-shadow: 0 22px 58px rgba(245,216,76,0.12);
+    }
+    .limitations-overview::before {
+      background:
+        radial-gradient(circle at 85% 15%, rgba(245,216,76,0.24), transparent 28%),
+        radial-gradient(circle at 15% 90%, rgba(20,99,255,0.08), transparent 24%);
+    }
+    .limitations-overview h3 {
+      color: #172133;
+    }
+    .limitations-overview p {
+      color: #4f5f73;
+    }
+    .risk-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .risk-summary-card {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(245,216,76,0.35);
+      background: rgba(255,255,255,0.7);
+    }
+    .risk-summary-card strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.28rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .risk-summary-card span {
+      display: block;
+      margin-top: 8px;
+      color: #556476;
+      font-size: 0.8rem;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+
+    .footer { padding: 56px 0 30px; }
+    .footer-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 20px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      box-shadow: 0 18px 58px rgba(13,17,23,0.06);
+      padding: 26px 28px;
+    }
+    .footer-name {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 4.4rem);
+      letter-spacing: -0.06em;
+      line-height: 0.95;
+    }
+    .footer-text { color: var(--muted); font-weight: 800; margin-top: 8px; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 9px; }
+    .footer-links .menu-link {
+      background: #f3f7fc;
+      border: 1px solid #e5ecf5;
+      color: #314054;
+    }
+    .footer-links .menu-link:hover { background: #eaf2fb; color: #0d1117; }
+    .copyright { width: 100%; margin-top: 12px; color: var(--muted); font-size: 0.86rem; font-weight: 700; text-align: right; }
+
+    .reveal { opacity: 0; transform: translateY(24px); }
+    .reveal.visible { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease; }
+
+    /* RESPONSIVE */
+    @media (max-width: 920px) {
+      .nav-links { display: none; }
+      .menu-button { display: flex; }
+      .hero { min-height: 980px; padding-top: 58px; padding-bottom: 92px; }
+      .hero-dashboard { grid-template-columns: 1fr; }
+      .grid-2, .grid-3, .workflow, .feature-matrix, .security-grid { grid-template-columns: 1fr; }
+      .narrative-panel, .feature-showcase, .database-map, .limitations-grid, .next-grid, .problem-grid, .workflow-shell, .database-layout, .security-shell, .limitations-shell, .gallery-note-bar { grid-template-columns: 1fr; }
+      .feature-tile.wide, .next-tile-wide { grid-column: auto; }
+      .next-tile-wide { flex-direction: column; }
+      .next-icon-light { margin-bottom: 18px; }
+      .role-strip { grid-template-columns: repeat(2, 1fr); }
+      .sticky-copy { position: relative; top: auto; }
+      .limitations-banner { position: relative; }
+      .section-head { display: block; }
+      .section-note { margin-top: 14px; }
+      .toc-wrap { top: 88px; }
+      .gallery-track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gallery-card { transform: none !important; }
+      .gallery-button { min-height: 420px; }
+      .screen-grid { grid-template-columns: 1fr; }
+      .build-hero { grid-row: auto; }
+      .problem-metrics, .security-points, .risk-summary, .schema-columns { grid-template-columns: 1fr 1fr; }
+      .flow-lane { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .navbar { margin-top: 0; top: 0; height: 62px; border-radius: 0; }
+      .mobile-menu { top: 78px; }
+      .hero { min-height: 1080px; border-radius: 0; padding: 44px 10px 56px; }
+      .hero-content { width: min(980px, calc(100% - 8px)); }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .hero-dashboard { width: calc(100% - 4px); gap: 10px; }
+      .glass-card { padding: 15px; border-radius: 18px; }
+      .toc-wrap { top: 78px; }
+      .toc { width: calc(100% - 24px); }
+      .section { padding-top: 74px; }
+      .role-strip { grid-template-columns: 1fr; }
+      .gallery-track { grid-template-columns: 1fr; width: 100%; }
+      .gallery-button { min-height: 360px; }
+      .screenshot-art { min-height: 220px; }
+      .modal { padding: 12px; }
+      .modal-panel { border-radius: 22px; padding: 16px; }
+      .data-diagram { min-height: 520px; }
+      .data-node { position: relative; inset: auto !important; transform: none !important; width: 100%; margin-bottom: 12px; }
+      .conclusion-card { padding: 2rem; }
+      .footer-card { grid-template-columns: 1fr; align-items: start; padding: 22px; border-radius: 22px; }
+      .footer-links { justify-content: flex-start; margin-top: 22px; }
+      .copyright { text-align: left; }
+      .problem-metrics, .security-points, .risk-summary, .schema-columns { grid-template-columns: 1fr; }
+      .gallery-shell { width: calc(100% - 24px); }
+      .gallery-visual { min-height: 250px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" aria-label="Main navigation">
+    <a class="brand" href="home.html" aria-label="Ashrif Rihan Blogs home">
+      <span class="brand-mark"><i data-lucide="code-2" class="icon"></i></span>
+      Ashrif Rihan Blogs
+    </a>
+    <div class="nav-links">
+      <a href="home.html"><i data-lucide="home" class="icon"></i>Home</a>
+      <a href="#overview"><i data-lucide="info" class="icon"></i>Overview</a>
+      <a href="#gallery"><i data-lucide="panels-top-left" class="icon"></i>Gallery</a>
+      <a class="nav-cta" href="#"><i data-lucide="external-link" class="icon"></i>Explore System</a>
+    </div>
+    <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false">
+      <span class="hamburger-icon"><i data-lucide="menu" class="icon"></i></span>
+      <span class="close-icon"><i data-lucide="x" class="icon"></i></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <a class="menu-link" href="home.html"><i data-lucide="home" class="icon"></i>Home</a>
+    <a class="menu-link" href="#overview"><i data-lucide="info" class="icon"></i>Overview</a>
+    <a class="menu-link" href="#gallery"><i data-lucide="panels-top-left" class="icon"></i>Gallery</a>
+    <a class="menu-link" href="#"><i data-lucide="external-link" class="icon"></i>Explore System</a>
+  </div>
+
+  <header class="shell hero" aria-label="QuickStay case study hero">
+    <div class="hero-content">
+      <span class="eyebrow"><i data-lucide="hotel" class="icon"></i>QuickStay Case Study</span>
+      <h1>Hotel booking system with structured workflows</h1>
+      <p class="hero-text">A multi-role platform for online booking, front-desk operations, billing, payments, room management, and secure access.</p>
+      <div class="hero-actions">
+        <a class="btn btn-dark pressable" href="#"><i data-lucide="external-link" class="icon"></i>Explore System</a>
+        <a class="btn btn-light pressable" href="home.html"><i data-lucide="arrow-left" class="icon"></i>Back to Home</a>
+      </div>
+    </div>
+    <div class="hero-dashboard" aria-label="QuickStay system highlights">
+      <div class="glass-card dark">
+        <div class="mini-title"><i data-lucide="calendar-check" class="icon"></i>Booking Flow</div>
+        <div class="booking-lines">
+          <span class="line"></span>
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="mini-title"><i data-lucide="shield-check" class="icon"></i>Access Control</div>
+        <div class="status-list">
+          <span class="status-pill"><i data-lucide="user-cog" class="icon"></i>Manager</span>
+          <span class="status-pill"><i data-lucide="monitor-check" class="icon"></i>Clerk</span>
+          <span class="status-pill"><i data-lucide="user-round-check" class="icon"></i>Customer</span>
+          <span class="status-pill"><i data-lucide="building-2" class="icon"></i>Travel Company</span>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="mini-title"><i data-lucide="credit-card" class="icon"></i>Payment</div>
+        <p style="margin:0;color:rgba(255,255,255,0.86);line-height:1.55;font-weight:800;">Stripe checkout with invoice records.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="toc-wrap">
+    <nav class="toc" id="toc" aria-label="Case study sections">
+      <a href="#overview" class="active"><i data-lucide="info" class="icon"></i>Overview</a>
+      <a href="#problem"><i data-lucide="alert-triangle" class="icon"></i>Problem</a>
+      <a href="#solution"><i data-lucide="check-circle-2" class="icon"></i>Solution</a>
+      <a href="#roles"><i data-lucide="users" class="icon"></i>User Roles</a>
+      <a href="#features"><i data-lucide="sparkles" class="icon"></i>Features</a>
+      <a href="#workflow"><i data-lucide="workflow" class="icon"></i>System Workflow</a>
+      <a href="#gallery"><i data-lucide="panels-top-left" class="icon"></i>System Screens</a>
+      <a href="#database"><i data-lucide="database" class="icon"></i>Database</a>
+      <a href="#security"><i data-lucide="shield" class="icon"></i>Security</a>
+      <a href="#limitations"><i data-lucide="triangle-alert" class="icon"></i>Limitations</a>
+      <a href="#improvements"><i data-lucide="trending-up" class="icon"></i>Improvements</a>
+      <a href="#conclusion"><i data-lucide="flag" class="icon"></i>Conclusion</a>
+    </nav>
+  </div>
+
+  <main>
+    <section class="section shell reveal" id="overview">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i data-lucide="info" class="icon"></i>Overview</span>
+          <h2>What is QuickStay?</h2>
+        </div>
+        <p class="section-note">QuickStay is a PHP and MySQL hotel management system that brings reservations, room availability, billing, and user roles into a single workflow.</p>
+      </div>
+      <div class="grid-2">
+        <article class="card tint-blue"><span class="card-icon"><i data-lucide="calendar-days" class="icon"></i></span><h3>Booking operations</h3><p>Customers can search rooms, create bookings, pay online, and view booking history from one flow.</p></article>
+        <article class="card tint-green"><span class="card-icon"><i data-lucide="building-2" class="icon"></i></span><h3>Hotel management</h3><p>Clerks and managers can handle room allocation, walk-ins, check-in, checkout, invoices, and reports.</p></article>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="problem">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i data-lucide="alert-triangle" class="icon"></i>Problem</span>
+          <h2>Why the system exists</h2>
+        </div>
+        <p class="section-note">The system solves the points where hotel operations usually break: availability visibility, billing accuracy, and role coordination.</p>
+      </div>
+      <div class="problem-grid">
+        <article class="problem-hero">
+          <span class="kicker" style="color:#9ac2ff;"><i data-lucide="file-warning" class="icon"></i>Operational gap</span>
+          <h3>Hotel work becomes fragile when every action lives in a different place.</h3>
+          <p>QuickStay exists to connect search, reservation, payment, check-in, invoicing, and staff permissions into one system so the front desk does not have to rebuild context on every guest interaction.</p>
+          <div class="problem-metrics">
+            <div class="problem-metric"><strong>1 record</strong><span>Booking, guest, room, and billing move together.</span></div>
+            <div class="problem-metric"><strong>4 roles</strong><span>Each role sees the right workspace without losing shared data.</span></div>
+            <div class="problem-metric"><strong>0 handoffs</strong><span>No spreadsheet-to-desk copy flow for core booking tasks.</span></div>
+          </div>
+        </article>
+        <div class="problem-stack">
+          <article class="problem-card">
+            <div class="problem-card-head">
+              <h3>Availability breaks first</h3>
+              <span class="problem-badge">01</span>
+            </div>
+            <p>When web reservations and desk bookings are managed separately, room inventory can drift out of sync and lead to double allocation or missed sales.</p>
+            <div class="problem-tags">
+              <span class="problem-tag">room status</span>
+              <span class="problem-tag">booking conflicts</span>
+              <span class="problem-tag">daily operations</span>
+            </div>
+          </article>
+          <article class="problem-card">
+            <div class="problem-card-head">
+              <h3>Billing loses continuity</h3>
+              <span class="problem-badge">02</span>
+            </div>
+            <p>Invoices, discounts, services, taxes, and deposits become harder to trust when payment steps happen outside the reservation workflow.</p>
+            <div class="problem-tags">
+              <span class="problem-tag">invoice totals</span>
+              <span class="problem-tag">advance payments</span>
+              <span class="problem-tag">service charges</span>
+            </div>
+          </article>
+          <article class="problem-card">
+            <div class="problem-card-head">
+              <h3>Teams need separation without silos</h3>
+              <span class="problem-badge">03</span>
+            </div>
+            <p>Managers, clerks, customers, and travel companies should not share the same controls, but they still need the same live booking truth underneath.</p>
+            <div class="problem-tags">
+              <span class="problem-tag">role-based access</span>
+              <span class="problem-tag">shared records</span>
+              <span class="problem-tag">audit clarity</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="solution">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i data-lucide="check-circle-2" class="icon"></i>Solution</span>
+          <h2>One platform for every workflow</h2>
+        </div>
+        <p class="section-note">All booking operations, billing, and staff workflows unified in a single system.</p>
+      </div>
+      <div class="feature-showcase">
+        <article class="feature-tile">
+          <span class="card-icon"><i data-lucide="route" class="icon"></i></span>
+          <h3>Connected reservation flow</h3>
+          <p>Search, booking, payment, invoice, check-in, checkout, and room status remain linked from the first request to the final bill.</p>
+          <div class="floating-ui">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+          </div>
+        </article>
+        <article class="feature-tile">
+          <span class="card-icon"><i data-lucide="lock-keyhole" class="icon"></i></span>
+          <h3>Access Control</h3>
+          <p>Manager, clerk, customer, and travel company users each land in the correct workspace with the right permissions.</p>
+          <div class="pill-cloud" style="margin-top:26px;">
+            <span class="pill"><i data-lucide="user-cog" class="icon"></i>Manager</span>
+            <span class="pill"><i data-lucide="monitor-check" class="icon"></i>Clerk</span>
+            <span class="pill"><i data-lucide="user-round-check" class="icon"></i>Customer</span>
+            <span class="pill"><i data-lucide="building-2" class="icon"></i>Travel Company</span>
+          </div>
+        </article>
+        <article class="feature-tile wide dark">
+          <span class="card-icon" style="background:rgba(255,255,255,0.14);color:#fff;"><i data-lucide="workflow" class="icon"></i></span>
+          <h3>One operational path</h3>
+          <p>Front desk and online workflows use the same booking records, so staff can see availability, payments, invoices, services, and guest movement without switching systems.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="roles">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i data-lucide="users" class="icon"></i>User Roles</span>
+          <h2>Four roles, one system</h2>
+        </div>
+      </div>
+      <div class="role-strip">
+        <article class="role-card"><div class="role-mini-screen"><span class="role-chip"><i data-lucide="user-cog" class="icon"></i>Manager</span></div><h3>Manager</h3><p>Controls rooms, services, reports, staff workflows, billing, and company accounts.</p></article>
+        <article class="role-card"><div class="role-mini-screen"><span class="role-chip"><i data-lucide="monitor-check" class="icon"></i>Clerk</span></div><h3>Clerk</h3><p>Handles front-desk bookings, check-in, checkout, reservations, services, and billing.</p></article>
+        <article class="role-card"><div class="role-mini-screen"><span class="role-chip"><i data-lucide="user-round-check" class="icon"></i>Customer</span></div><h3>Customer</h3><p>Searches rooms, books online, pays through Stripe, and manages reservation history.</p></article>
+        <article class="role-card"><div class="role-mini-screen"><span class="role-chip"><i data-lucide="building-2" class="icon"></i>Travel Company</span></div><h3>Travel Company</h3><p>Creates group bookings, assigns guest details, and manages corporate billing.</p></article>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="features">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i data-lucide="sparkles" class="icon"></i>Features</span>
+          <h2>What is built</h2>
+        </div>
+        <p class="section-note">The system already covers the core hotel journey from discovery to departure, with role-based tools wrapped around it.</p>
+      </div>
+      <div class="feature-matrix">
+        <article class="build-hero">
+          <span class="kicker" style="color:#9ac2ff;"><i data-lucide="layout-dashboard" class="icon"></i>System scope</span>
+          <h3>A complete booking platform, not just a room form.</h3>
+          <p>QuickStay combines guest actions, front-desk work, finance records, and role-based control so the project reads like a real hotel system instead of isolated pages.</p>
+          <div class="build-hero-map">
+            <div class="build-hero-step"><strong>01</strong><span>Guest-facing search and reservation creation with room filtering and booking codes.</span></div>
+            <div class="build-hero-step"><strong>02</strong><span>Desk-side operations for walk-ins, room assignment, check-in, services, and checkout.</span></div>
+            <div class="build-hero-step"><strong>03</strong><span>Billing and access control that stay attached to the same reservation lifecycle.</span></div>
+          </div>
+        </article>
+        <article class="build-card">
+          <span class="card-icon"><i data-lucide="search" class="icon"></i></span>
+          <h3>Reservation entry points</h3>
+          <p>Guests and staff can both create reservations without splitting the record model.</p>
+          <ul>
+            <li><i data-lucide="check" class="icon"></i>Room search by dates, guests, type, and availability</li>
+            <li><i data-lucide="check" class="icon"></i>Online booking with generated reservation identity</li>
+            <li><i data-lucide="check" class="icon"></i>Walk-in booking support at the front desk</li>
+          </ul>
+        </article>
+        <article class="build-card">
+          <span class="card-icon"><i data-lucide="credit-card" class="icon"></i></span>
+          <h3>Payments and billing</h3>
+          <p>Financial tracking is built into the operational path rather than added later.</p>
+          <ul>
+            <li><i data-lucide="check" class="icon"></i>Stripe checkout for full or advance payments</li>
+            <li><i data-lucide="check" class="icon"></i>Invoice records with totals, discounts, and tax</li>
+            <li><i data-lucide="check" class="icon"></i>Final billing visibility at checkout</li>
+          </ul>
+        </article>
+        <article class="build-card">
+          <span class="card-icon"><i data-lucide="door-open" class="icon"></i></span>
+          <h3>Stay management</h3>
+          <p>Once a reservation exists, operational steps continue in the same system.</p>
+          <ul>
+            <li><i data-lucide="check" class="icon"></i>Check-in with room assignment and guest confirmation</li>
+            <li><i data-lucide="check" class="icon"></i>Service additions during the stay</li>
+            <li><i data-lucide="check" class="icon"></i>Checkout with room status updates</li>
+          </ul>
+        </article>
+        <article class="build-card">
+          <span class="card-icon"><i data-lucide="shield-check" class="icon"></i></span>
+          <h3>Role-based workspaces</h3>
+          <p>Different users enter the same system through interfaces that match their responsibilities.</p>
+          <ul>
+            <li><i data-lucide="check" class="icon"></i>Manager tools for rooms, services, reports, and staff-side oversight</li>
+            <li><i data-lucide="check" class="icon"></i>Clerk tools for reservations, check-in, checkout, and invoices</li>
+            <li><i data-lucide="check" class="icon"></i>Customer and travel company flows for self-service booking work</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="workflow">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i data-lucide="workflow" class="icon"></i>System Workflow</span>
+          <h2>How the system flows</h2>
+        </div>
+        <p class="section-note">The experience is organized as one booking spine with role-specific actions layered onto each stage.</p>
+      </div>
+      <div class="workflow-shell">
+        <article class="flow-overview">
+          <span class="kicker" style="color:#9ac2ff;"><i data-lucide="git-branch-plus" class="icon"></i>Workflow spine</span>
+          <h3>Every role touches the same reservation lifecycle.</h3>
+          <p>The system starts with room discovery, moves through booking and payment, and then continues into arrival, service handling, billing, and checkout without losing context.</p>
+          <div class="flow-overview-points">
+            <div class="flow-point"><i data-lucide="calendar-search" class="icon"></i>Discovery and booking start the record.</div>
+            <div class="flow-point"><i data-lucide="badge-dollar-sign" class="icon"></i>Payments and invoices stay tied to that booking.</div>
+            <div class="flow-point"><i data-lucide="hotel" class="icon"></i>Desk operations update stay progress in real time.</div>
+            <div class="flow-point"><i data-lucide="clipboard-check" class="icon"></i>Checkout closes the loop and resets availability.</div>
+          </div>
+        </article>
+        <div class="flow-lanes">
+          <article class="flow-lane">
+            <div class="flow-lane-side">
+              <h3>Guest journey</h3>
+              <p>Customer or travel company starts the booking.</p>
+            </div>
+            <div class="flow-steps">
+              <div class="flow-step"><strong>01</strong><h4>Search</h4><p>Filter available rooms by stay details.</p></div>
+              <div class="flow-step"><strong>02</strong><h4>Reserve</h4><p>Create reservation with guest and stay data.</p></div>
+              <div class="flow-step"><strong>03</strong><h4>Pay</h4><p>Use Stripe or record the advance payment.</p></div>
+            </div>
+          </article>
+          <article class="flow-lane">
+            <div class="flow-lane-side">
+              <h3>Front-desk control</h3>
+              <p>Clerk continues the booking through the stay.</p>
+            </div>
+            <div class="flow-steps">
+              <div class="flow-step"><strong>04</strong><h4>Review</h4><p>Find, verify, and prepare the reservation.</p></div>
+              <div class="flow-step"><strong>05</strong><h4>Check in</h4><p>Assign room, confirm arrival, and add services.</p></div>
+              <div class="flow-step"><strong>06</strong><h4>Manage stay</h4><p>Update service usage and room state.</p></div>
+            </div>
+          </article>
+          <article class="flow-lane">
+            <div class="flow-lane-side">
+              <h3>Closure and reporting</h3>
+              <p>Manager and clerk finish the financial record.</p>
+            </div>
+            <div class="flow-steps">
+              <div class="flow-step"><strong>07</strong><h4>Checkout</h4><p>Finalize charges and guest departure.</p></div>
+              <div class="flow-step"><strong>08</strong><h4>Invoice</h4><p>Confirm totals, discounts, tax, and payment status.</p></div>
+              <div class="flow-step"><strong>09</strong><h4>Reset room</h4><p>Return the room to available inventory and reporting.</p></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <article class="gallery" id="gallery">
+      <header class="gallery-intro shell reveal">
+        <div>
+          <span class="kicker"><i data-lucide="panels-top-left" class="icon"></i>System Screens</span>
+          <h2>Role-based screen gallery</h2>
+          <p class="section-note" style="margin:18px auto 0;">A redesigned image-led gallery for each role, using the same visual language as the rest of the case study. Click any role card to open the screen set and why each page matters.</p>
+        </div>
+      </header>
+      <section class="gallery-track-container">
+        <div class="gallery-sticky">
+          <div class="gallery-shell">
+            <div class="gallery-note-bar">
+              <div class="gallery-note-main">
+                <h3>Screens are grouped by responsibility, not just by page list.</h3>
+                <p>That makes the section feel closer to a real product showcase: each card introduces a role, its key pages, and the kind of work the interface supports.</p>
+              </div>
+              <div class="gallery-stat"><strong>4 roles</strong><span>Manager, clerk, customer, and travel company.</span></div>
+              <div class="gallery-stat"><strong>12 views</strong><span>Three highlighted screens per role in the modal set.</span></div>
+              <div class="gallery-stat"><strong>1 system</strong><span>Different interfaces, one shared booking source of truth.</span></div>
+            </div>
+            <ul class="gallery-track" id="galleryTrack">
+              <li class="gallery-card">
+                <button class="gallery-button" type="button" data-role="manager">
+                  <div class="gallery-visual" style="--gallery-image:url('images/hero-reference-5.jpg');">
+                    <div class="gallery-topline">
+                      <span class="gallery-role-tag"><i data-lucide="user-cog" class="icon"></i>Manager</span>
+                      <div class="gallery-count"><strong>06</strong><span>control areas</span></div>
+                    </div>
+                    <div class="gallery-bottomline">
+                      <div class="gallery-page-list">
+                        <span class="gallery-page-chip">dashboard</span>
+                        <span class="gallery-page-chip">rooms</span>
+                        <span class="gallery-page-chip">billing</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gallery-meta"><h3>Manager pages</h3><p>Oversight views for rooms, services, reports, billing, and role-level control.</p></div>
+                </button>
+              </li>
+              <li class="gallery-card">
+                <button class="gallery-button" type="button" data-role="clerk">
+                  <div class="gallery-visual" style="--gallery-image:url('images/hero-reference-1.jpg');">
+                    <div class="gallery-topline">
+                      <span class="gallery-role-tag"><i data-lucide="monitor-check" class="icon"></i>Clerk</span>
+                      <div class="gallery-count"><strong>05</strong><span>desk actions</span></div>
+                    </div>
+                    <div class="gallery-bottomline">
+                      <div class="gallery-page-list">
+                        <span class="gallery-page-chip">reservations</span>
+                        <span class="gallery-page-chip">check-in</span>
+                        <span class="gallery-page-chip">checkout</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gallery-meta"><h3>Clerk pages</h3><p>Fast operational screens for handling arrivals, walk-ins, services, and invoices.</p></div>
+                </button>
+              </li>
+              <li class="gallery-card">
+                <button class="gallery-button" type="button" data-role="customer">
+                  <div class="gallery-visual" style="--gallery-image:url('images/hero-reference-2.jpg');">
+                    <div class="gallery-topline">
+                      <span class="gallery-role-tag"><i data-lucide="user-round-check" class="icon"></i>Customer</span>
+                      <div class="gallery-count"><strong>04</strong><span>self-service views</span></div>
+                    </div>
+                    <div class="gallery-bottomline">
+                      <div class="gallery-page-list">
+                        <span class="gallery-page-chip">search</span>
+                        <span class="gallery-page-chip">booking</span>
+                        <span class="gallery-page-chip">history</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gallery-meta"><h3>Customer pages</h3><p>Simple booking screens focused on finding rooms, paying, and reviewing reservation history.</p></div>
+                </button>
+              </li>
+              <li class="gallery-card">
+                <button class="gallery-button" type="button" data-role="company">
+                  <div class="gallery-visual" style="--gallery-image:url('images/hero-reference-4.jpg');">
+                    <div class="gallery-topline">
+                      <span class="gallery-role-tag"><i data-lucide="building-2" class="icon"></i>Travel Company</span>
+                      <div class="gallery-count"><strong>04</strong><span>group tools</span></div>
+                    </div>
+                    <div class="gallery-bottomline">
+                      <div class="gallery-page-list">
+                        <span class="gallery-page-chip">company hub</span>
+                        <span class="gallery-page-chip">group guests</span>
+                        <span class="gallery-page-chip">billing</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gallery-meta"><h3>Travel company pages</h3><p>Corporate booking views for assigning guests, tracking totals, and managing company stays.</p></div>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <div class="modal" id="galleryModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-panel">
+        <div class="modal-head">
+          <div>
+            <span class="kicker"><i data-lucide="panels-top-left" class="icon"></i>Screenshot set</span>
+            <h3 id="modalTitle">Manager pages</h3>
+          </div>
+          <button class="modal-close" type="button" id="modalClose" aria-label="Close screenshot gallery"><i data-lucide="x" class="icon"></i></button>
+        </div>
+        <div class="screen-grid" id="modalScreens"></div>
+      </div>
+    </div>
+
+    <section class="section shell reveal" id="database">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i data-lucide="database" class="icon"></i>Database</span>
+          <h2>Data structure</h2>
+        </div>
+        <p class="section-note">The schema is organized around one core reservation record, then extended by rooms, payments, services, and role-linked entities.</p>
+      </div>
+      <div class="database-layout">
+        <article class="schema-panel">
+          <span class="kicker"><i data-lucide="table-properties" class="icon"></i>Entity groups</span>
+          <h3>Tables are grouped by responsibility.</h3>
+          <p>Instead of a floating diagram only, this layout makes the structure easier to scan: identity, inventory, booking records, and financial data are all visible in one place.</p>
+          <div class="schema-columns">
+            <div class="schema-group">
+              <h4>Access and people</h4>
+              <ul>
+                <li><span>users</span><span class="schema-key">roles</span></li>
+                <li><span>customers</span><span class="schema-key">profiles</span></li>
+                <li><span>companies</span><span class="schema-key">accounts</span></li>
+                <li><span>guest assignments</span><span class="schema-key">mapping</span></li>
+              </ul>
+            </div>
+            <div class="schema-group">
+              <h4>Rooms and availability</h4>
+              <ul>
+                <li><span>rooms</span><span class="schema-key">inventory</span></li>
+                <li><span>room types</span><span class="schema-key">catalog</span></li>
+                <li><span>status updates</span><span class="schema-key">live use</span></li>
+                <li><span>services</span><span class="schema-key">extras</span></li>
+              </ul>
+            </div>
+            <div class="schema-group">
+              <h4>Reservation core</h4>
+              <ul>
+                <li><span>reservations</span><span class="schema-key">spine</span></li>
+                <li><span>check-in data</span><span class="schema-key">arrival</span></li>
+                <li><span>checkout data</span><span class="schema-key">closure</span></li>
+                <li><span>booking history</span><span class="schema-key">tracking</span></li>
+              </ul>
+            </div>
+            <div class="schema-group">
+              <h4>Finance layer</h4>
+              <ul>
+                <li><span>invoices</span><span class="schema-key">totals</span></li>
+                <li><span>payments</span><span class="schema-key">status</span></li>
+                <li><span>discounts</span><span class="schema-key">adjustments</span></li>
+                <li><span>tax values</span><span class="schema-key">billing</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        <div class="relationship-spine">
+          <article class="relation-card">
+            <h3>Reservation is the center point</h3>
+            <p>The reservation record connects guest identity, room selection, dates, payment state, and the desk workflow that follows after booking.</p>
+            <div class="relation-route">
+              <span class="relation-pill">user</span>
+              <span class="relation-pill">room</span>
+              <span class="relation-pill">dates</span>
+              <span class="relation-pill">invoice</span>
+            </div>
+          </article>
+          <article class="relation-card">
+            <h3>Operations update the same booking</h3>
+            <p>Check-in, service additions, room assignment, and checkout do not create disconnected flows. They extend the same operational record.</p>
+            <div class="relation-route">
+              <span class="relation-pill">check-in</span>
+              <span class="relation-pill">services</span>
+              <span class="relation-pill">room status</span>
+              <span class="relation-pill">checkout</span>
+            </div>
+          </article>
+          <article class="relation-card">
+            <h3>Billing mirrors stay progress</h3>
+            <p>Invoices and payments stay attached to the booking so managers and clerks can reconcile totals without leaving the system context.</p>
+            <div class="relation-route">
+              <span class="relation-pill">subtotal</span>
+              <span class="relation-pill">discount</span>
+              <span class="relation-pill">tax</span>
+              <span class="relation-pill">payment state</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="security">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i data-lucide="shield" class="icon"></i>Security</span>
+          <h2>Built with protection layers</h2>
+        </div>
+        <p class="section-note">Security is presented here as stacked protections across authentication, sessions, and data handling.</p>
+      </div>
+      <div class="security-shell">
+        <article class="security-hero">
+          <span class="kicker" style="color:#9ac2ff;"><i data-lucide="shield-check" class="icon"></i>Protection model</span>
+          <h3>Multiple safeguards support the booking lifecycle.</h3>
+          <p>The system already includes key backend protections that reduce common risk around sessions, credentials, and request handling.</p>
+          <div class="security-points">
+            <div class="security-point"><strong>Auth</strong><span>Session-led login control per role.</span></div>
+            <div class="security-point"><strong>Data</strong><span>Prepared statements for safer writes.</span></div>
+            <div class="security-point"><strong>Forms</strong><span>CSRF coverage for trusted actions.</span></div>
+          </div>
+        </article>
+        <div class="security-grid">
+          <article class="security-card">
+            <span class="card-icon"><i data-lucide="clock-3" class="icon"></i></span>
+            <h3>Session lifecycle</h3>
+            <p>Session timeout, regeneration after login, and cookie restrictions help reduce session fixation and stale access risk.</p>
+          </article>
+          <article class="security-card">
+            <span class="card-icon"><i data-lucide="key-round" class="icon"></i></span>
+            <h3>Password handling</h3>
+            <p>Password storage uses PHP hashing so raw credentials are not persisted directly in the application layer.</p>
+          </article>
+          <article class="security-card">
+            <span class="card-icon"><i data-lucide="database-zap" class="icon"></i></span>
+            <h3>Query protection</h3>
+            <p>Prepared statements reduce injection risk for database writes and keep request data out of hand-built SQL strings.</p>
+          </article>
+          <article class="security-card">
+            <span class="card-icon"><i data-lucide="badge-check" class="icon"></i></span>
+            <h3>Request trust</h3>
+            <p>CSRF tokens help ensure state-changing form submissions come from trusted sessions rather than third-party triggers.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="limitations">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i data-lucide="triangle-alert" class="icon"></i>Limitations</span>
+          <h2>Current limitations</h2>
+        </div>
+        <p class="section-note">The project is strong as a system case study, but a few production-level gaps are still visible and worth calling out clearly.</p>
+      </div>
+      <div class="limitations-shell">
+        <article class="limitations-overview">
+          <span class="kicker" style="color:#8b6b00;"><i data-lucide="siren" class="icon"></i>Release readiness</span>
+          <h3>Ready to demonstrate, not yet ready to trust unattended in production.</h3>
+          <p>The core booking path works, but long-term reliability still depends on better notification handling, stronger payment confirmation, and safer configuration management.</p>
+          <div class="risk-summary">
+            <div class="risk-summary-card"><strong>01</strong><span>Messaging gap for guests</span></div>
+            <div class="risk-summary-card"><strong>02</strong><span>Server-side payment trust still thin</span></div>
+            <div class="risk-summary-card"><strong>03</strong><span>Secrets need environment isolation</span></div>
+          </div>
+        </article>
+        <div class="risk-list">
+          <article class="risk-card">
+            <div class="risk-card-head">
+              <h3>No automated guest communication</h3>
+              <span class="risk-badge">L1</span>
+            </div>
+            <p>Guests do not yet receive booking confirmations, receipts, cancellations, or reminder emails, which leaves too much of the stay communication outside the platform.</p>
+            <div class="risk-tags">
+              <span class="risk-tag">notifications</span>
+              <span class="risk-tag">guest trust</span>
+            </div>
+          </article>
+          <article class="risk-card">
+            <div class="risk-card-head">
+              <h3>Stripe return flow is not enough</h3>
+              <span class="risk-badge">L2</span>
+            </div>
+            <p>Payment state should be confirmed through verified Stripe webhook events so invoice status changes do not rely only on the browser redirect outcome.</p>
+            <div class="risk-tags">
+              <span class="risk-tag">payment verification</span>
+              <span class="risk-tag">backend trust</span>
+            </div>
+          </article>
+          <article class="risk-card">
+            <div class="risk-card-head">
+              <h3>Credentials should leave the code path</h3>
+              <span class="risk-badge">L3</span>
+            </div>
+            <p>Database access details, Stripe configuration, and environment-specific secrets should be moved into protected environment variables before deployment.</p>
+            <div class="risk-tags">
+              <span class="risk-tag">secret management</span>
+              <span class="risk-tag">deployment safety</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="improvements">
+      <div class="section-head">
+        <div>
+          <span class="kicker"><i data-lucide="trending-up" class="icon"></i>Improvements</span>
+          <h2>What comes next</h2>
+        </div>
+        <p class="section-note">Planned upgrades to move QuickStay from case study to production-grade.</p>
+      </div>
+      <div class="next-grid">
+        <article class="next-tile">
+          <div class="next-icon"><i data-lucide="mail-check" class="icon"></i></div>
+          <h3>Email notifications</h3>
+          <p>Send confirmations, receipts, cancellation notices, and pre-arrival reminders through a mail service.</p>
+          <div class="next-tag">Priority</div>
+        </article>
+        <article class="next-tile">
+          <div class="next-icon"><i data-lucide="webhook" class="icon"></i></div>
+          <h3>Stripe webhook handler</h3>
+          <p>Verify payment events on the server and update invoices only after trusted Stripe events arrive.</p>
+          <div class="next-tag">Security</div>
+        </article>
+        <article class="next-tile next-tile-wide">
+          <div class="next-icon next-icon-light"><i data-lucide="smartphone" class="icon"></i></div>
+          <div>
+            <h3>Cleaner responsive admin panels</h3>
+            <p>Improve tables, sidebars, action bars, and dashboard density so clerks can use the system comfortably on tablet and mobile screens.</p>
+            <div class="next-tag" style="background:rgba(255,255,255,0.15);color:#fff;border-color:rgba(255,255,255,0.2);">UX</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell reveal" id="conclusion">
+      <div class="conclusion-card">
+        <h2 class="conclusion-title">A complete hotel<br /><em>operations system.</em></h2>
+        <p class="conclusion-text">QuickStay demonstrates a complete hotel booking and management workflow with structured user roles, system logic, and operational control, all in a single PHP platform. It's a real-world case study in multi-role system design, database architecture, and secure session management.</p>
+        <p class="conclusion-text">Explore the system to understand how multi-user workflows and booking operations are implemented in a real-world scenario.</p>
+        <div class="conclusion-cta">
+          <a href="#" class="btn btn-light pressable"><i data-lucide="external-link" class="icon"></i>Explore System</a>
+          <a href="home.html" class="btn btn-dark pressable"><i data-lucide="arrow-left" class="icon"></i>Back to Home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-card">
+      <div>
+        <div class="footer-name">Ashrif Rihan Blogs</div>
+        <div class="footer-text">Software Engineering Student</div>
+      </div>
+      <div>
+        <div class="footer-links">
+          <a class="menu-link" href="home.html"><i data-lucide="home" class="icon"></i>Home</a>
+          <a class="menu-link" href="home.html#projects"><i data-lucide="layers" class="icon"></i>Projects</a>
+          <a class="menu-link" href="home.html#contact"><i data-lucide="send" class="icon"></i>Contact</a>
+        </div>
+        <div class="copyright">&copy; 2026 All Rights Reserved</div>
+      </div>
+    </div>
+  </footer>
+  <div class="progress"></div>
+
+  <script>
+    const progress = document.querySelector(".progress");
+    const updateProgress = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const amount = docHeight > 0 ? Math.min(1, scrollTop / docHeight) : 0;
+      progress.style.transform = `scaleX(${amount})`;
+    };
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    updateProgress();
+
+    document.querySelectorAll(".pressable").forEach((element) => {
+      element.addEventListener("pointerdown", () => { element.style.transform = "scale(0.97)"; });
+      element.addEventListener("pointerup", () => { element.style.transform = ""; });
+      element.addEventListener("pointerleave", () => { element.style.transform = ""; });
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+  </script>
+  <script>
+    window.lucide?.createIcons();
+
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuButton.addEventListener("click", () => {
+      const open = mobileMenu.classList.toggle("open");
+      menuButton.classList.toggle("open", open);
+      menuButton.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+        menuButton.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const gallerySets = {
+      manager: {
+        title: "Manager pages",
+        screens: [
+          { title: "Dashboard overview", reason: "This screen gives managers one fast read on occupancy, reservations, billing, and current activity.", image: "images/hero-reference-5.jpg", tint: "rgba(20,99,255,0.28)" },
+          { title: "Room management", reason: "Room details, rate control, availability state, and maintenance awareness stay under manager control here.", image: "images/hero-reference-1.jpg", tint: "rgba(7,17,31,0.3)" },
+          { title: "Reports and billing", reason: "Revenue summaries, invoice status, and service totals support operational and financial decisions.", image: "images/hero-reference-2.jpg", tint: "rgba(32,167,121,0.22)" }
+        ]
+      },
+      clerk: {
+        title: "Clerk pages",
+        screens: [
+          { title: "Reservation desk", reason: "This is the daily command surface for finding, verifying, and preparing active bookings.", image: "images/hero-reference-1.jpg", tint: "rgba(20,99,255,0.24)" },
+          { title: "Check-in workflow", reason: "Arrival, room assignment, guest details, and added services all connect through this step.", image: "images/hero-reference-5.jpg", tint: "rgba(32,167,121,0.22)" },
+          { title: "Checkout invoice", reason: "Final charges, payment status, and room release actions meet here before the stay is closed.", image: "images/hero-reference-4.jpg", tint: "rgba(7,17,31,0.34)" }
+        ]
+      },
+      customer: {
+        title: "Customer pages",
+        screens: [
+          { title: "Room search", reason: "Customers can compare availability and find the right room from one clear entry point.", image: "images/hero-reference-2.jpg", tint: "rgba(20,99,255,0.22)" },
+          { title: "Booking and payment", reason: "Selected rooms turn into a real reservation with payment tied directly to the booking flow.", image: "images/hero-reference-3.jpg", tint: "rgba(123,181,255,0.24)" },
+          { title: "Booking history", reason: "Guests can review upcoming and past stays without contacting the front desk for basic updates.", image: "images/hero-reference-5.jpg", tint: "rgba(7,17,31,0.28)" }
+        ]
+      },
+      company: {
+        title: "Travel company pages",
+        screens: [
+          { title: "Company dashboard", reason: "Corporate booking activity is separated cleanly from regular guest self-service actions.", image: "images/hero-reference-4.jpg", tint: "rgba(123,92,255,0.28)" },
+          { title: "Group booking", reason: "Multiple guests, room assignments, and stay coordination can be managed as one company request.", image: "images/hero-reference-5.jpg", tint: "rgba(20,99,255,0.24)" },
+          { title: "Corporate billing", reason: "Company-side invoices, payments, and group totals remain visible in one billing-oriented view.", image: "images/hero-reference-2.jpg", tint: "rgba(7,17,31,0.32)" }
+        ]
+      }
+    };
+    const galleryModal = document.getElementById("galleryModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalScreens = document.getElementById("modalScreens");
+    const modalClose = document.getElementById("modalClose");
+    const closeGalleryModal = () => {
+      galleryModal.classList.remove("open");
+      galleryModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    };
+    document.querySelectorAll(".gallery-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const set = gallerySets[button.dataset.role];
+        modalTitle.textContent = set.title;
+        modalScreens.innerHTML = set.screens.map((screen, index) => `
+          <article class="screen-shot" style="--shot-image:url('${screen.image}'); --shot-tint:${screen.tint};">
+            <div class="screen-shot-badge">${String(index + 1).padStart(2, "0")}</div>
+            <h4>${screen.title}</h4>
+            <p>${screen.reason}</p>
+          </article>
+        `).join("");
+        galleryModal.classList.add("open");
+        galleryModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        window.lucide?.createIcons();
+      });
+    });
+    modalClose.addEventListener("click", closeGalleryModal);
+    galleryModal.addEventListener("click", (event) => {
+      if (event.target === galleryModal) closeGalleryModal();
+    });
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeGalleryModal();
+    });
+
+    const sections = document.querySelectorAll("main section[id], article[id]");
+    const tocLinks = document.querySelectorAll(".toc a");
+    const tocObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        tocLinks.forEach((link) => link.classList.remove("active"));
+        const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add("active");
+      });
+    }, { threshold: 0.35, rootMargin: "-18% 0px -58% 0px" });
+    sections.forEach((section) => tocObserver.observe(section));
+  </script>
+</body>
+</html>
