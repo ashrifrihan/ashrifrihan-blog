@@ -3786,6 +3786,736 @@
       background: rgba(229,72,77,0.1);
       border: 1px solid rgba(229,72,77,0.16);
     }
+
+    .problem-window-title,
+    .problem-billing-total span,
+    .problem-billing-total strong {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .problem-billing-total {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+    }
+    .problem-billing-total strong {
+      min-height: 28px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      text-align: right;
+      line-height: 1.2;
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+      align-items: stretch;
+    }
+    .built-hero,
+    .built-panel,
+    .built-card,
+    .system-path,
+    .system-steps,
+    .edge-card,
+    .data-summary,
+    .data-map-shell,
+    .data-principle,
+    .limits-hero,
+    .limits-card {
+      min-width: 0;
+      border: 1px solid rgba(20,99,255,0.1);
+      border-radius: 30px;
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+      box-shadow: 0 18px 54px rgba(20,99,255,0.08);
+    }
+    .built-chip,
+    .system-chip,
+    .data-chip,
+    .limits-chip,
+    .edge-label {
+      min-height: 30px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .built-chip,
+    .system-chip,
+    .data-chip,
+    .edge-label {
+      color: var(--blue);
+      background: rgba(20,99,255,0.08);
+      border: 1px solid rgba(20,99,255,0.08);
+    }
+    .built-hero {
+      grid-column: span 7;
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(260px, 0.78fr);
+      gap: 24px;
+      align-items: center;
+      color: #fff;
+      background: linear-gradient(145deg, #07111f 0%, #0f2e69 58%, #1463ff 150%);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 28px 70px rgba(20,99,255,0.18);
+    }
+    .built-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -70px -90px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.24), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .built-hero-copy {
+      position: relative;
+      z-index: 1;
+    }
+    .built-hero-copy .built-chip {
+      color: #fff;
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.16);
+    }
+    .built-hero-copy h3 {
+      margin: 16px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+    .built-hero-copy p {
+      margin: 12px 0 0;
+      max-width: 460px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.68;
+    }
+    .built-hero-pills,
+    .system-state-row,
+    .limits-pills,
+    .limits-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .built-hero-pills span,
+    .system-state-row span,
+    .limits-pills span,
+    .limits-meta span {
+      min-height: 32px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+    .built-hero-pills span,
+    .system-state-row span,
+    .limits-pills span {
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .built-visual {
+      position: relative;
+      min-height: 308px;
+      padding: 20px;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
+      overflow: hidden;
+    }
+    .built-visual::before,
+    .built-visual::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 50%;
+    }
+    .built-visual::before { inset: 22px; }
+    .built-visual::after { inset: 56px; }
+    .built-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 176px;
+      height: 176px;
+      padding: 20px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 18px 40px rgba(7,17,31,0.18);
+      backdrop-filter: blur(10px);
+      z-index: 1;
+    }
+    .built-core strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+    }
+    .built-core span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.82rem;
+      line-height: 1.48;
+    }
+    .built-node {
+      position: absolute;
+      min-height: 44px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.94);
+      color: var(--ink);
+      box-shadow: 0 14px 32px rgba(7,17,31,0.18);
+      font-size: 0.78rem;
+      font-weight: 900;
+      white-space: nowrap;
+      z-index: 1;
+    }
+    .built-node span {
+      color: #7b8da8;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .built-node.search {
+      left: 50%;
+      top: 18px;
+      transform: translateX(-50%);
+    }
+    .built-node.book {
+      left: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .built-node.pay {
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .built-node.checkout {
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+    }
+    .built-panel {
+      grid-column: span 5;
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+    .built-panel::after,
+    .built-card::after,
+    .edge-card::after,
+    .data-summary::after,
+    .limits-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -42px -50px auto;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.18), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .built-panel h3,
+    .built-card h3,
+    .system-path h3,
+    .data-summary h3,
+    .limits-hero h3,
+    .edge-card h3,
+    .data-principle h3 {
+      position: relative;
+      z-index: 1;
+      margin: 14px 0 0;
+      font-family: var(--font-display);
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+    }
+    .built-panel h3,
+    .system-path h3,
+    .data-summary h3,
+    .limits-hero h3 {
+      font-size: clamp(1.55rem, 2.2vw, 2.2rem);
+    }
+    .built-card h3,
+    .edge-card h3,
+    .data-principle h3 {
+      font-size: 1.14rem;
+    }
+    .built-panel p,
+    .built-card p,
+    .system-path p,
+    .system-step-card p,
+    .edge-card p,
+    .data-summary p,
+    .data-point span,
+    .data-node span,
+    .data-principle p,
+    .limits-hero p,
+    .limits-copy p {
+      position: relative;
+      z-index: 1;
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.64;
+    }
+    .built-role-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .built-role-tile {
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(20,99,255,0.08);
+      box-shadow: 0 12px 28px rgba(20,99,255,0.06);
+    }
+    .built-role-tile strong,
+    .data-point strong,
+    .data-node strong {
+      display: block;
+      font-family: var(--font-display);
+      letter-spacing: -0.02em;
+    }
+    .built-role-tile strong { font-size: 1rem; }
+    .built-role-tile span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+    .built-card {
+      grid-column: span 4;
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
+    }
+    .built-card-visual {
+      position: relative;
+      z-index: 1;
+      margin-top: 18px;
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(20,99,255,0.06), rgba(20,99,255,0.1));
+      border: 1px solid rgba(20,99,255,0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+    .built-stat-row {
+      min-height: 46px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.84);
+      color: #405068;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .built-stat-row strong {
+      min-height: 28px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(20,99,255,0.1);
+      color: var(--ink);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .built-flow-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .built-flow-chips span {
+      min-height: 32px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.84);
+      color: #405068;
+      font-size: 0.74rem;
+      font-weight: 800;
+      border: 1px solid rgba(20,99,255,0.08);
+    }
+    .process-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .system-path {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      color: #fff;
+      background: linear-gradient(150deg, #07111f 0%, #0d254f 56%, #1463ff 160%);
+      box-shadow: 0 30px 70px rgba(20,99,255,0.2);
+    }
+    .system-path::after,
+    .limits-hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -70px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.2), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .system-path p,
+    .limits-hero p { color: rgba(255,255,255,0.76); }
+    .system-state-row span { white-space: nowrap; }
+    .system-steps {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .system-steps::before,
+    .system-steps::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+    .system-steps::before {
+      left: 50%;
+      top: 42px;
+      bottom: 42px;
+      width: 1px;
+      background: linear-gradient(180deg, rgba(20,99,255,0.08), rgba(20,99,255,0.24), rgba(20,99,255,0.08));
+    }
+    .system-steps::after {
+      left: 42px;
+      right: 42px;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(20,99,255,0.08), rgba(20,99,255,0.24), rgba(20,99,255,0.08));
+    }
+    .system-step-card {
+      position: relative;
+      z-index: 1;
+      min-height: 188px;
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(20,99,255,0.08);
+      box-shadow: 0 14px 34px rgba(20,99,255,0.06);
+    }
+    .system-step-card:nth-child(2),
+    .system-step-card:nth-child(4) {
+      transform: translateY(18px);
+    }
+    .system-step-no,
+    .limits-no {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, #0d1117 0%, #1463ff 100%);
+      box-shadow: 0 10px 20px rgba(20,99,255,0.18);
+    }
+    .system-step-card h4 {
+      margin: 16px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.06rem;
+      letter-spacing: -0.02em;
+      line-height: 1.14;
+    }
+    .edge-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .edge-card {
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+    }
+    .edge-label {
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+    }
+    .schema-refresh {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .data-summary {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+    }
+    .data-point-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .data-point {
+      padding: 14px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(20,99,255,0.08);
+    }
+    .data-point strong,
+    .data-node strong {
+      font-size: 0.98rem;
+    }
+    .data-point span,
+    .data-node span {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.86rem;
+      line-height: 1.52;
+    }
+    .data-map-shell {
+      position: relative;
+      min-height: 424px;
+      padding: 26px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(123,181,255,0.16), transparent 25%),
+        radial-gradient(circle at 1px 1px, rgba(20,99,255,0.08) 1px, transparent 0) 0 0 / 22px 22px,
+        linear-gradient(180deg, #ffffff 0%, #f3f8ff 100%);
+    }
+    .data-map-shell::before,
+    .data-map-shell::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(20,99,255,0.1);
+      pointer-events: none;
+    }
+    .data-map-shell::before {
+      width: 420px;
+      height: 420px;
+      border-color: rgba(20,99,255,0.08);
+    }
+    .data-map-shell::after {
+      width: 272px;
+      height: 272px;
+    }
+    .data-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 220px;
+      height: 220px;
+      padding: 28px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #07111f 0%, #103171 60%, #1463ff 150%);
+      color: #fff;
+      box-shadow: 0 24px 56px rgba(20,99,255,0.2);
+      z-index: 1;
+    }
+    .data-core strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.28rem;
+      letter-spacing: -0.03em;
+    }
+    .data-core span {
+      display: block;
+      margin-top: 10px;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.84rem;
+      line-height: 1.52;
+    }
+    .data-node {
+      position: absolute;
+      width: 190px;
+      padding: 16px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(20,99,255,0.08);
+      box-shadow: 0 16px 36px rgba(20,99,255,0.07);
+      z-index: 1;
+    }
+    .data-node.accounts { left: 22px; top: 48px; }
+    .data-node.rooms { right: 22px; top: 56px; }
+    .data-node.billing { left: 44px; bottom: 44px; }
+    .data-node.payments { right: 30px; bottom: 44px; }
+    .data-link {
+      position: absolute;
+      border-style: dashed;
+      border-color: rgba(20,99,255,0.24);
+      pointer-events: none;
+    }
+    .data-link.one {
+      left: 184px;
+      top: 126px;
+      width: 166px;
+      height: 114px;
+      border-bottom-width: 2px;
+      border-right-width: 2px;
+      border-bottom-right-radius: 92px;
+    }
+    .data-link.two {
+      right: 184px;
+      top: 132px;
+      width: 166px;
+      height: 108px;
+      border-bottom-width: 2px;
+      border-left-width: 2px;
+      border-bottom-left-radius: 92px;
+    }
+    .data-link.three {
+      left: 194px;
+      top: 240px;
+      width: 154px;
+      height: 112px;
+      border-top-width: 2px;
+      border-right-width: 2px;
+      border-top-right-radius: 92px;
+    }
+    .data-link.four {
+      right: 194px;
+      top: 240px;
+      width: 154px;
+      height: 112px;
+      border-top-width: 2px;
+      border-left-width: 2px;
+      border-top-left-radius: 92px;
+    }
+    .schema-principle-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .data-principle {
+      padding: 20px;
+    }
+    .data-principle p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .limitations-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .limits-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      color: #fff;
+      background: linear-gradient(145deg, #07111f 0%, #0f2d62 56%, #1463ff 160%);
+      box-shadow: 0 30px 70px rgba(20,99,255,0.2);
+    }
+    .limits-chip {
+      color: #fff;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .limits-card-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .limits-card {
+      position: relative;
+      overflow: hidden;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .limits-copy {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+    }
+    .limits-copy .limits-chip {
+      color: var(--blue);
+      background: rgba(20,99,255,0.08);
+      border-color: rgba(20,99,255,0.08);
+    }
+    .limits-card.ops .limits-copy .limits-chip {
+      color: #876400;
+      background: rgba(245,216,76,0.18);
+      border-color: rgba(245,216,76,0.28);
+    }
+    .limits-card.payments .limits-copy .limits-chip {
+      color: var(--blue);
+      background: rgba(20,99,255,0.1);
+      border-color: rgba(20,99,255,0.16);
+    }
+    .limits-card.security .limits-copy .limits-chip {
+      color: var(--red);
+      background: rgba(229,72,77,0.1);
+      border-color: rgba(229,72,77,0.16);
+    }
+    .limits-copy h3 {
+      margin: 12px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+      line-height: 1.16;
+    }
+    .limits-meta span {
+      color: #405068;
+      background: rgba(20,99,255,0.08);
+      border: 1px solid rgba(20,99,255,0.08);
+    }
     .next-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -4085,6 +4815,146 @@
       .footer-card { grid-template-columns: 1fr; align-items: start; padding: 22px; border-radius: 22px; }
       .footer-links { justify-content: flex-start; margin-top: 22px; }
       .copyright { text-align: left; }
+    }
+
+    @media (max-width: 920px) {
+      .capability-grid,
+      .process-stage,
+      .schema-refresh,
+      .limitations-grid {
+        grid-template-columns: 1fr;
+      }
+      .built-hero,
+      .built-panel,
+      .built-card {
+        grid-column: auto;
+      }
+      .built-hero {
+        grid-template-columns: 1fr;
+      }
+      .system-steps,
+      .edge-grid,
+      .schema-principle-row {
+        grid-template-columns: 1fr;
+      }
+      .system-steps::before,
+      .system-steps::after,
+      .data-map-shell::before,
+      .data-map-shell::after,
+      .data-link {
+        display: none;
+      }
+      .system-step-card:nth-child(2),
+      .system-step-card:nth-child(4) {
+        transform: none;
+      }
+      .data-map-shell {
+        min-height: auto;
+        display: grid;
+        gap: 14px;
+      }
+      .data-core,
+      .data-node {
+        position: relative;
+        inset: auto !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: 100%;
+        height: auto;
+        border-radius: 28px;
+      }
+      .built-role-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 620px) {
+      .built-hero,
+      .built-panel,
+      .built-card,
+      .system-path,
+      .system-steps,
+      .edge-card,
+      .data-summary,
+      .data-map-shell,
+      .data-principle,
+      .limits-hero,
+      .limits-card {
+        padding: 20px;
+        border-radius: 22px;
+      }
+      .built-hero-copy h3,
+      .system-path h3,
+      .data-summary h3,
+      .limits-hero h3 {
+        font-size: clamp(1.6rem, 7vw, 2.1rem);
+      }
+      .built-visual {
+        min-height: auto;
+        padding: 16px;
+        display: grid;
+        gap: 10px;
+        border-radius: 24px;
+      }
+      .built-visual::before,
+      .built-visual::after {
+        display: none;
+      }
+      .built-core,
+      .built-node {
+        position: relative;
+        inset: auto !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+      }
+      .built-node {
+        justify-content: space-between;
+        white-space: normal;
+      }
+      .built-role-grid {
+        grid-template-columns: 1fr;
+      }
+      .built-stat-row,
+      .problem-billing-total {
+        grid-template-columns: 1fr;
+        justify-items: start;
+      }
+      .problem-window-head {
+        flex-wrap: wrap;
+      }
+      .built-stat-row {
+        min-height: 0;
+        padding: 12px;
+        display: grid;
+      }
+      .built-stat-row strong,
+      .problem-billing-total strong {
+        white-space: normal;
+        text-align: left;
+      }
+      .limits-card {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .limits-no,
+      .system-step-no {
+        width: 42px;
+        height: 42px;
+      }
+      .limits-meta span,
+      .built-hero-pills span,
+      .system-state-row span,
+      .limits-pills span {
+        white-space: normal;
+      }
     }
   </style>
 </head>
@@ -4499,53 +5369,85 @@
         <p class="section-note">Grouped capabilities, not a long checklist.</p>
       </div>
       <div class="capability-grid">
-        <article class="capability-card capability-hero">
-          <span class="capability-eyebrow">Core journey</span>
-          <h3>Search, book, pay, stay.</h3>
-          <p>Guest booking and staff follow-up stay attached to one reservation record from first search to final checkout.</p>
-          <div class="capability-flow">
-            <div class="capability-flow-step"><span>01</span><strong>Search</strong></div>
-            <div class="capability-flow-step"><span>02</span><strong>Book</strong></div>
-            <div class="capability-flow-step"><span>03</span><strong>Pay</strong></div>
-            <div class="capability-flow-step"><span>04</span><strong>Checkout</strong></div>
+        <article class="built-hero">
+          <div class="built-hero-copy">
+            <span class="built-chip">Core journey</span>
+            <h3>One reservation spine across search, booking, payment, and stay.</h3>
+            <p>Guests and staff move through the same live record, so booking context does not disappear between the first search and final checkout.</p>
+            <div class="built-hero-pills">
+              <span>Guest booking</span>
+              <span>Desk follow-up</span>
+              <span>Invoice attached</span>
+            </div>
+          </div>
+          <div class="built-visual" aria-hidden="true">
+            <div class="built-core">
+              <div>
+                <strong>Reservation</strong>
+                <span>Source of truth</span>
+              </div>
+            </div>
+            <div class="built-node search"><span>01</span>Search</div>
+            <div class="built-node book"><span>02</span>Book</div>
+            <div class="built-node pay"><span>03</span>Pay</div>
+            <div class="built-node checkout"><span>04</span>Checkout</div>
           </div>
         </article>
-        <article class="capability-card">
-          <span class="card-icon"><i data-lucide="search" class="icon"></i></span>
-          <h3>Room search</h3>
-          <p>Filter by date, guest count, room type, and live availability.</p>
-          <div class="capability-mini-ui">
-            <div class="capability-mini-row"><span>Date filters</span><span>Active</span></div>
-            <div class="capability-mini-row"><span>Room state</span><span>Live</span></div>
+        <article class="built-panel">
+          <span class="built-chip">Role workspaces</span>
+          <h3>Right actions, right interface.</h3>
+          <p>Managers, clerks, customers, and company accounts land in focused workspaces instead of a noisy shared admin.</p>
+          <div class="built-role-grid">
+            <div class="built-role-tile">
+              <strong>Manager</strong>
+              <span>Rooms, billing, reports.</span>
+            </div>
+            <div class="built-role-tile">
+              <strong>Clerk</strong>
+              <span>Desk queue and check-in flow.</span>
+            </div>
+            <div class="built-role-tile">
+              <strong>Customer</strong>
+              <span>Search, book, pay, history.</span>
+            </div>
+            <div class="built-role-tile">
+              <strong>Company</strong>
+              <span>Corporate stays and billing.</span>
+            </div>
           </div>
         </article>
-        <article class="capability-card">
-          <span class="card-icon"><i data-lucide="shield-check" class="icon"></i></span>
-          <h3>Role workspaces</h3>
-          <p>Each user lands in the right interface with the right actions.</p>
-          <div class="capability-meta">
-            <span>Manager</span>
-            <span>Clerk</span>
-            <span>Customer</span>
-            <span>Company</span>
+        <article class="built-card">
+          <span class="built-chip">Room search</span>
+          <h3>Live availability, not a separate step.</h3>
+          <p>Date filters, guest count, room type, and room state stay visible inside the booking flow.</p>
+          <div class="built-card-visual">
+            <div class="built-stat-row"><span>Date filters</span><strong>Active</strong></div>
+            <div class="built-stat-row"><span>Guest count</span><strong>Live</strong></div>
+            <div class="built-stat-row"><span>Room state</span><strong>Available</strong></div>
           </div>
         </article>
-        <article class="capability-card">
-          <span class="card-icon"><i data-lucide="door-open" class="icon"></i></span>
-          <h3>Front-desk flow</h3>
-          <p>Walk-ins, check-in, checkout, room assignment, and service edits stay together.</p>
-          <div class="capability-mini-ui">
-            <div class="capability-mini-row"><span>Walk-ins</span><span>Fast desk flow</span></div>
-            <div class="capability-mini-row"><span>Room assign</span><span>Check-in</span></div>
+        <article class="built-card">
+          <span class="built-chip">Front desk</span>
+          <h3>Walk-ins and check-ins stay in one lane.</h3>
+          <p>Clerks can move from reservation lookup to room assignment, service edits, and checkout without losing the stay record.</p>
+          <div class="built-card-visual">
+            <div class="built-flow-chips">
+              <span>Walk-ins</span>
+              <span>Check-in</span>
+              <span>Checkout</span>
+            </div>
+            <div class="built-stat-row"><span>Room assign</span><strong>During check-in</strong></div>
+            <div class="built-stat-row"><span>Desk flow</span><strong>Fast handoff</strong></div>
           </div>
         </article>
-        <article class="capability-card">
-          <span class="card-icon"><i data-lucide="file-text" class="icon"></i></span>
-          <h3>Billing and invoices</h3>
-          <p>Services, tax, discounts, and final totals stay attached to the stay record.</p>
-          <div class="capability-mini-ui">
-            <div class="capability-mini-row"><span>Service charges</span><span>Tracked</span></div>
-            <div class="capability-mini-row"><span>Invoice state</span><span>Linked</span></div>
+        <article class="built-card">
+          <span class="built-chip">Billing</span>
+          <h3>Charges stay attached to the stay.</h3>
+          <p>Services, tax, discounts, and invoice totals stay linked to the reservation instead of drifting into side notes.</p>
+          <div class="built-card-visual">
+            <div class="built-stat-row"><span>Service charges</span><strong>Tracked</strong></div>
+            <div class="built-stat-row"><span>Invoice state</span><strong>Linked</strong></div>
+            <div class="built-stat-row"><span>Payment path</span><strong>Visible</strong></div>
           </div>
         </article>
       </div>
@@ -4586,59 +5488,58 @@
           <span class="kicker"><i data-lucide="git-branch" class="icon"></i>Engineering View</span>
           <h2>How data and edge cases move through the system</h2>
         </div>
-        <p class="section-note">This section now follows the stay record from booking to checkout, then calls out the edge cases that matter most.</p>
+        <p class="section-note">Follow the stay record, then surface the risky edge cases.</p>
       </div>
       <div class="process-stage">
-        <article class="process-summary">
-          <span class="kicker" style="color:#7bb5ff;"><i data-lucide="workflow" class="icon"></i>System path</span>
-          <h3>The reservation record stays at the center from inquiry to final checkout.</h3>
-          <p>That one spine is what keeps availability, billing, payment status, and room release logic understandable. When the record stays authoritative, the hotel workflow becomes easier to reason about and safer to extend.</p>
-          <div class="process-pills">
+        <article class="system-path">
+          <span class="system-chip">System path</span>
+          <h3>Every important state change points back to the reservation.</h3>
+          <p>That keeps availability, invoice growth, payment status, and room release understandable even when the stay changes after booking.</p>
+          <div class="system-state-row">
             <span>Reservation state</span>
             <span>Invoice state</span>
             <span>Payment state</span>
             <span>Room state</span>
           </div>
         </article>
-        <div class="process-flow">
-          <div class="process-curve"></div>
-          <article class="process-stop">
-            <span>Step 1</span>
+        <div class="system-steps">
+          <article class="system-step-card">
+            <div class="system-step-no">01</div>
             <h4>Reservation created</h4>
-            <p>The booking record ties together the guest or company account, room selection, stay dates, and initial status.</p>
+            <p>Guest or company, dates, room choice, and opening status are written once.</p>
           </article>
-          <article class="process-stop">
-            <span>Step 2</span>
+          <article class="system-step-card">
+            <div class="system-step-no">02</div>
             <h4>Invoice grows with the stay</h4>
-            <p>Room rate, services, taxes, discounts, and advance charges attach to the reservation instead of being tracked elsewhere.</p>
+            <p>Room rate, services, tax, discounts, and advances stay attached to that same record.</p>
           </article>
-          <article class="process-stop">
-            <span>Step 3</span>
+          <article class="system-step-card">
+            <div class="system-step-no">03</div>
             <h4>Payment state is reconciled</h4>
-            <p>Stripe updates the payment path today, while production hardening should make verified webhook events the final source of truth.</p>
+            <p>Stripe updates the billing path today, with webhook verification as the next trust layer.</p>
           </article>
-          <article class="process-stop">
-            <span>Step 4</span>
-            <h4>Checkout closes the operational loop</h4>
-            <p>Final billing settles the stay and reopens room availability so the next reservation can safely move forward.</p>
+          <article class="system-step-card">
+            <div class="system-step-no">04</div>
+            <h4>Checkout releases the room</h4>
+            <p>Final billing closes the stay and returns room availability for the next reservation.</p>
           </article>
         </div>
       </div>
       <div class="edge-grid">
         <article class="edge-card">
-          <span class="card-icon"><i data-lucide="hotel" class="icon"></i></span>
-          <h3>Double-booking control</h3>
-          <p>Availability should be checked before a reservation is written and checked again before room assignment at check-in.</p>
+          <span class="edge-label">Availability</span>
+          <h3>Double-booking guard</h3>
+          <p>Check room availability before write time and again before staff assignment.</p>
         </article>
         <article class="edge-card">
-          <span class="card-icon"><i data-lucide="credit-card" class="icon"></i></span>
-          <h3>Failed payment handling</h3>
-          <p>Failed or abandoned checkout sessions should leave the booking pending or unpaid instead of auto-confirming from a return URL alone.</p>
+          <span class="edge-label">Payments</span>
+          <h3>Failed checkout fallback</h3>
+          <p>Abandoned or failed payments should leave the booking pending, not silently confirmed.</p>
         </article>
         <article class="edge-card">
-          <span class="card-icon"><i data-lucide="shield-alert" class="icon"></i></span>
-          <h3>Role-limited corrections</h3>
-          <p>Cancellation, late-arrival changes, and final billing edits should stay inside staff-only workflows rather than customer-facing screens.</p>
+          <span class="edge-label">Role control</span>
+          <h3>Staff-only corrections</h3>
+          <p>Late changes, cancellations, and final billing edits should stay out of customer-facing screens.</p>
         </article>
       </div>
     </section>
@@ -4770,64 +5671,64 @@
         <p class="section-note">High-level relationship map only.</p>
       </div>
       <div class="schema-refresh">
-        <article class="schema-summary-card">
-          <span class="schema-summary-tag">Relationship view</span>
+        <article class="data-summary">
+          <span class="data-chip">Relationship view</span>
           <h3>Reservations stay at the center.</h3>
-          <p>Every important state change points back to the stay record, which keeps booking, room, and billing logic clean.</p>
-          <div class="schema-note-list">
-            <div class="schema-note-item">
+          <p>Identity starts the booking, rooms supply availability, invoices collect charges, and payments close the stay.</p>
+          <div class="data-point-list">
+            <div class="data-point">
               <strong>Accounts start the booking</strong>
               <span>Users or companies own the stay.</span>
             </div>
-            <div class="schema-note-item">
+            <div class="data-point">
               <strong>Rooms stay operational</strong>
-              <span>Availability and room state stay meaningful for staff.</span>
+              <span>Inventory and room state remain meaningful for staff.</span>
             </div>
-            <div class="schema-note-item">
+            <div class="data-point">
               <strong>Billing follows the stay</strong>
               <span>Charges and payments do not drift away from the reservation.</span>
             </div>
           </div>
         </article>
-        <div class="schema-map-lite" aria-label="High-level data relationship view">
-          <div class="schema-core">
+        <div class="data-map-shell" aria-label="High-level data relationship view">
+          <div class="data-core">
             <div>
               <strong>reservations</strong>
-              <span>Guest, room, dates, invoice state, and checkout all connect here.</span>
+              <span>Guest, room, stay dates, invoice state, and checkout.</span>
             </div>
           </div>
-          <article class="schema-node accounts">
+          <article class="data-node accounts">
             <strong>users + companies</strong>
-            <span>Booking identity and ownership.</span>
+            <span>Identity and booking ownership.</span>
           </article>
-          <article class="schema-node rooms">
+          <article class="data-node rooms">
             <strong>rooms</strong>
-            <span>Inventory, price, and room state.</span>
+            <span>Inventory, pricing, and room state.</span>
           </article>
-          <article class="schema-node billing">
+          <article class="data-node billing">
             <strong>invoices + services</strong>
-            <span>Charges, tax, and extras.</span>
+            <span>Charges, tax, discounts, and extras.</span>
           </article>
-          <article class="schema-node payments">
+          <article class="data-node payments">
             <strong>payments</strong>
             <span>Checkout session and payment state.</span>
           </article>
-          <span class="schema-link one"></span>
-          <span class="schema-link two"></span>
-          <span class="schema-link three"></span>
-          <span class="schema-link four"></span>
+          <span class="data-link one"></span>
+          <span class="data-link two"></span>
+          <span class="data-link three"></span>
+          <span class="data-link four"></span>
         </div>
       </div>
       <div class="schema-principle-row">
-        <article class="schema-principle-card">
+        <article class="data-principle">
           <h3>People and rooms meet in the stay</h3>
-          <p>The reservation is where booking ownership and room assignment stay aligned.</p>
+          <p>Booking ownership and room assignment remain aligned.</p>
         </article>
-        <article class="schema-principle-card">
+        <article class="data-principle">
           <h3>Invoices stay attached</h3>
           <p>Revenue reporting still points back to the same operational record.</p>
         </article>
-        <article class="schema-principle-card">
+        <article class="data-principle">
           <h3>Extensions avoid duplication</h3>
           <p>Company bookings and guest assignment extend the core model instead of splitting it.</p>
         </article>
@@ -4880,42 +5781,55 @@
           <span class="kicker"><i data-lucide="triangle-alert" class="icon"></i>Limitations</span>
           <h2>Current limitations</h2>
         </div>
-        <p class="section-note">Solid foundation, but a few reliability and security upgrades are needed before production use.</p>
+        <p class="section-note">Solid case-study foundation, a few production gaps remain.</p>
       </div>
       <div class="limitations-grid">
-        <div class="limitations-banner">
-          <span class="kicker" style="color:#f5d84c;"><i data-lucide="triangle-alert" class="icon"></i>Known gaps</span>
-          <h3>Good case-study foundation, not yet production-ready.</h3>
-          <p>The main workflows are in place, but a few reliability and security upgrades should happen before a live hotel depends on it.</p>
-          <p>Current scope is still case-study scale: no caching layer, no queued email pipeline, and no verified webhook-based payment source of truth yet.</p>
-        </div>
-        <div class="risk-stack">
-          <article class="risk-item">
-            <div class="risk-step-num">01</div>
-            <div class="risk-step-copy">
-              <span class="risk-step-label">Guest communication</span>
+        <article class="limits-hero">
+          <span class="limits-chip">Known gaps</span>
+          <h3>Strong local build, not production hardening yet.</h3>
+          <p>The core workflow works as a case study, but payment trust, guest communication, and secret handling still need stronger delivery infrastructure.</p>
+          <div class="limits-pills">
+            <span>No caching layer</span>
+            <span>No email pipeline</span>
+            <span>No verified webhook truth</span>
+          </div>
+        </article>
+        <div class="limits-card-grid">
+          <article class="limits-card ops">
+            <div class="limits-no">01</div>
+            <div class="limits-copy">
+              <span class="limits-chip">Operations</span>
               <h3>No email notifications</h3>
-              <p>Guests currently do not receive automated booking confirmations, receipts, or reminders.</p>
+              <p>Guests do not receive automatic confirmations, receipts, or reminder messages yet.</p>
+              <div class="limits-meta">
+                <span>Guest communication</span>
+                <span>Needs queue + templates</span>
+              </div>
             </div>
-            <div class="risk-chip ops">Operations</div>
           </article>
-          <article class="risk-item">
-            <div class="risk-step-num">02</div>
-            <div class="risk-step-copy">
-              <span class="risk-step-label">Payment trust</span>
+          <article class="limits-card payments">
+            <div class="limits-no">02</div>
+            <div class="limits-copy">
+              <span class="limits-chip">Payments</span>
               <h3>No Stripe webhook verification</h3>
-              <p>Payment recording should move to verified Stripe webhook events instead of relying only on checkout return flow.</p>
+              <p>Invoice updates should be driven by verified webhook events instead of checkout return flow alone.</p>
+              <div class="limits-meta">
+                <span>Payment trust</span>
+                <span>Server confirmation needed</span>
+              </div>
             </div>
-            <div class="risk-chip payments">Payments</div>
           </article>
-          <article class="risk-item">
-            <div class="risk-step-num">03</div>
-            <div class="risk-step-copy">
-              <span class="risk-step-label">Secret management</span>
+          <article class="limits-card security">
+            <div class="limits-no">03</div>
+            <div class="limits-copy">
+              <span class="limits-chip">Security</span>
               <h3>Hardcoded credentials</h3>
-              <p>Database keys, API keys, and environment-specific values should move into protected environment variables.</p>
+              <p>Database secrets, API keys, and environment-specific values should move into protected environment variables.</p>
+              <div class="limits-meta">
+                <span>Secret management</span>
+                <span>Environment-based config</span>
+              </div>
             </div>
-            <div class="risk-chip security">Security</div>
           </article>
         </div>
       </div>
