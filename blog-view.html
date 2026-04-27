@@ -589,29 +589,212 @@
     .sticky-copy .kicker { position: relative; z-index: 1; }
     .sticky-copy h3 { position: relative; z-index: 1; margin: 14px 0 0; font-family: var(--font-display); font-size: clamp(1.5rem, 2.8vw, 2.4rem); line-height: 1.05; letter-spacing: -0.04em; }
     .sticky-copy p { position: relative; z-index: 1; color: rgba(255,255,255,0.72); line-height: 1.72; margin-top: 12px; }
-    .stacked-cards { display: grid; gap: 14px; }
-    .stack-card {
-      min-height: 150px;
-      padding: 26px;
+    .problem-lane {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+      padding-top: 4px;
+    }
+    .problem-card {
+      --problem-transform: none;
+      width: min(100%, 480px);
+      padding: 18px;
       border: 1px solid rgba(20,99,255,0.12);
-      border-radius: 22px;
-      background: #fff;
-      box-shadow: 0 10px 36px rgba(13,17,23,0.06);
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(244,248,255,0.94));
+      box-shadow: 0 24px 60px rgba(20,99,255,0.08);
       position: relative;
       overflow: hidden;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      transform: var(--problem-transform);
+      transition: transform 0.26s ease, box-shadow 0.26s ease;
     }
-    .stack-card::before {
+    .problem-card::after {
       content: "";
       position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      background: linear-gradient(180deg, var(--blue), #20a779);
-      border-radius: 0 0 0 0;
+      inset: auto -18% -50% auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.2), rgba(123,181,255,0));
+      pointer-events: none;
     }
-    .stack-card:hover { transform: translateX(4px); box-shadow: 0 18px 52px rgba(20,99,255,0.1); }
-    .stack-card h3 { margin: 0; font-size: 1.08rem; }
-    .stack-card p { color: var(--muted); line-height: 1.66; margin-bottom: 0; margin-top: 8px; }
+    .problem-card:nth-child(1) {
+      justify-self: start;
+      --problem-transform: rotate(-2deg);
+    }
+    .problem-card:nth-child(2) {
+      justify-self: center;
+      --problem-transform: translateX(18px) rotate(1.5deg);
+    }
+    .problem-card:nth-child(3) {
+      justify-self: end;
+      --problem-transform: rotate(-1deg);
+    }
+    .problem-card:hover {
+      transform: translateY(-8px) rotate(0deg);
+      box-shadow: 0 28px 70px rgba(20,99,255,0.14);
+    }
+    .problem-card-visual {
+      position: relative;
+      min-height: 184px;
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, #f7fbff 0%, #ebf2ff 100%);
+      border: 1px solid rgba(255,255,255,0.84);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.96);
+      display: grid;
+      align-content: start;
+      gap: 16px;
+    }
+    .problem-number {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      color: #fff;
+      background: linear-gradient(135deg, #0d1117 0%, #1463ff 100%);
+      box-shadow: 0 14px 24px rgba(20,99,255,0.22);
+    }
+    .problem-window {
+      min-height: 104px;
+      padding: 14px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(20,99,255,0.1);
+      box-shadow: 0 14px 32px rgba(20,99,255,0.08);
+      display: grid;
+      gap: 12px;
+    }
+    .problem-window-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .problem-window-title {
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: #75849b;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .problem-window-pulse {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #7bb5ff, #1463ff);
+      box-shadow: 0 0 0 6px rgba(20,99,255,0.08);
+    }
+    .problem-room-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .problem-room {
+      min-height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #f3f6fb;
+      color: #8290a5;
+      font-size: 0.72rem;
+      font-weight: 900;
+      border: 1px solid rgba(20,99,255,0.05);
+    }
+    .problem-room.active {
+      color: var(--blue);
+      background: linear-gradient(135deg, rgba(20,99,255,0.12), rgba(123,181,255,0.28));
+      border-color: rgba(20,99,255,0.14);
+    }
+    .problem-room.warn {
+      color: #8e5f08;
+      background: linear-gradient(135deg, rgba(245,216,76,0.24), rgba(229,72,77,0.12));
+      border-color: rgba(245,216,76,0.28);
+    }
+    .problem-billing-lines {
+      display: grid;
+      gap: 10px;
+    }
+    .problem-billing-line {
+      height: 10px;
+      width: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(20,99,255,0.08), rgba(20,99,255,0.24));
+    }
+    .problem-billing-line.short { width: 72%; }
+    .problem-billing-line.mid { width: 86%; }
+    .problem-billing-total {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 13px;
+      border-radius: 16px;
+      color: #fff;
+      background: linear-gradient(135deg, #0f1b31 0%, #1463ff 100%);
+      font-size: 0.76rem;
+      font-weight: 900;
+    }
+    .problem-role-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .problem-role-pill {
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #f3f6fb;
+      border: 1px solid rgba(20,99,255,0.08);
+      color: #58657a;
+      font-size: 0.73rem;
+      font-weight: 900;
+    }
+    .problem-role-pill.primary {
+      color: var(--blue);
+      background: linear-gradient(135deg, rgba(20,99,255,0.12), rgba(123,181,255,0.24));
+    }
+    .problem-role-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(13,17,23,0.08) 0%, rgba(13,17,23,0.08) 28%, rgba(20,99,255,0.2) 28%, rgba(20,99,255,0.2) 62%, rgba(32,167,121,0.18) 62%, rgba(32,167,121,0.18) 100%);
+    }
+    .problem-card-copy {
+      position: relative;
+      z-index: 1;
+      padding: 18px 6px 6px;
+    }
+    .problem-card-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(20,99,255,0.08);
+      color: var(--blue);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .problem-card h3 {
+      margin: 12px 0 0;
+      font-size: 1.14rem;
+      line-height: 1.18;
+    }
+    .problem-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
     .feature-showcase {
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
@@ -982,14 +1165,118 @@
     .limitations-banner .kicker { position: relative; z-index: 1; }
     .limitations-banner h3 { position: relative; z-index: 1; margin: 14px 0 0; font-family: var(--font-display); font-size: clamp(1.5rem, 2.8vw, 2.2rem); line-height: 1.08; letter-spacing: -0.04em; }
     .limitations-banner p { position: relative; z-index: 1; color: rgba(255,255,255,0.72); line-height: 1.72; margin-top: 12px; }
-    .stack-card-num {
+    .risk-stack {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      padding: 14px;
+      border-radius: 30px;
+      border: 1px solid rgba(20,99,255,0.1);
+      background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(239,244,255,0.92));
+      box-shadow: 0 22px 58px rgba(13,17,23,0.06);
+      overflow: hidden;
+    }
+    .risk-stack::before {
+      content: "";
+      position: absolute;
+      left: 35px;
+      top: 30px;
+      bottom: 30px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(20,99,255,0.18), rgba(20,99,255,0.08), rgba(229,72,77,0.22));
+    }
+    .risk-item {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(20,99,255,0.08);
+      box-shadow: 0 14px 32px rgba(20,99,255,0.06);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .risk-item::before {
+      content: "";
+      position: absolute;
+      left: 21px;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      border: 3px solid var(--blue);
+      box-shadow: 0 0 0 8px rgba(20,99,255,0.08);
+    }
+    .risk-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 44px rgba(20,99,255,0.1);
+    }
+    .risk-step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
       font-family: var(--font-display);
-      font-size: 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: #fff;
+      background: linear-gradient(135deg, #0d1117 0%, #1463ff 100%);
+      box-shadow: 0 10px 18px rgba(20,99,255,0.18);
+    }
+    .risk-step-copy {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+    .risk-step-label {
+      color: #7a8aa4;
+      font-size: 0.72rem;
       font-weight: 900;
       letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .risk-step-copy h3 {
+      margin: 0;
+      font-size: 1.04rem;
+      line-height: 1.22;
+    }
+    .risk-step-copy p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.64;
+    }
+    .risk-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 13px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .risk-chip.ops {
+      color: #876400;
+      background: rgba(245,216,76,0.18);
+      border: 1px solid rgba(245,216,76,0.32);
+    }
+    .risk-chip.payments {
       color: var(--blue);
-      margin-bottom: 10px;
-      opacity: 0.7;
+      background: rgba(20,99,255,0.1);
+      border: 1px solid rgba(20,99,255,0.16);
+    }
+    .risk-chip.security {
+      color: var(--red);
+      background: rgba(229,72,77,0.1);
+      border: 1px solid rgba(229,72,77,0.16);
     }
     .next-grid {
       display: grid;
@@ -1098,6 +1385,12 @@
       .role-strip { grid-template-columns: repeat(2, 1fr); }
       .sticky-copy { position: relative; top: auto; }
       .limitations-banner { position: relative; }
+      .problem-card {
+        width: 100%;
+        justify-self: stretch;
+        --problem-transform: none;
+      }
+      .problem-card-copy { padding-inline: 0; }
       .section-head { display: block; }
       .section-note { margin-top: 14px; }
       .toc-wrap { top: 88px; }
@@ -1121,6 +1414,22 @@
       .toc-wrap { top: 78px; }
       .toc { width: calc(100% - 24px); }
       .section { padding-top: 74px; }
+      .problem-card { padding: 14px; border-radius: 24px; }
+      .problem-card-visual { min-height: auto; padding: 14px; border-radius: 20px; }
+      .problem-window { min-height: auto; border-radius: 18px; }
+      .risk-stack { padding: 10px; border-radius: 24px; }
+      .risk-stack::before,
+      .risk-item::before { display: none; }
+      .risk-item {
+        grid-template-columns: auto 1fr;
+        align-items: start;
+        padding: 18px;
+      }
+      .risk-chip {
+        grid-column: 2;
+        justify-self: start;
+        margin-top: 2px;
+      }
       .role-strip { grid-template-columns: 1fr; }
       .gallery-track { grid-template-columns: 1fr; width: calc(100% - 24px); }
       .gallery-button { min-height: 360px; }
@@ -1242,10 +1551,79 @@
           <h3>Manual records make simple hotel work feel heavy.</h3>
           <p>QuickStay exists because booking, billing, room status, guest details, and staff access need to move together instead of living in separate notes and spreadsheets.</p>
         </aside>
-        <div class="stacked-cards">
-          <article class="stack-card"><div class="stack-card-num">01</div><h3>Room conflicts</h3><p>When online requests and front-desk bookings are not synced, staff can accidentally assign the same room twice.</p></article>
-          <article class="stack-card"><div class="stack-card-num">02</div><h3>Billing mistakes</h3><p>Invoices, services, discounts, taxes, and advance payments are easier to lose when they are handled outside the booking flow.</p></article>
-          <article class="stack-card"><div class="stack-card-num">03</div><h3>Weak role separation</h3><p>Managers, clerks, customers, and travel companies need different tools, but the same source of truth.</p></article>
+        <div class="problem-lane">
+          <article class="problem-card">
+            <div class="problem-card-visual">
+              <div class="problem-number">01</div>
+              <div class="problem-window">
+                <div class="problem-window-head">
+                  <span class="problem-window-title">Room board</span>
+                  <span class="problem-window-pulse"></span>
+                </div>
+                <div class="problem-room-grid">
+                  <span class="problem-room">101</span>
+                  <span class="problem-room active">204</span>
+                  <span class="problem-room warn">204</span>
+                  <span class="problem-room">305</span>
+                  <span class="problem-room">402</span>
+                  <span class="problem-room">504</span>
+                </div>
+              </div>
+            </div>
+            <div class="problem-card-copy">
+              <span class="problem-card-label">Availability</span>
+              <h3>Room conflicts</h3>
+              <p>When online requests and front-desk bookings are not synced, staff can accidentally assign the same room twice.</p>
+            </div>
+          </article>
+          <article class="problem-card">
+            <div class="problem-card-visual">
+              <div class="problem-number">02</div>
+              <div class="problem-window">
+                <div class="problem-window-head">
+                  <span class="problem-window-title">Billing flow</span>
+                  <span class="problem-window-pulse"></span>
+                </div>
+                <div class="problem-billing-lines">
+                  <span class="problem-billing-line"></span>
+                  <span class="problem-billing-line mid"></span>
+                  <span class="problem-billing-line short"></span>
+                </div>
+                <div class="problem-billing-total">
+                  <span>Services + tax</span>
+                  <strong>Total mismatch</strong>
+                </div>
+              </div>
+            </div>
+            <div class="problem-card-copy">
+              <span class="problem-card-label">Billing</span>
+              <h3>Billing mistakes</h3>
+              <p>Invoices, services, discounts, taxes, and advance payments are easier to lose when they are handled outside the booking flow.</p>
+            </div>
+          </article>
+          <article class="problem-card">
+            <div class="problem-card-visual">
+              <div class="problem-number">03</div>
+              <div class="problem-window">
+                <div class="problem-window-head">
+                  <span class="problem-window-title">Role access</span>
+                  <span class="problem-window-pulse"></span>
+                </div>
+                <div class="problem-role-grid">
+                  <span class="problem-role-pill primary">Manager</span>
+                  <span class="problem-role-pill">Clerk</span>
+                  <span class="problem-role-pill">Customer</span>
+                  <span class="problem-role-pill">Company</span>
+                </div>
+                <div class="problem-role-bar"></div>
+              </div>
+            </div>
+            <div class="problem-card-copy">
+              <span class="problem-card-label">Permissions</span>
+              <h3>Weak role separation</h3>
+              <p>Managers, clerks, customers, and travel companies need different tools, but the same source of truth.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -1438,10 +1816,34 @@
           <h3>Good case-study foundation, not yet production-ready.</h3>
           <p>The main workflows are in place, but a few reliability and security upgrades should happen before a live hotel depends on it.</p>
         </div>
-        <div class="stacked-cards">
-          <article class="stack-card"><div class="stack-card-num">01</div><h3>No email notifications</h3><p>Guests currently do not receive automated booking confirmations, receipts, or reminders.</p></article>
-          <article class="stack-card"><div class="stack-card-num">02</div><h3>No Stripe webhook verification</h3><p>Payment recording should move to verified Stripe webhook events instead of relying only on checkout return flow.</p></article>
-          <article class="stack-card"><div class="stack-card-num">03</div><h3>Hardcoded credentials</h3><p>Database keys, API keys, and environment-specific values should move into protected environment variables.</p></article>
+        <div class="risk-stack">
+          <article class="risk-item">
+            <div class="risk-step-num">01</div>
+            <div class="risk-step-copy">
+              <span class="risk-step-label">Guest communication</span>
+              <h3>No email notifications</h3>
+              <p>Guests currently do not receive automated booking confirmations, receipts, or reminders.</p>
+            </div>
+            <div class="risk-chip ops">Operations</div>
+          </article>
+          <article class="risk-item">
+            <div class="risk-step-num">02</div>
+            <div class="risk-step-copy">
+              <span class="risk-step-label">Payment trust</span>
+              <h3>No Stripe webhook verification</h3>
+              <p>Payment recording should move to verified Stripe webhook events instead of relying only on checkout return flow.</p>
+            </div>
+            <div class="risk-chip payments">Payments</div>
+          </article>
+          <article class="risk-item">
+            <div class="risk-step-num">03</div>
+            <div class="risk-step-copy">
+              <span class="risk-step-label">Secret management</span>
+              <h3>Hardcoded credentials</h3>
+              <p>Database keys, API keys, and environment-specific values should move into protected environment variables.</p>
+            </div>
+            <div class="risk-chip security">Security</div>
+          </article>
         </div>
       </div>
     </section>
