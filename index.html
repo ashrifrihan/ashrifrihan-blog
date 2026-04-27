@@ -699,42 +699,118 @@
       display: none;
       padding: 24px;
       place-items: center;
-      background: rgba(7, 17, 31, 0.78);
-      backdrop-filter: blur(12px);
+      background: rgba(10, 20, 34, 0.52);
+      backdrop-filter: blur(8px);
     }
     .modal-overlay.open { display: grid; }
     .project-modal {
-      width: min(760px, 100%);
+      width: min(700px, 100%);
       max-height: min(760px, calc(100vh - 48px));
       overflow: auto;
-      border-radius: 30px;
-      color: #fff;
-      background: #07111f;
-      box-shadow: 0 30px 120px rgba(0,0,0,0.32);
+      border-radius: 24px;
+      color: #172033;
+      background: #ffffff;
+      border: 1px solid #e4eaf3;
+      box-shadow: 0 24px 80px rgba(13, 17, 23, 0.22);
     }
     .modal-hero {
-      min-height: 320px;
-      padding: 28px;
-      background:
-        linear-gradient(145deg, rgba(7,17,31,0.05), rgba(7,17,31,0.88)),
-        radial-gradient(circle at 22% 28%, rgba(110,168,255,0.95), transparent 28%),
-        linear-gradient(135deg, #1463ff, #21a67a);
+      min-height: auto;
+      padding: 22px 22px 18px;
+      border-bottom: 1px solid #edf2f9;
+      background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
     }
     .modal-close {
       float: right;
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(255,255,255,0.22);
+      border: 1px solid #dbe5f2;
       border-radius: 50%;
-      color: #fff;
-      background: rgba(255,255,255,0.14);
+      color: #1e2b42;
+      background: #ffffff;
       cursor: pointer;
     }
-    .modal-body { padding: 26px 28px 30px; }
-    .modal-body p { color: rgba(255,255,255,0.78); line-height: 1.75; }
-    .modal-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .modal-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      color: #1c4fb1;
+      background: #eaf2ff;
+      border: 1px solid #d6e4fb;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    #modalTitle {
+      margin: 14px 0 0;
+      color: #0d1528;
+      font-family: var(--font-display);
+      font-size: clamp(1.55rem, 3.2vw, 2.25rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+    .modal-body { padding: 20px 22px 24px; }
+    .modal-body p {
+      margin: 0;
+      color: #4e5d74;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .modal-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      color: #2e3f5d;
+      background: #f3f7fd;
+      border: 1px solid #dfe8f4;
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .modal-action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1px solid #d6e0ef;
+      background: #f7fafe;
+      color: #253651;
+      font-size: 0.82rem;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .modal-action-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(19, 40, 72, 0.1);
+    }
+    .modal-action-btn.primary {
+      border-color: #0f2f68;
+      background: #0f2f68;
+      color: #ffffff;
+    }
 
     .reveal { opacity: 0; transform: translateY(24px); }
     .reveal.visible { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -804,6 +880,12 @@
       .footer-card { grid-template-columns: 1fr; align-items: start; padding: 22px; border-radius: 22px; }
       .footer-links { justify-content: flex-start; margin-top: 22px; }
       .copyright { text-align: left; }
+      .modal-overlay { padding: 12px; }
+      .project-modal { width: 100%; border-radius: 18px; }
+      .modal-hero { padding: 16px 16px 14px; }
+      .modal-body { padding: 14px 16px 18px; }
+      .modal-actions { flex-direction: column; }
+      .modal-action-btn { width: 100%; }
     }
   </style>
 </head>
@@ -1007,8 +1089,8 @@
         <button class="modal-close" id="modalClose" type="button" aria-label="Close project modal">
           <i data-lucide="x" class="icon"></i>
         </button>
-        <span class="pill"><i data-lucide="file-text" class="icon"></i>Case Study</span>
-        <h2 id="modalTitle" style="color:#fff;margin-top:90px;">QuickStay</h2>
+        <span class="modal-kicker"><i data-lucide="file-text" class="icon"></i>Case Study</span>
+        <h2 id="modalTitle">QuickStay</h2>
       </div>
       <div class="modal-body" id="modalBody"></div>
     </article>
@@ -1082,10 +1164,10 @@
       modalTitle.textContent = project.title;
       modalBody.innerHTML = `
         <p>${project.details}</p>
-        <div class="modal-tags">${project.tags.map((tag) => `<span class="pill">${icon("tag")}${tag}</span>`).join("")}</div>
-        <div class="project-actions" style="margin-top:24px;">
-          <a class="btn btn-light" href="${project.caseUrl}">${icon("file-text")}View Case Study</a>
-          <a class="btn btn-dark" href="${project.liveUrl}">${icon("external-link")}Explore System</a>
+        <div class="modal-tags">${project.tags.map((tag) => `<span class="modal-tag">${icon("tag")}${tag}</span>`).join("")}</div>
+        <div class="modal-actions">
+          <a class="modal-action-btn" href="${project.caseUrl}">${icon("file-text")}View Case Study</a>
+          <a class="modal-action-btn primary" href="${project.liveUrl}">${icon("external-link")}Explore System</a>
         </div>
       `;
       modal.classList.add("open");
