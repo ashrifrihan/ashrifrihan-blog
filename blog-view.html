@@ -70,10 +70,6 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    html, body {
-      -webkit-user-select: none;
-      user-select: none;
-    }
     body {
       margin: 0;
       font-family: var(--font-body);
@@ -1776,6 +1772,1115 @@
       font-weight: 700;
     }
 
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .spotlight-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 32px;
+      border: 1px solid rgba(20,99,255,0.1);
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(238,245,255,0.96));
+      box-shadow: 0 24px 64px rgba(20,99,255,0.09);
+    }
+    .spotlight-panel::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.24), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .spotlight-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(20,99,255,0.1);
+      background: rgba(255,255,255,0.82);
+      color: var(--blue);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .spotlight-panel h3 {
+      position: relative;
+      z-index: 1;
+      margin: 16px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+    }
+    .spotlight-panel p {
+      position: relative;
+      z-index: 1;
+      margin: 14px 0 0;
+      max-width: 560px;
+      color: var(--muted);
+      line-height: 1.74;
+    }
+    .spotlight-stat-row {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .spotlight-stat {
+      padding: 16px;
+      border-radius: 24px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.84);
+      box-shadow: 0 14px 34px rgba(20,99,255,0.06);
+    }
+    .spotlight-stat span {
+      display: block;
+      color: #7a8aa4;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .spotlight-stat strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      letter-spacing: -0.02em;
+    }
+    .delivery-map {
+      position: relative;
+      min-height: 560px;
+      padding: 24px;
+      border: 1px solid rgba(20,99,255,0.1);
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(123,181,255,0.12), transparent 24%),
+        radial-gradient(circle at 1px 1px, rgba(20,99,255,0.08) 1px, transparent 0) 0 0 / 24px 24px,
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(239,245,255,0.96));
+      box-shadow: 0 24px 64px rgba(20,99,255,0.08);
+      overflow: hidden;
+    }
+    .delivery-map::before,
+    .delivery-map::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(20,99,255,0.1);
+      pointer-events: none;
+    }
+    .delivery-map::before {
+      inset: 88px 118px;
+    }
+    .delivery-map::after {
+      inset: 136px 166px;
+      background: radial-gradient(circle, rgba(123,181,255,0.06), transparent 72%);
+    }
+    .delivery-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 230px;
+      height: 230px;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      border-radius: 50%;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(145deg, #07111f 0%, #11409a 65%, #2c86ff 130%);
+      box-shadow: 0 24px 56px rgba(20,99,255,0.22);
+    }
+    .delivery-core strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.34rem;
+      letter-spacing: -0.03em;
+    }
+    .delivery-core span {
+      display: block;
+      margin-top: 10px;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+    .delivery-card {
+      position: absolute;
+      width: 228px;
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 16px 42px rgba(20,99,255,0.08);
+    }
+    .delivery-card.context { left: 24px; top: 68px; transform: rotate(-3deg); }
+    .delivery-card.ownership { right: 24px; top: 104px; transform: rotate(2deg); }
+    .delivery-card.state { left: 52px; bottom: 36px; width: 264px; }
+    .delivery-card-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      background: rgba(20,99,255,0.08);
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .delivery-card h4 {
+      margin: 12px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.06rem;
+      letter-spacing: -0.02em;
+    }
+    .delivery-card p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.9rem;
+    }
+    .delivery-mini-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .delivery-mini-pills span {
+      min-height: 30px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: #f6f9ff;
+      color: #405068;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+    .delivery-link {
+      position: absolute;
+      border-style: dashed;
+      border-color: rgba(20,99,255,0.26);
+      pointer-events: none;
+    }
+    .delivery-link.one {
+      left: 198px;
+      top: 182px;
+      width: 154px;
+      height: 110px;
+      border-left-width: 2px;
+      border-bottom-width: 2px;
+      border-bottom-left-radius: 100px;
+    }
+    .delivery-link.two {
+      right: 194px;
+      top: 214px;
+      width: 140px;
+      height: 92px;
+      border-right-width: 2px;
+      border-top-width: 2px;
+      border-top-right-radius: 100px;
+    }
+    .delivery-link.three {
+      left: 204px;
+      bottom: 160px;
+      width: 190px;
+      height: 96px;
+      border-top-width: 2px;
+      border-right-width: 2px;
+      border-top-right-radius: 120px;
+    }
+    .stack-showcase {
+      margin-top: 20px;
+      padding: 30px;
+      border: 1px solid rgba(20,99,255,0.1);
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(242,247,255,0.96));
+      box-shadow: 0 22px 62px rgba(20,99,255,0.08);
+    }
+    .stack-showcase-copy h3 {
+      margin: 10px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.45rem, 2.3vw, 2.05rem);
+      letter-spacing: -0.04em;
+    }
+    .stack-showcase-copy p {
+      margin: 10px 0 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .stack-service-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .stack-service {
+      position: relative;
+      overflow: hidden;
+      min-height: 172px;
+      padding: 22px;
+      border-radius: 26px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: #fff;
+      box-shadow: 0 16px 40px rgba(20,99,255,0.06);
+    }
+    .stack-service::after {
+      content: "";
+      position: absolute;
+      right: -36px;
+      bottom: -40px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.14), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .stack-service.primary {
+      grid-column: span 2;
+      min-height: 220px;
+      color: #fff;
+      background: linear-gradient(145deg, #07111f 0%, #0e2e73 55%, #1463ff 140%);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 22px 56px rgba(20,99,255,0.18);
+    }
+    .stack-service-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      background: rgba(20,99,255,0.08);
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .stack-service.primary .stack-service-tag {
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+    }
+    .stack-service h4 {
+      margin: 14px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.14rem;
+      letter-spacing: -0.03em;
+      line-height: 1.16;
+    }
+    .stack-service p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 420px;
+      font-size: 0.92rem;
+    }
+    .stack-service.primary p { color: rgba(255,255,255,0.78); }
+    .stack-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .stack-chip {
+      min-height: 32px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(20,99,255,0.08);
+      border: 1px solid rgba(20,99,255,0.08);
+      color: var(--ink);
+      font-size: 0.74rem;
+      font-weight: 900;
+    }
+    .stack-service.primary .stack-chip {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.14);
+      color: #fff;
+    }
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .outcome-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+      padding: 24px;
+      border: 1px solid rgba(20,99,255,0.08);
+      border-radius: 28px;
+      background: linear-gradient(180deg, #ffffff 0%, #f3f8ff 100%);
+      box-shadow: 0 18px 48px rgba(20,99,255,0.07);
+    }
+    .outcome-card::before {
+      content: "";
+      position: absolute;
+      inset: 18px 18px auto auto;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.2), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .outcome-step {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      color: #fff;
+      background: linear-gradient(135deg, #07111f 0%, #1463ff 100%);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(20,99,255,0.18);
+    }
+    .outcome-card h3 {
+      margin: 20px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      letter-spacing: -0.03em;
+      line-height: 1.14;
+    }
+    .outcome-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.66;
+    }
+    .outcome-foot {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.8);
+      color: #405068;
+      font-size: 0.74rem;
+      font-weight: 900;
+    }
+    .build-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .build-card {
+      grid-column: span 4;
+      min-height: 280px;
+      padding: 24px;
+      border: 1px solid rgba(20,99,255,0.08);
+      border-radius: 28px;
+      background: linear-gradient(180deg, #ffffff 0%, #f6faff 100%);
+      box-shadow: 0 18px 48px rgba(20,99,255,0.07);
+      position: relative;
+      overflow: hidden;
+    }
+    .build-card.wide {
+      grid-column: span 8;
+      min-height: 320px;
+      color: #fff;
+      background: linear-gradient(145deg, #07111f 0%, #0f326e 58%, #1463ff 135%);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 26px 62px rgba(20,99,255,0.18);
+    }
+    .build-card.medium { grid-column: span 6; }
+    .build-card::after {
+      content: "";
+      position: absolute;
+      right: -42px;
+      bottom: -42px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.16), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .build-card.wide::after {
+      background: radial-gradient(circle, rgba(255,255,255,0.16), rgba(255,255,255,0));
+    }
+    .build-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .build-card-header h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      line-height: 1.14;
+      letter-spacing: -0.03em;
+    }
+    .build-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.68;
+      max-width: 480px;
+    }
+    .build-card.wide p { color: rgba(255,255,255,0.78); }
+    .build-visual {
+      margin-top: 18px;
+      min-height: 148px;
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.78);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+      display: grid;
+      gap: 10px;
+    }
+    .build-card.wide .build-visual {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.12);
+      box-shadow: none;
+    }
+    .build-flow-top {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .build-flow-pill,
+    .build-flow-bar,
+    .build-mini-row {
+      border-radius: 999px;
+      background: rgba(20,99,255,0.12);
+    }
+    .build-card.wide .build-flow-pill,
+    .build-card.wide .build-flow-bar,
+    .build-card.wide .build-mini-row {
+      background: rgba(255,255,255,0.18);
+    }
+    .build-flow-pill {
+      min-height: 38px;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
+    .build-card.wide .build-flow-pill { color: #fff; }
+    .build-flow-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 12px;
+      flex: 1;
+    }
+    .build-flow-column {
+      display: grid;
+      gap: 10px;
+    }
+    .build-flow-bar { min-height: 12px; }
+    .build-flow-bar.short { width: 62%; }
+    .build-flow-bar.mid { width: 76%; }
+    .build-mini-row {
+      min-height: 54px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: #405068;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .build-card.wide .build-mini-row { color: rgba(255,255,255,0.82); }
+    .process-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .process-summary {
+      padding: 32px;
+      border-radius: 30px;
+      border: 1px solid rgba(20,99,255,0.1);
+      background: linear-gradient(150deg, #0a1628 0%, #0d2451 56%, #1463ff 160%);
+      color: #fff;
+      box-shadow: 0 30px 70px rgba(20,99,255,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .process-summary::before {
+      content: "";
+      position: absolute;
+      inset: auto -60px -80px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.18), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .process-summary h3 {
+      position: relative;
+      z-index: 1;
+      margin: 14px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.7vw, 2.4rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+    }
+    .process-summary p {
+      position: relative;
+      z-index: 1;
+      margin: 12px 0 0;
+      color: rgba(255,255,255,0.76);
+      line-height: 1.72;
+    }
+    .process-pills {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .process-pills span {
+      min-height: 32px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff;
+      font-size: 0.74rem;
+      font-weight: 900;
+    }
+    .process-flow {
+      position: relative;
+      padding: 28px 24px 28px 112px;
+      border-radius: 32px;
+      border: 1px solid rgba(20,99,255,0.1);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(242,247,255,0.96));
+      box-shadow: 0 22px 58px rgba(20,99,255,0.08);
+      display: grid;
+      gap: 16px;
+      overflow: hidden;
+    }
+    .process-curve {
+      position: absolute;
+      left: 58px;
+      top: 30px;
+      bottom: 32px;
+      width: 3px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(20,99,255,0.16), rgba(20,99,255,0.52), rgba(32,167,121,0.22));
+    }
+    .process-stop {
+      position: relative;
+      padding: 18px 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 14px 34px rgba(20,99,255,0.06);
+    }
+    .process-stop:nth-child(even) { margin-left: 28px; }
+    .process-stop::before {
+      content: "";
+      position: absolute;
+      left: -63px;
+      top: 24px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      border: 4px solid var(--blue);
+      box-shadow: 0 0 0 8px rgba(20,99,255,0.08);
+    }
+    .process-stop span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(20,99,255,0.08);
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .process-stop h4 {
+      margin: 12px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.06rem;
+      letter-spacing: -0.02em;
+    }
+    .process-stop p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.62;
+    }
+    .edge-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .edge-card {
+      padding: 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: #fff;
+      box-shadow: 0 16px 38px rgba(20,99,255,0.06);
+    }
+    .edge-card h3 {
+      margin: 16px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.04rem;
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+    }
+    .edge-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.62;
+    }
+    .architecture-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .architecture-copy {
+      padding: 32px;
+      border: 1px solid rgba(20,99,255,0.1);
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(239,245,255,0.96));
+      box-shadow: 0 22px 58px rgba(20,99,255,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .architecture-copy::after {
+      content: "";
+      position: absolute;
+      right: -58px;
+      bottom: -76px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.2), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .architecture-copy h3 {
+      position: relative;
+      z-index: 1;
+      margin: 14px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.55rem, 2.4vw, 2.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+    .architecture-copy p {
+      position: relative;
+      z-index: 1;
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+    .architecture-list {
+      position: relative;
+      z-index: 1;
+      list-style: none;
+      margin: 20px 0 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .architecture-list li {
+      padding: 14px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.84);
+      color: #405068;
+      line-height: 1.56;
+    }
+    .architecture-list strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 0.94rem;
+      font-weight: 900;
+    }
+    .architecture-map {
+      position: relative;
+      min-height: 470px;
+      padding: 24px;
+      border: 1px solid rgba(20,99,255,0.1);
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(123,181,255,0.14), transparent 22%),
+        radial-gradient(circle at 1px 1px, rgba(20,99,255,0.08) 1px, transparent 0) 0 0 / 24px 24px,
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(241,246,255,0.96));
+      box-shadow: 0 22px 60px rgba(20,99,255,0.08);
+      overflow: hidden;
+    }
+    .architecture-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 214px;
+      height: 214px;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      text-align: center;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #07111f 0%, #123f95 65%, #2d87ff 145%);
+      color: #fff;
+      box-shadow: 0 24px 56px rgba(20,99,255,0.2);
+    }
+    .architecture-core strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+    }
+    .architecture-core span {
+      display: block;
+      margin-top: 10px;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+    .architecture-node {
+      position: absolute;
+      width: 204px;
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 16px 38px rgba(20,99,255,0.07);
+    }
+    .architecture-node.accounts { left: 24px; top: 52px; }
+    .architecture-node.rooms { right: 24px; top: 60px; }
+    .architecture-node.billing { left: 42px; bottom: 56px; }
+    .architecture-node.payments { right: 34px; bottom: 54px; }
+    .architecture-node strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .architecture-node span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.84rem;
+    }
+    .architecture-connector {
+      position: absolute;
+      border-style: dashed;
+      border-color: rgba(20,99,255,0.26);
+      pointer-events: none;
+    }
+    .architecture-connector.one {
+      left: 186px;
+      top: 128px;
+      width: 164px;
+      height: 110px;
+      border-bottom-width: 2px;
+      border-right-width: 2px;
+      border-bottom-right-radius: 96px;
+    }
+    .architecture-connector.two {
+      right: 186px;
+      top: 132px;
+      width: 166px;
+      height: 104px;
+      border-bottom-width: 2px;
+      border-left-width: 2px;
+      border-bottom-left-radius: 96px;
+    }
+    .architecture-connector.three {
+      left: 194px;
+      top: 244px;
+      width: 156px;
+      height: 112px;
+      border-top-width: 2px;
+      border-right-width: 2px;
+      border-top-right-radius: 96px;
+    }
+    .architecture-connector.four {
+      right: 190px;
+      top: 242px;
+      width: 160px;
+      height: 112px;
+      border-top-width: 2px;
+      border-left-width: 2px;
+      border-top-left-radius: 96px;
+    }
+    .architecture-principles {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .architecture-principle {
+      padding: 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: #fff;
+      box-shadow: 0 16px 38px rgba(20,99,255,0.06);
+    }
+    .architecture-principle h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .architecture-principle p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.62;
+    }
+    .security-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .security-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 360px;
+      padding: 32px;
+      border-radius: 32px;
+      background: linear-gradient(150deg, #07111f 0%, #102d6f 58%, #1463ff 150%);
+      color: #fff;
+      box-shadow: 0 32px 72px rgba(20,99,255,0.22);
+    }
+    .security-hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -64px -84px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.18), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .security-hero h3 {
+      position: relative;
+      z-index: 1;
+      margin: 14px 0 0;
+      max-width: 420px;
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 2.8vw, 2.55rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+    }
+    .security-hero p {
+      position: relative;
+      z-index: 1;
+      margin: 12px 0 0;
+      max-width: 420px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.72;
+    }
+    .security-orbit {
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .security-orbit::before,
+    .security-orbit::after {
+      content: "";
+      position: absolute;
+      inset: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .security-orbit::after { inset: 74px; }
+    .security-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 88px;
+      height: 88px;
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.14);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 12px 28px rgba(7,17,31,0.22);
+    }
+    .security-center .icon {
+      width: 28px;
+      height: 28px;
+      color: #fff;
+    }
+    .security-node {
+      position: absolute;
+      min-height: 34px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 0.74rem;
+      font-weight: 900;
+      backdrop-filter: blur(8px);
+    }
+    .security-node.one { left: 18px; top: 94px; }
+    .security-node.two { right: 6px; top: 84px; }
+    .security-node.three { left: 42px; bottom: 16px; }
+    .security-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .security-card {
+      padding: 22px;
+      border-radius: 26px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: #fff;
+      box-shadow: 0 16px 40px rgba(20,99,255,0.06);
+    }
+    .security-card h3 {
+      margin: 16px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+    .security-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.64;
+    }
+    .upgrade-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .upgrade-card {
+      grid-column: span 4;
+      padding: 24px;
+      border-radius: 28px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: linear-gradient(180deg, #ffffff 0%, #f6faff 100%);
+      box-shadow: 0 18px 48px rgba(20,99,255,0.07);
+      position: relative;
+      overflow: hidden;
+    }
+    .upgrade-card::after {
+      content: "";
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.16), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .upgrade-card.featured {
+      grid-column: span 8;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 22px;
+      align-items: center;
+      color: #fff;
+      background: linear-gradient(145deg, #07111f 0%, #0d2b67 54%, #1463ff 145%);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 28px 68px rgba(20,99,255,0.2);
+    }
+    .upgrade-card.featured::after {
+      background: radial-gradient(circle, rgba(255,255,255,0.16), rgba(255,255,255,0));
+    }
+    .upgrade-card h3 {
+      margin: 14px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+    .upgrade-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.66;
+    }
+    .upgrade-card.featured p { color: rgba(255,255,255,0.78); }
+    .upgrade-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(20,99,255,0.08);
+      border: 1px solid rgba(20,99,255,0.08);
+      color: var(--blue);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .upgrade-card.featured .upgrade-tag {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.14);
+      color: #fff;
+    }
+    .upgrade-ui {
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.12);
+      display: grid;
+      gap: 10px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .upgrade-ui-row {
+      min-height: 56px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: rgba(255,255,255,0.88);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+    .upgrade-ui-row span:last-child {
+      min-height: 28px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
     .progress {
       position: fixed;
       left: 0;
@@ -2096,11 +3201,16 @@
       .hero { min-height: 980px; padding-top: 58px; padding-bottom: 92px; }
       .hero-dashboard { grid-template-columns: 1fr; }
       .grid-2, .grid-3, .workflow { grid-template-columns: 1fr; }
-      .narrative-panel, .feature-showcase, .limitations-grid, .next-grid, .snapshot-stage, .database-stage, .database-panels, .database-relations { grid-template-columns: 1fr; }
+      .narrative-panel, .feature-showcase, .limitations-grid, .next-grid, .snapshot-stage, .database-stage, .database-panels, .database-relations, .spotlight-grid, .process-stage, .architecture-stage, .security-shell { grid-template-columns: 1fr; }
       .feature-tile.wide, .next-tile-wide { grid-column: auto; }
       .next-tile-wide { flex-direction: column; }
-      .wide-feature-layout, .stack-mosaic { grid-template-columns: 1fr; }
+      .wide-feature-layout, .stack-mosaic, .stack-service-grid, .outcome-grid, .edge-grid, .architecture-principles { grid-template-columns: 1fr; }
+      .build-grid, .upgrade-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .stack-tile.large, .stack-tile.wide, .database-panel.wide { grid-column: auto; }
+      .stack-service.primary { grid-column: auto; }
+      .build-card, .build-card.medium, .upgrade-card { grid-column: span 1; }
+      .build-card.wide, .upgrade-card.featured { grid-column: span 2; }
+      .upgrade-card.featured { grid-template-columns: 1fr; }
       .snapshot-network, .database-canvas { min-height: auto; }
       .snapshot-hub-pill, .snapshot-node-card, .db-table {
         position: relative;
@@ -2115,6 +3225,31 @@
       .snapshot-network, .database-canvas {
         display: grid;
         gap: 14px;
+      }
+      .delivery-map, .architecture-map {
+        min-height: auto;
+        display: grid;
+        gap: 14px;
+      }
+      .delivery-map::before,
+      .delivery-map::after,
+      .delivery-link,
+      .architecture-connector,
+      .security-orbit { display: none; }
+      .delivery-core, .delivery-card, .architecture-core, .architecture-node {
+        position: relative;
+        inset: auto !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: 100%;
+        height: auto;
+      }
+      .delivery-core, .architecture-core {
+        min-height: 190px;
+        border-radius: 32px;
       }
       .snapshot-hub-pill { justify-self: start; }
       .snapshot-curve, .snapshot-dot, .db-curve, .db-dot { display: none; }
@@ -2153,6 +3288,25 @@
       .section { padding-top: 74px; }
       .snapshot-brief, .stack-board, .database-brief, .database-panel, .database-relation { padding: 20px; border-radius: 22px; }
       .snapshot-network, .database-canvas, .wide-feature-visual { border-radius: 22px; }
+      .spotlight-panel, .delivery-map, .stack-showcase, .stack-service, .outcome-card, .build-card, .process-summary, .process-flow, .edge-card, .architecture-copy, .architecture-map, .architecture-principle, .security-hero, .security-card, .upgrade-card { padding: 20px; border-radius: 22px; }
+      .spotlight-stat-row, .build-grid, .upgrade-grid { grid-template-columns: 1fr; }
+      .build-card, .build-card.wide, .build-card.medium, .upgrade-card, .upgrade-card.featured { grid-column: auto; }
+      .build-flow-grid { grid-template-columns: 1fr; }
+      .delivery-core, .architecture-core {
+        min-height: 170px;
+        padding: 24px;
+        border-radius: 28px;
+      }
+      .process-flow { padding: 20px 18px 20px 58px; }
+      .process-curve { left: 26px; }
+      .process-stop:nth-child(even) { margin-left: 12px; }
+      .process-stop::before {
+        left: -37px;
+        width: 14px;
+        height: 14px;
+        border-width: 3px;
+        box-shadow: 0 0 0 6px rgba(20,99,255,0.08);
+      }
       .wide-feature-layout { gap: 16px; }
       .wide-feature-visual { min-height: 260px; }
       .wide-feature-pill.two, .wide-feature-pill.three {
@@ -2303,110 +3457,118 @@
           <span class="kicker"><i data-lucide="briefcase" class="icon"></i>Project Snapshot</span>
           <h2>Context, ownership, and delivery state</h2>
         </div>
-        <p class="section-note">This is the fast credibility layer recruiters usually look for first: what was built, what part of the stack was owned, and where the project stands today.</p>
+        <p class="section-note">This first snapshot now reads like a modern product case study: quick context, clear ownership, and honest delivery state without overloading smaller screens.</p>
       </div>
-      <div class="snapshot-stage">
-        <article class="snapshot-brief">
-          <span class="kicker"><i data-lucide="briefcase" class="icon"></i>Quick Read</span>
-          <h3>Fast project context for recruiters and engineers</h3>
-          <p>This section now behaves more like a product snapshot than a stack of plain cards. It gives the project story, your ownership, and the current delivery state in one connected view.</p>
-          <div class="snapshot-metrics">
-            <div class="snapshot-stat">
-              <span>Use Case</span>
-              <strong>Single-property hotel booking and operations system with one shared reservation flow.</strong>
+      <div class="spotlight-grid">
+        <article class="spotlight-panel">
+          <span class="spotlight-badge">Quick project snapshot</span>
+          <h3>QuickStay now opens with clear context before the reader reaches the deeper technical sections.</h3>
+          <p>The build is framed as a real hotel operations system: reservations, room availability, billing, payments, and role-based actions all move through one shared workflow instead of disconnected admin pages.</p>
+          <div class="spotlight-stat-row">
+            <div class="spotlight-stat">
+              <span>Use case</span>
+              <strong>Single-property hotel booking, billing, and front-desk operations in one connected platform.</strong>
             </div>
-            <div class="snapshot-stat">
+            <div class="spotlight-stat">
               <span>Audience</span>
-              <strong>Managers, clerks, customers, and travel companies working from the same source of truth.</strong>
+              <strong>Managers, clerks, customers, and company accounts using the same reservation source of truth.</strong>
             </div>
-            <div class="snapshot-stat">
+            <div class="spotlight-stat">
               <span>Scope</span>
-              <strong>Built for small-to-medium hotel operations where room availability and role separation matter.</strong>
+              <strong>Best suited to small and medium hotel workflows where room state and access control both matter.</strong>
             </div>
           </div>
         </article>
-        <div class="snapshot-network" aria-label="Connected project snapshot">
-          <div class="snapshot-hub-pill">QuickStay build</div>
-          <article class="snapshot-node-card snapshot-ownership">
-            <span class="snapshot-card-tag">Role in this build</span>
-            <h3>Full workflow ownership</h3>
-            <ul class="snapshot-mini-list">
-              <li><strong>Frontend</strong><span>Case study UI, page structure, and role-based workflow presentation in HTML, CSS, and JavaScript.</span></li>
-              <li><strong>Backend</strong><span>PHP workflow logic for reservations, invoices, check-in, checkout, and session-based access control.</span></li>
-              <li><strong>Data + payments</strong><span>MySQL schema design and Stripe checkout integration tied back to booking records.</span></li>
-            </ul>
+        <div class="delivery-map" aria-label="Project context, ownership, and delivery view">
+          <div class="delivery-core">
+            <div>
+              <strong>QuickStay build</strong>
+              <span>Portfolio case study showing the product story, workflow ownership, and current maturity.</span>
+            </div>
+          </div>
+          <article class="delivery-card context">
+            <span class="delivery-card-tag">Project context</span>
+            <h4>Operational hotel workflow</h4>
+            <p>Reservations, room state, invoices, services, and payments stay connected instead of living in separate tools.</p>
           </article>
-          <article class="snapshot-node-card snapshot-context">
-            <span class="snapshot-card-tag">Project context</span>
-            <h3>Operational hotel workflow</h3>
-            <ul class="snapshot-mini-list">
-              <li><strong>Use case</strong><span>Reservations, billing, payments, room state, and staff actions kept in one flow.</span></li>
-              <li><strong>Audience</strong><span>Manager, clerk, customer, and travel-company experiences connected to the same booking record.</span></li>
-            </ul>
+          <article class="delivery-card ownership">
+            <span class="delivery-card-tag">Ownership</span>
+            <h4>Full-stack implementation</h4>
+            <p>Frontend presentation, PHP booking logic, MySQL structure, and Stripe checkout belong to the same project build.</p>
+            <div class="delivery-mini-pills">
+              <span>HTML/CSS/JS</span>
+              <span>PHP</span>
+              <span>MySQL</span>
+              <span>Stripe</span>
+            </div>
           </article>
-          <article class="snapshot-node-card snapshot-status">
-            <span class="snapshot-card-tag">Delivery state</span>
-            <h3>Prototype, not production</h3>
-            <ul class="snapshot-mini-list">
-              <li><strong>Status</strong><span>Functional prototype and portfolio case study, not yet a production-hardened deployment.</span></li>
-              <li><strong>Environment</strong><span>Runs on Apache or XAMPP with MySQL and Stripe-based payment flow.</span></li>
-              <li><strong>Next hardening</strong><span>Verified webhooks, email notifications, secret management, and real system screenshots.</span></li>
-            </ul>
+          <article class="delivery-card state">
+            <span class="delivery-card-tag">Delivery state</span>
+            <h4>Functional case study</h4>
+            <p>Portfolio-ready and working locally today, with webhook verification, notifications, and responsive admin polish as the next hardening steps.</p>
+            <div class="delivery-mini-pills">
+              <span>Prototype</span>
+              <span>Local runtime</span>
+              <span>Next: production hardening</span>
+            </div>
           </article>
-          <span class="snapshot-curve top"></span>
-          <span class="snapshot-curve left"></span>
-          <span class="snapshot-curve right"></span>
-          <span class="snapshot-dot one"></span>
-          <span class="snapshot-dot two"></span>
-          <span class="snapshot-dot three"></span>
+          <span class="delivery-link one"></span>
+          <span class="delivery-link two"></span>
+          <span class="delivery-link three"></span>
         </div>
       </div>
-      <div class="stack-board">
-        <div class="stack-board-copy">
+      <div class="stack-showcase">
+        <div class="stack-showcase-copy">
           <span class="kicker"><i data-lucide="layers" class="icon"></i>Tech Stack</span>
           <h3>Stack used in the QuickStay build</h3>
-          <p>Instead of a long line of pills, the stack now reads like grouped capability blocks so it is easier to scan where interface work, workflow logic, persistence, payments, and security live.</p>
+          <p>Instead of a flat list of technologies, the stack is grouped by responsibility so the reader can quickly understand where interface work, workflow logic, persistence, payments, and runtime live.</p>
         </div>
-        <div class="stack-mosaic">
-          <article class="stack-tile large">
-            <h4>Interface layer</h4>
-            <p>Presentation, interaction, layout, and content framing for the case study and user-facing flows.</p>
-            <div class="stack-tags">
-              <span class="stack-tag">HTML</span>
-              <span class="stack-tag">CSS</span>
-              <span class="stack-tag">JavaScript</span>
+        <div class="stack-service-grid">
+          <article class="stack-service primary">
+            <span class="stack-service-tag">Experience layer</span>
+            <h4>Case-study interface and user flow presentation.</h4>
+            <p>HTML, CSS, and JavaScript shape the portfolio narrative, the customer-facing journey, and the role-based workflow presentation across the page.</p>
+            <div class="stack-chip-row">
+              <span class="stack-chip">HTML</span>
+              <span class="stack-chip">CSS</span>
+              <span class="stack-chip">JavaScript</span>
             </div>
           </article>
-          <article class="stack-tile">
-            <h4>Backend workflow</h4>
-            <p>Reservation logic, invoice generation, access control, and stay lifecycle handling.</p>
-            <div class="stack-tags">
-              <span class="stack-tag">PHP</span>
-              <span class="stack-tag">Sessions</span>
+          <article class="stack-service">
+            <span class="stack-service-tag">Backend</span>
+            <h4>Server-side booking logic</h4>
+            <p>Reservation flow, invoice creation, session-based login, and stay lifecycle handling run through PHP.</p>
+            <div class="stack-chip-row">
+              <span class="stack-chip">PHP</span>
+              <span class="stack-chip">Sessions</span>
             </div>
           </article>
-          <article class="stack-tile">
-            <h4>Persistence</h4>
-            <p>Schema design and relational state across rooms, users, reservations, and billing.</p>
-            <div class="stack-tags">
-              <span class="stack-tag">MySQL</span>
+          <article class="stack-service">
+            <span class="stack-service-tag">Data</span>
+            <h4>Relational reservation state</h4>
+            <p>MySQL keeps rooms, users, reservations, invoices, payments, and company-linked bookings in sync.</p>
+            <div class="stack-chip-row">
+              <span class="stack-chip">MySQL</span>
+              <span class="stack-chip">Relational schema</span>
             </div>
           </article>
-          <article class="stack-tile wide">
-            <h4>Payments and security</h4>
-            <p>Checkout integration and request protection tied back to the reservation and invoice flow.</p>
-            <div class="stack-tags">
-              <span class="stack-tag">Stripe API</span>
-              <span class="stack-tag">Prepared Statements</span>
-              <span class="stack-tag">CSRF Protection</span>
+          <article class="stack-service">
+            <span class="stack-service-tag">Payments + safety</span>
+            <h4>Checkout and protected writes</h4>
+            <p>Stripe handles payment sessions while prepared statements and CSRF checks protect sensitive requests.</p>
+            <div class="stack-chip-row">
+              <span class="stack-chip">Stripe API</span>
+              <span class="stack-chip">Prepared statements</span>
+              <span class="stack-chip">CSRF</span>
             </div>
           </article>
-          <article class="stack-tile">
-            <h4>Runtime</h4>
-            <p>Local execution environment for the current project build and development workflow.</p>
-            <div class="stack-tags">
-              <span class="stack-tag">Apache</span>
-              <span class="stack-tag">XAMPP</span>
+          <article class="stack-service">
+            <span class="stack-service-tag">Runtime</span>
+            <h4>Local delivery setup</h4>
+            <p>Apache and XAMPP provide the current environment for developing and running the project locally.</p>
+            <div class="stack-chip-row">
+              <span class="stack-chip">Apache</span>
+              <span class="stack-chip">XAMPP</span>
             </div>
           </article>
         </div>
@@ -2567,23 +3729,26 @@
           <span class="kicker"><i data-lucide="bar-chart-3" class="icon"></i>Operational Impact</span>
           <h2>Designed workflow outcomes</h2>
         </div>
-        <p class="section-note">These are architecture-level outcomes the system is designed to support, not made-up post-launch analytics.</p>
+        <p class="section-note">These cards explain the operational improvements the system is designed to create when bookings, billing, and permissions stay connected.</p>
       </div>
-      <div class="grid-3">
-        <article class="card tint-blue">
-          <span class="card-icon"><i data-lucide="hotel" class="icon"></i></span>
+      <div class="outcome-grid">
+        <article class="outcome-card">
+          <div class="outcome-step">01</div>
           <h3>Lower room-conflict risk</h3>
-          <p>Centralizing room availability around the reservation record reduces the chance of front-desk and online booking channels assigning the same room twice.</p>
+          <p>Availability stays tied to the reservation record, so online requests and front-desk actions are less likely to compete for the same room.</p>
+          <div class="outcome-foot"><i data-lucide="hotel" class="icon"></i>Availability stays authoritative</div>
         </article>
-        <article class="card tint-green">
-          <span class="card-icon"><i data-lucide="receipt" class="icon"></i></span>
-          <h3>Stronger billing accuracy</h3>
-          <p>Keeping booking totals, services, taxes, discounts, advance payments, and final checkout charges inside one invoice flow reduces missed financial steps.</p>
+        <article class="outcome-card">
+          <div class="outcome-step">02</div>
+          <h3>Cleaner billing accuracy</h3>
+          <p>Room charges, services, taxes, discounts, and advance payments stay in one invoice path instead of being reconciled manually later.</p>
+          <div class="outcome-foot"><i data-lucide="receipt" class="icon"></i>Billing follows the stay record</div>
         </article>
-        <article class="card">
-          <span class="card-icon"><i data-lucide="users" class="icon"></i></span>
-          <h3>Cleaner staff separation</h3>
-          <p>Role-specific workspaces let managers, clerks, customers, and travel companies act on the same data without sharing the same controls.</p>
+        <article class="outcome-card">
+          <div class="outcome-step">03</div>
+          <h3>Better role clarity</h3>
+          <p>Managers, clerks, customers, and companies can operate on the same booking data without exposing the same actions to everyone.</p>
+          <div class="outcome-foot"><i data-lucide="users" class="icon"></i>Shared data, scoped actions</div>
         </article>
       </div>
     </section>
@@ -2609,15 +3774,78 @@
           <span class="kicker"><i data-lucide="sparkles" class="icon"></i>Features</span>
           <h2>What is built</h2>
         </div>
-        <p class="section-note">The feature layout is card-based and easy to extend as the project grows.</p>
+        <p class="section-note">The build is now framed as grouped product capabilities instead of a flat six-card checklist.</p>
       </div>
-      <div class="grid-3">
-        <article class="card"><span class="card-icon"><i data-lucide="search" class="icon"></i></span><h3>Room Search</h3><p>Filter rooms by dates, guests, room type, and availability.</p></article>
-        <article class="card"><span class="card-icon"><i data-lucide="calendar-check" class="icon"></i></span><h3>Online Booking</h3><p>Reservation creation with invoice records and unique booking codes.</p></article>
-        <article class="card"><span class="card-icon"><i data-lucide="credit-card" class="icon"></i></span><h3>Stripe Payments</h3><p>Supports full payment or advance payment through Stripe Checkout.</p></article>
-        <article class="card"><span class="card-icon"><i data-lucide="door-open" class="icon"></i></span><h3>Walk-in Bookings</h3><p>Front-desk staff can create on-site reservations quickly.</p></article>
-        <article class="card"><span class="card-icon"><i data-lucide="log-in" class="icon"></i></span><h3>Check-in</h3><p>Assign room, confirm arrival, add services, and update room status.</p></article>
-        <article class="card"><span class="card-icon"><i data-lucide="file-text" class="icon"></i></span><h3>Invoice System</h3><p>Tracks booking totals, tax, discounts, payments, and final billing.</p></article>
+      <div class="build-grid">
+        <article class="build-card wide">
+          <div class="build-card-header">
+            <span class="card-icon" style="background:rgba(255,255,255,0.14);color:#fff;"><i data-lucide="calendar-check" class="icon"></i></span>
+            <h3>Reservations and checkout stay connected</h3>
+          </div>
+          <p>Search, booking creation, invoice updates, and payment handling all point back to the same stay record, which keeps the flow coherent for both guests and staff.</p>
+          <div class="build-visual">
+            <div class="build-flow-top">
+              <div class="build-flow-pill">Search</div>
+              <div class="build-flow-pill">Book</div>
+              <div class="build-flow-pill">Pay</div>
+            </div>
+            <div class="build-flow-grid">
+              <div class="build-flow-column">
+                <span class="build-flow-bar"></span>
+                <span class="build-flow-bar mid"></span>
+                <span class="build-flow-bar short"></span>
+              </div>
+              <div class="build-flow-column">
+                <div class="build-mini-row"><span>Reservation record</span><span>Live</span></div>
+                <div class="build-mini-row"><span>Invoice state</span><span>Linked</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="build-card">
+          <div class="build-card-header">
+            <span class="card-icon"><i data-lucide="search" class="icon"></i></span>
+            <h3>Room search and availability</h3>
+          </div>
+          <p>Guests can filter by dates, guests, room type, and current availability without leaving the booking flow.</p>
+          <div class="build-visual">
+            <div class="build-mini-row"><span>Date and guest filters</span><span>Active</span></div>
+            <div class="build-mini-row"><span>Available room states</span><span>Live</span></div>
+          </div>
+        </article>
+        <article class="build-card">
+          <div class="build-card-header">
+            <span class="card-icon"><i data-lucide="shield-check" class="icon"></i></span>
+            <h3>Role-based workspaces</h3>
+          </div>
+          <p>Managers, clerks, customers, and company users land in the right workspace with the actions they actually need.</p>
+          <div class="build-visual">
+            <div class="build-mini-row"><span>Manager</span><span>Rooms + billing</span></div>
+            <div class="build-mini-row"><span>Clerk</span><span>Desk operations</span></div>
+          </div>
+        </article>
+        <article class="build-card medium">
+          <div class="build-card-header">
+            <span class="card-icon"><i data-lucide="door-open" class="icon"></i></span>
+            <h3>Front-desk operations</h3>
+          </div>
+          <p>Walk-in reservations, check-in, checkout, room assignment, and service updates are handled from the same operational lane.</p>
+          <div class="build-visual">
+            <div class="build-mini-row"><span>Walk-ins and reservations</span><span>Fast desk flow</span></div>
+            <div class="build-mini-row"><span>Room assignment</span><span>During check-in</span></div>
+          </div>
+        </article>
+        <article class="build-card medium">
+          <div class="build-card-header">
+            <span class="card-icon"><i data-lucide="file-text" class="icon"></i></span>
+            <h3>Billing, services, and invoices</h3>
+          </div>
+          <p>Charges, taxes, discounts, services, and payment history stay attached to the reservation instead of drifting into manual notes.</p>
+          <div class="build-visual">
+            <div class="build-mini-row"><span>Service charges</span><span>Tracked</span></div>
+            <div class="build-mini-row"><span>Final invoice</span><span>Checkout ready</span></div>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -2656,27 +3884,59 @@
           <span class="kicker"><i data-lucide="git-branch" class="icon"></i>Engineering View</span>
           <h2>How data and edge cases move through the system</h2>
         </div>
-        <p class="section-note">A hotel platform feels trustworthy only when reservation records, invoices, payments, and room status changes stay linked from start to finish.</p>
+        <p class="section-note">This section now follows the stay record from booking to checkout, then calls out the edge cases that matter most.</p>
       </div>
-      <div class="grid-2">
-        <article class="card tint-blue">
-          <span class="card-icon"><i data-lucide="workflow" class="icon"></i></span>
-          <h3>Reservation to revenue flow</h3>
-          <div class="timeline">
-            <div class="step"><span class="step-num">1</span><div><h4>Reservation created</h4><p>The booking record ties together guest or company data, room selection, stay dates, and status.</p></div></div>
-            <div class="step"><span class="step-num">2</span><div><h4>Invoice generated</h4><p>Room rate, extra services, taxes, discounts, and advance payments attach to the stay instead of living in separate notes.</p></div></div>
-            <div class="step"><span class="step-num">3</span><div><h4>Payment recorded</h4><p>Stripe checkout updates the payment state, while production-grade handling should trust verified webhook events as the final source of truth.</p></div></div>
-            <div class="step"><span class="step-num">4</span><div><h4>Checkout closes the stay</h4><p>Final billing locks the stay record and reopens room availability for the next guest.</p></div></div>
+      <div class="process-stage">
+        <article class="process-summary">
+          <span class="kicker" style="color:#7bb5ff;"><i data-lucide="workflow" class="icon"></i>System path</span>
+          <h3>The reservation record stays at the center from inquiry to final checkout.</h3>
+          <p>That one spine is what keeps availability, billing, payment status, and room release logic understandable. When the record stays authoritative, the hotel workflow becomes easier to reason about and safer to extend.</p>
+          <div class="process-pills">
+            <span>Reservation state</span>
+            <span>Invoice state</span>
+            <span>Payment state</span>
+            <span>Room state</span>
           </div>
         </article>
-        <article class="card tint-green">
+        <div class="process-flow">
+          <div class="process-curve"></div>
+          <article class="process-stop">
+            <span>Step 1</span>
+            <h4>Reservation created</h4>
+            <p>The booking record ties together the guest or company account, room selection, stay dates, and initial status.</p>
+          </article>
+          <article class="process-stop">
+            <span>Step 2</span>
+            <h4>Invoice grows with the stay</h4>
+            <p>Room rate, services, taxes, discounts, and advance charges attach to the reservation instead of being tracked elsewhere.</p>
+          </article>
+          <article class="process-stop">
+            <span>Step 3</span>
+            <h4>Payment state is reconciled</h4>
+            <p>Stripe updates the payment path today, while production hardening should make verified webhook events the final source of truth.</p>
+          </article>
+          <article class="process-stop">
+            <span>Step 4</span>
+            <h4>Checkout closes the operational loop</h4>
+            <p>Final billing settles the stay and reopens room availability so the next reservation can safely move forward.</p>
+          </article>
+        </div>
+      </div>
+      <div class="edge-grid">
+        <article class="edge-card">
+          <span class="card-icon"><i data-lucide="hotel" class="icon"></i></span>
+          <h3>Double-booking control</h3>
+          <p>Availability should be checked before a reservation is written and checked again before room assignment at check-in.</p>
+        </article>
+        <article class="edge-card">
+          <span class="card-icon"><i data-lucide="credit-card" class="icon"></i></span>
+          <h3>Failed payment handling</h3>
+          <p>Failed or abandoned checkout sessions should leave the booking pending or unpaid instead of auto-confirming from a return URL alone.</p>
+        </article>
+        <article class="edge-card">
           <span class="card-icon"><i data-lucide="shield-alert" class="icon"></i></span>
-          <h3>Operational edge-case thinking</h3>
-          <div class="timeline">
-            <div class="step"><span class="step-num">1</span><div><h4>Double-booking control</h4><p>Availability should be checked before a reservation is written and checked again before room assignment at check-in.</p></div></div>
-            <div class="step"><span class="step-num">2</span><div><h4>Failed payment handling</h4><p>Abandoned or failed payments should keep the booking in a pending or unpaid state instead of marking it confirmed from the return URL alone.</p></div></div>
-            <div class="step"><span class="step-num">3</span><div><h4>Role-limited corrections</h4><p>Cancellation, late-arrival adjustments, and final checkout changes should stay inside authorized staff workflows, not customer-facing views.</p></div></div>
-          </div>
+          <h3>Role-limited corrections</h3>
+          <p>Cancellation, late-arrival changes, and final billing edits should stay inside staff-only workflows rather than customer-facing screens.</p>
         </article>
       </div>
     </section>
@@ -2721,118 +3981,60 @@
           <span class="kicker"><i data-lucide="database" class="icon"></i>Database</span>
           <h2>Data structure</h2>
         </div>
-        <p class="section-note">The database needs to show more than table names. This section now surfaces representative fields, keys, and relationships so the system reads like engineering instead of just interface design.</p>
+        <p class="section-note">This view keeps only the high-level relationships behind the case study, not a dense field-by-field schema dump.</p>
       </div>
-      <div class="database-stage">
-        <article class="database-brief">
-          <span class="kicker"><i data-lucide="database" class="icon"></i>Schema Story</span>
-          <h3>One reservation model connects the hotel workflow</h3>
-          <p>The database section now reads like a connected system instead of a list of isolated tables. Reservations sit in the middle, while users, rooms, invoices, payments, companies, guests, and services extend from that shared record.</p>
-          <ul class="db-entity-strip">
-            <li>users</li>
-            <li>rooms</li>
-            <li>reservations</li>
-            <li>invoices</li>
-            <li>payments</li>
-            <li>companies</li>
-            <li>guests</li>
-            <li>services</li>
+      <div class="architecture-stage">
+        <article class="architecture-copy">
+          <span class="kicker"><i data-lucide="database" class="icon"></i>Relationship view</span>
+          <h3>One reservation spine keeps hotel state consistent.</h3>
+          <p>The database story is simpler when it stays at the relationship level: account information starts the booking, room inventory supplies availability, invoices collect charges, and payments settle the stay.</p>
+          <ul class="architecture-list">
+            <li><strong>Booking is the center</strong> Operational state resolves back to the reservation instead of being duplicated across separate helper records.</li>
+            <li><strong>Rooms stay operational</strong> Inventory, room state, and pricing are attached to the stay, so availability remains meaningful for the front desk.</li>
+            <li><strong>Billing extends the stay</strong> Charges, services, and payment events follow the reservation instead of branching into disconnected flows.</li>
           </ul>
         </article>
-        <div class="database-canvas" aria-label="Database relationship overview">
-          <div class="db-table users"><strong>users</strong><span>role access and account identity</span></div>
-          <div class="db-table rooms"><strong>rooms</strong><span>inventory, rate, and availability</span></div>
-          <div class="db-table reservations"><strong>reservations</strong><span>core record linking guest, room, stay dates, and status</span></div>
-          <div class="db-table invoices"><strong>invoices</strong><span>tax, discount, subtotal, and final total</span></div>
-          <div class="db-table payments"><strong>payments</strong><span>Stripe session reference and payment state</span></div>
-          <div class="db-table extensions"><strong>companies, guests, services</strong><span>extensions that attach corporate stays, named guests, and add-on services</span></div>
-          <span class="db-curve a"></span>
-          <span class="db-curve b"></span>
-          <span class="db-curve c"></span>
-          <span class="db-curve d"></span>
-          <span class="db-curve e"></span>
-          <span class="db-dot one"></span>
-          <span class="db-dot two"></span>
-          <span class="db-dot three"></span>
+        <div class="architecture-map" aria-label="High-level data relationship view">
+          <div class="architecture-core">
+            <div>
+              <strong>reservations</strong>
+              <span>Core record linking guest or company, room, stay window, invoice state, and final checkout.</span>
+            </div>
+          </div>
+          <article class="architecture-node accounts">
+            <strong>users and companies</strong>
+            <span>Identity, role access, and booking ownership start here.</span>
+          </article>
+          <article class="architecture-node rooms">
+            <strong>rooms and availability</strong>
+            <span>Room inventory, pricing, and operational state support the stay.</span>
+          </article>
+          <article class="architecture-node billing">
+            <strong>invoices and services</strong>
+            <span>Charges, tax, discount, and add-on services remain attached to the reservation.</span>
+          </article>
+          <article class="architecture-node payments">
+            <strong>payments</strong>
+            <span>Checkout sessions and payment state close the billing path.</span>
+          </article>
+          <span class="architecture-connector one"></span>
+          <span class="architecture-connector two"></span>
+          <span class="architecture-connector three"></span>
+          <span class="architecture-connector four"></span>
         </div>
       </div>
-      <div class="schema-note"><strong>Representative schema view:</strong> these fields show the core relationships behind the case study, not an exhaustive SQL dump of every helper table.</div>
-      <div class="database-panels">
-        <article class="database-panel">
-          <span class="database-panel-tag">Core entity</span>
-          <h3>users</h3>
-          <p>Stores every authenticated actor in the platform, with role-based access deciding what each workspace can do.</p>
-          <div class="field-stack">
-            <div class="field-row"><code>id</code><span>primary key</span></div>
-            <div class="field-row"><code>name</code><span>display name for staff or guest account</span></div>
-            <div class="field-row"><code>email</code><span>login and contact identity</span></div>
-            <div class="field-row"><code>role</code><span>manager, clerk, customer, or company</span></div>
-            <div class="field-row"><code>password_hash</code><span>secure credential storage</span></div>
-          </div>
+      <div class="architecture-principles">
+        <article class="architecture-principle">
+          <h3>Reservation links people and rooms</h3>
+          <p>The stay record connects who booked with what room was assigned, which keeps room state and booking ownership aligned.</p>
         </article>
-        <article class="database-panel">
-          <span class="database-panel-tag">Inventory</span>
-          <h3>rooms</h3>
-          <p>Defines the sellable room inventory and the operational state staff need during booking, check-in, and checkout.</p>
-          <div class="field-stack">
-            <div class="field-row"><code>id</code><span>primary key</span></div>
-            <div class="field-row"><code>room_number</code><span>human-readable room identifier</span></div>
-            <div class="field-row"><code>type</code><span>category or room class</span></div>
-            <div class="field-row"><code>price</code><span>base room rate</span></div>
-            <div class="field-row"><code>status</code><span>available, occupied, reserved, or out of service</span></div>
-          </div>
+        <article class="architecture-principle">
+          <h3>Invoices follow the stay</h3>
+          <p>Charges and payment state remain attached to the reservation so revenue reporting still points back to the same operational record.</p>
         </article>
-        <article class="database-panel">
-          <span class="database-panel-tag">Booking record</span>
-          <h3>reservations</h3>
-          <p>This is the central operational record. It connects the guest, room, stay window, booking status, and downstream billing flow.</p>
-          <div class="field-stack">
-            <div class="field-row"><code>id</code><span>primary key</span></div>
-            <div class="field-row"><code>user_id</code><span>foreign key to <code>users.id</code></span></div>
-            <div class="field-row"><code>room_id</code><span>foreign key to <code>rooms.id</code></span></div>
-            <div class="field-row"><code>check_in</code><span>arrival date and time</span></div>
-            <div class="field-row"><code>check_out</code><span>departure date and time</span></div>
-            <div class="field-row"><code>status</code><span>pending, confirmed, checked_in, checked_out, cancelled</span></div>
-          </div>
-        </article>
-        <article class="database-panel">
-          <span class="database-panel-tag">Billing</span>
-          <h3>invoices</h3>
-          <p>Invoices carry room charges, services, tax, discounts, and payment state so financial data stays attached to the stay record.</p>
-          <div class="field-stack">
-            <div class="field-row"><code>id</code><span>primary key</span></div>
-            <div class="field-row"><code>reservation_id</code><span>foreign key to <code>reservations.id</code></span></div>
-            <div class="field-row"><code>subtotal</code><span>room and service charges</span></div>
-            <div class="field-row"><code>tax</code><span>calculated tax amount</span></div>
-            <div class="field-row"><code>discount</code><span>applied offer or manual adjustment</span></div>
-            <div class="field-row"><code>total</code><span>final payable amount</span></div>
-          </div>
-        </article>
-        <article class="database-panel wide">
-          <span class="database-panel-tag">Payments and extensions</span>
-          <h3>payments, companies, and guest assignments</h3>
-          <p>These supporting records extend the base reservation model for online payments, corporate stays, and multi-guest bookings.</p>
-          <div class="field-stack">
-            <div class="field-row"><code>payments.invoice_id</code><span>links payment events back to invoice state</span></div>
-            <div class="field-row"><code>payments.stripe_session_id</code><span>stores checkout session reference</span></div>
-            <div class="field-row"><code>payments.status</code><span>pending, paid, failed, refunded</span></div>
-            <div class="field-row"><code>companies.id</code><span>identifies travel or corporate accounts</span></div>
-            <div class="field-row"><code>guest_assignments.reservation_id</code><span>maps named guests into a company booking</span></div>
-          </div>
-        </article>
-      </div>
-      <div class="database-relations">
-        <article class="database-relation">
-          <h3>Reservation links users and rooms</h3>
-          <p><code>reservations.user_id</code> connects the person or company making the booking, while <code>reservations.room_id</code> ties the stay to a specific room record and availability state.</p>
-        </article>
-        <article class="database-relation">
-          <h3>Invoice links reservation and payments</h3>
-          <p><code>invoices.reservation_id</code> keeps room charges and services attached to the stay, and <code>payments.invoice_id</code> tracks how that invoice was actually paid.</p>
-        </article>
-        <article class="database-relation">
-          <h3>Companies and services extend the base model</h3>
-          <p>Corporate bookings and extra services should extend the core reservation instead of duplicating it, so reporting and billing still resolve back to one source of truth.</p>
+        <article class="architecture-principle">
+          <h3>Extensions avoid duplication</h3>
+          <p>Company bookings, guest assignments, and service add-ons should extend the reservation model instead of creating parallel sources of truth.</p>
         </article>
       </div>
     </section>
@@ -2843,10 +4045,37 @@
           <span class="kicker"><i data-lucide="shield" class="icon"></i>Security</span>
           <h2>Built with protection layers</h2>
         </div>
+        <p class="section-note">Security is presented as layered capability instead of a pair of plain cards.</p>
       </div>
-      <div class="grid-2">
-        <article class="card"><span class="card-icon"><i data-lucide="shield-check" class="icon"></i></span><h3>Session-based auth</h3><p>Session timeout, HttpOnly cookies, SameSite cookies, and session regeneration after login.</p></article>
-        <article class="card"><span class="card-icon"><i data-lucide="lock-keyhole" class="icon"></i></span><h3>Password and SQL safety</h3><p>Passwords use PHP hashing, and database writes use prepared statements and CSRF tokens.</p></article>
+      <div class="security-shell">
+        <article class="security-hero">
+          <span class="kicker" style="color:#7bb5ff;"><i data-lucide="shield" class="icon"></i>Protection model</span>
+          <h3>Access, writes, and payment actions are guarded in layers.</h3>
+          <p>QuickStay separates who can act, how state changes are written, and how sensitive payment paths are trusted so risky actions do not depend on one single safeguard.</p>
+          <div class="security-orbit" aria-hidden="true">
+            <div class="security-center"><i data-lucide="lock" class="icon"></i></div>
+            <span class="security-node one">Sessions</span>
+            <span class="security-node two">Prepared writes</span>
+            <span class="security-node three">Role access</span>
+          </div>
+        </article>
+        <div class="security-grid">
+          <article class="security-card">
+            <span class="card-icon"><i data-lucide="shield-check" class="icon"></i></span>
+            <h3>Session-based authentication</h3>
+            <p>Session timeout, HttpOnly cookies, SameSite cookies, and session regeneration help reduce common session abuse risks after login.</p>
+          </article>
+          <article class="security-card">
+            <span class="card-icon"><i data-lucide="lock-keyhole" class="icon"></i></span>
+            <h3>Protected writes and credentials</h3>
+            <p>Passwords are hashed, SQL writes use prepared statements, and CSRF checks help defend sensitive request paths.</p>
+          </article>
+          <article class="security-card">
+            <span class="card-icon"><i data-lucide="shield-alert" class="icon"></i></span>
+            <h3>Role-scoped operational actions</h3>
+            <p>Billing edits, room assignments, and staff-only corrections are meant to stay inside role-limited workspaces rather than customer views.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -2905,26 +4134,30 @@
         </div>
         <p class="section-note">Planned upgrades to move QuickStay from case study to production-grade.</p>
       </div>
-      <div class="next-grid">
-        <article class="next-tile">
-          <div class="next-icon"><i data-lucide="mail-check" class="icon"></i></div>
-          <h3>Email notifications</h3>
-          <p>Send confirmations, receipts, cancellation notices, and pre-arrival reminders through a mail service.</p>
-          <div class="next-tag">Priority</div>
-        </article>
-        <article class="next-tile">
-          <div class="next-icon"><i data-lucide="webhook" class="icon"></i></div>
-          <h3>Stripe webhook handler</h3>
-          <p>Verify payment events on the server and update invoices only after trusted Stripe events arrive.</p>
-          <div class="next-tag">Security</div>
-        </article>
-        <article class="next-tile next-tile-wide">
-          <div class="next-icon next-icon-light"><i data-lucide="smartphone" class="icon"></i></div>
+      <div class="upgrade-grid">
+        <article class="upgrade-card featured">
           <div>
+            <span class="upgrade-tag">UX priority</span>
             <h3>Cleaner responsive admin panels</h3>
-            <p>Improve tables, sidebars, action bars, and dashboard density so clerks can use the system comfortably on tablet and mobile screens.</p>
-            <div class="next-tag" style="background:rgba(255,255,255,0.15);color:#fff;border-color:rgba(255,255,255,0.2);">UX</div>
+            <p>Improve tables, sidebars, action bars, and dashboard density so clerks can use the system comfortably on tablet and mobile screens without losing important booking context.</p>
           </div>
+          <div class="upgrade-ui" aria-hidden="true">
+            <div class="upgrade-ui-row"><span>Reservation table</span><span>Stacked mobile rows</span></div>
+            <div class="upgrade-ui-row"><span>Action bar</span><span>Condensed</span></div>
+            <div class="upgrade-ui-row"><span>Sidebar + dashboard</span><span>Tablet safe</span></div>
+          </div>
+        </article>
+        <article class="upgrade-card">
+          <div class="next-icon"><i data-lucide="mail-check" class="icon"></i></div>
+          <span class="upgrade-tag">Communication</span>
+          <h3>Email notifications</h3>
+          <p>Send confirmations, receipts, cancellations, and pre-arrival reminders through a proper mail service.</p>
+        </article>
+        <article class="upgrade-card">
+          <div class="next-icon"><i data-lucide="webhook" class="icon"></i></div>
+          <span class="upgrade-tag">Payment trust</span>
+          <h3>Verified Stripe webhooks</h3>
+          <p>Update invoice state only after trusted Stripe events arrive on the server rather than relying on the return flow alone.</p>
         </article>
       </div>
     </section>
@@ -2932,7 +4165,7 @@
     <section class="section shell reveal" id="conclusion">
       <div class="conclusion-card">
         <h2 class="conclusion-title">A stronger case study for<br /><em>real software engineering.</em></h2>
-        <p class="conclusion-text">QuickStay now reads less like a visual mock project and more like an actual system case study: clear stack visibility, explicit workflow ownership, representative schema depth, and honest production limitations.</p>
+        <p class="conclusion-text">QuickStay now reads less like a visual mock project and more like an actual system case study: clear stack visibility, explicit workflow ownership, cleaner relationship framing, and honest production limitations.</p>
         <p class="conclusion-text">The next credibility jump is external proof: add a project-specific GitHub repository, a live demo or recorded walkthrough, and exported screens from the running application.</p>
         <div class="conclusion-cta">
           <a href="#gallery" class="btn btn-light pressable"><i data-lucide="panels-top-left" class="icon"></i>Open Walkthrough</a>
@@ -2991,20 +4224,6 @@
   </script>
   <script>
     window.lucide?.createIcons();
-
-    // Discourage copying or selecting text on this page.
-    ["copy", "cut", "contextmenu", "selectstart", "dragstart"].forEach((eventName) => {
-      document.addEventListener(eventName, (event) => {
-        event.preventDefault();
-      });
-    });
-
-    document.addEventListener("keydown", (event) => {
-      const key = event.key.toLowerCase();
-      if ((event.ctrlKey || event.metaKey) && ["c", "x", "a"].includes(key)) {
-        event.preventDefault();
-      }
-    });
 
     const menuButton = document.getElementById("menuButton");
     const mobileMenu = document.getElementById("mobileMenu");
