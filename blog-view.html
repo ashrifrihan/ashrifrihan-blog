@@ -2881,6 +2881,702 @@
       text-transform: uppercase;
     }
 
+    .snapshot-refresh {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .snapshot-summary-card,
+    .snapshot-compact-card,
+    .capability-card,
+    .schema-summary-card,
+    .schema-map-lite,
+    .schema-principle-card,
+    .workflow-role-card {
+      border: 1px solid rgba(20,99,255,0.08);
+      border-radius: 30px;
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+      box-shadow: 0 18px 52px rgba(20,99,255,0.08);
+    }
+    .snapshot-summary-card {
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .snapshot-summary-card::after,
+    .capability-card::after,
+    .schema-summary-card::after,
+    .schema-map-lite::after,
+    .workflow-role-preview::after {
+      content: "";
+      position: absolute;
+      right: -52px;
+      bottom: -62px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,181,255,0.18), rgba(123,181,255,0));
+      pointer-events: none;
+    }
+    .snapshot-summary-tag,
+    .snapshot-card-tag,
+    .capability-eyebrow,
+    .schema-summary-tag,
+    .workflow-count,
+    .modal-summary-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(20,99,255,0.08);
+      border: 1px solid rgba(20,99,255,0.08);
+      color: var(--blue);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .snapshot-summary-card h3,
+    .schema-summary-card h3 {
+      margin: 16px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+      line-height: 1.03;
+      letter-spacing: -0.05em;
+      max-width: 560px;
+    }
+    .snapshot-summary-card p,
+    .schema-summary-card > p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.72;
+      max-width: 560px;
+    }
+    .snapshot-metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .snapshot-metric {
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.88);
+    }
+    .snapshot-metric span {
+      display: block;
+      color: #7a8aa4;
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .snapshot-metric strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.98rem;
+      line-height: 1.45;
+      letter-spacing: -0.02em;
+    }
+    .snapshot-aside-grid {
+      display: grid;
+      gap: 14px;
+      align-content: stretch;
+    }
+    .snapshot-compact-card {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .snapshot-compact-primary {
+      background: linear-gradient(145deg, #07111f 0%, #0e2f73 55%, #1463ff 145%);
+      border-color: rgba(255,255,255,0.08);
+      color: #fff;
+      box-shadow: 0 28px 64px rgba(20,99,255,0.18);
+    }
+    .snapshot-compact-primary .snapshot-card-tag,
+    .snapshot-compact-primary .snapshot-pill {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.14);
+      color: #fff;
+    }
+    .snapshot-compact-card h4 {
+      margin: 14px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.16rem;
+      line-height: 1.14;
+      letter-spacing: -0.03em;
+    }
+    .snapshot-compact-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.62;
+      font-size: 0.92rem;
+    }
+    .snapshot-compact-primary p { color: rgba(255,255,255,0.78); }
+    .snapshot-pill-row,
+    .capability-meta,
+    .schema-quick-points,
+    .workflow-role-pills,
+    .modal-summary-pills,
+    .screen-shot-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .snapshot-pill,
+    .capability-meta span,
+    .schema-quick-points span,
+    .workflow-role-pills span,
+    .modal-summary-pills span,
+    .screen-shot-pills span {
+      min-height: 30px;
+      padding: 0 11px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(20,99,255,0.08);
+      color: #405068;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .capability-card {
+      grid-column: span 4;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .capability-hero {
+      grid-column: span 8;
+      color: #fff;
+      background: linear-gradient(145deg, #07111f 0%, #103171 55%, #1463ff 145%);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 28px 66px rgba(20,99,255,0.18);
+    }
+    .capability-hero::after {
+      background: radial-gradient(circle, rgba(255,255,255,0.16), rgba(255,255,255,0));
+    }
+    .capability-hero .capability-eyebrow,
+    .capability-hero .capability-meta span {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.14);
+      color: #fff;
+    }
+    .capability-card h3 {
+      margin: 16px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      line-height: 1.14;
+      letter-spacing: -0.03em;
+    }
+    .capability-hero h3 {
+      font-size: clamp(2rem, 3vw, 2.9rem);
+      max-width: 560px;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+    }
+    .capability-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.64;
+      max-width: 480px;
+    }
+    .capability-hero p { color: rgba(255,255,255,0.78); }
+    .capability-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .capability-flow-step {
+      min-height: 58px;
+      padding: 12px;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .capability-flow-step span {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .capability-flow-step strong {
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+    }
+    .capability-mini-ui {
+      margin-top: 18px;
+      min-height: 120px;
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      border-radius: 22px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.82);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+    .capability-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(20,99,255,0.14);
+    }
+    .capability-bar.short { width: 52%; }
+    .capability-bar.mid { width: 72%; }
+    .capability-mini-row {
+      min-height: 44px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-radius: 16px;
+      background: rgba(20,99,255,0.08);
+      color: #405068;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .capability-mini-row span:last-child {
+      min-height: 26px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.74);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .schema-refresh {
+      display: grid;
+      grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .schema-summary-card {
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .schema-note-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .schema-note-item {
+      padding: 14px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.86);
+    }
+    .schema-note-item strong {
+      display: block;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+    }
+    .schema-note-item span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      line-height: 1.54;
+      font-size: 0.88rem;
+    }
+    .schema-map-lite {
+      position: relative;
+      min-height: 410px;
+      padding: 24px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(123,181,255,0.14), transparent 24%),
+        radial-gradient(circle at 1px 1px, rgba(20,99,255,0.07) 1px, transparent 0) 0 0 / 24px 24px,
+        linear-gradient(180deg, #ffffff 0%, #f3f7ff 100%);
+    }
+    .schema-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 220px;
+      height: 220px;
+      transform: translate(-50%, -50%);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      text-align: center;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #07111f 0%, #123d90 65%, #2b86ff 145%);
+      color: #fff;
+      box-shadow: 0 24px 56px rgba(20,99,255,0.2);
+    }
+    .schema-core strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+    }
+    .schema-core span {
+      display: block;
+      margin-top: 10px;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+    .schema-node {
+      position: absolute;
+      width: 186px;
+      padding: 15px;
+      border-radius: 22px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 16px 36px rgba(20,99,255,0.07);
+    }
+    .schema-node.accounts { left: 22px; top: 48px; }
+    .schema-node.rooms { right: 22px; top: 58px; }
+    .schema-node.billing { left: 42px; bottom: 48px; }
+    .schema-node.payments { right: 32px; bottom: 48px; }
+    .schema-node strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      letter-spacing: -0.02em;
+    }
+    .schema-node span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.46;
+    }
+    .schema-link {
+      position: absolute;
+      border-style: dashed;
+      border-color: rgba(20,99,255,0.24);
+      pointer-events: none;
+    }
+    .schema-link.one {
+      left: 178px;
+      top: 124px;
+      width: 164px;
+      height: 112px;
+      border-bottom-width: 2px;
+      border-right-width: 2px;
+      border-bottom-right-radius: 92px;
+    }
+    .schema-link.two {
+      right: 178px;
+      top: 132px;
+      width: 168px;
+      height: 104px;
+      border-bottom-width: 2px;
+      border-left-width: 2px;
+      border-bottom-left-radius: 92px;
+    }
+    .schema-link.three {
+      left: 188px;
+      top: 236px;
+      width: 156px;
+      height: 118px;
+      border-top-width: 2px;
+      border-right-width: 2px;
+      border-top-right-radius: 94px;
+    }
+    .schema-link.four {
+      right: 188px;
+      top: 238px;
+      width: 154px;
+      height: 116px;
+      border-top-width: 2px;
+      border-left-width: 2px;
+      border-top-left-radius: 94px;
+    }
+    .schema-principle-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .schema-principle-card {
+      padding: 20px;
+    }
+    .schema-principle-card h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .schema-principle-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.58;
+      font-size: 0.9rem;
+    }
+    .gallery-track {
+      width: min(1040px, calc(100% - 32px));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      padding: 0;
+    }
+    .gallery-button.workflow-role-card {
+      min-height: 420px;
+      padding: 18px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+      box-shadow: 0 18px 52px rgba(20,99,255,0.08);
+      transform: none;
+    }
+    .gallery-button.workflow-role-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 26px 64px rgba(20,99,255,0.14);
+    }
+    .workflow-role-preview {
+      position: relative;
+      min-height: 244px;
+      padding: 18px;
+      border-radius: 24px;
+      overflow: hidden;
+      color: #fff;
+      background: linear-gradient(145deg, #07111f 0%, #1463ff 100%);
+    }
+    .workflow-role-preview.manager { background: linear-gradient(145deg, #07111f 0%, #1463ff 100%); }
+    .workflow-role-preview.clerk { background: linear-gradient(145deg, #0a4a5c 0%, #20a779 100%); }
+    .workflow-role-preview.customer { background: linear-gradient(145deg, #1463ff 0%, #7bb5ff 100%); }
+    .workflow-role-preview.company { background: linear-gradient(145deg, #1a1a2e 0%, #7b5cff 100%); }
+    .workflow-preview-deck {
+      position: relative;
+      height: 150px;
+      margin-top: 22px;
+    }
+    .workflow-preview-window {
+      position: absolute;
+      width: 64%;
+      min-height: 92px;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 34px rgba(7,17,31,0.16);
+    }
+    .workflow-preview-window.one { left: 0; top: 0; transform: rotate(-5deg); }
+    .workflow-preview-window.two { right: 0; top: 20px; transform: rotate(4deg); }
+    .workflow-preview-window.three { left: 34px; bottom: 0; transform: rotate(-1deg); }
+    .workflow-preview-window strong {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: -0.01em;
+    }
+    .workflow-preview-window span {
+      display: block;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.24);
+      margin-top: 8px;
+    }
+    .workflow-preview-window span.short { width: 58%; }
+    .workflow-role-copy {
+      padding: 20px 6px 2px;
+    }
+    .workflow-role-copy h3 {
+      margin: 10px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.28rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+    .workflow-role-copy p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.56;
+      font-size: 0.9rem;
+    }
+    .workflow-role-pills { margin-top: 14px; }
+    .modal-panel {
+      width: min(1120px, 100%);
+      max-height: min(760px, calc(100vh - 40px));
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 22px;
+    }
+    .modal-body {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .modal-summary {
+      padding: 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: linear-gradient(180deg, #ffffff 0%, #f3f8ff 100%);
+      box-shadow: 0 14px 36px rgba(20,99,255,0.06);
+    }
+    .modal-summary h4 {
+      margin: 16px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+    }
+    .modal-summary p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.62;
+      font-size: 0.92rem;
+    }
+    .screen-grid {
+      max-height: calc(100vh - 200px);
+      overflow: auto;
+      padding-right: 6px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .screen-shot {
+      position: relative;
+      min-height: 250px;
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(20,99,255,0.08);
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+      box-shadow: 0 18px 42px rgba(20,99,255,0.07);
+      overflow: hidden;
+      color: var(--ink);
+    }
+    .screen-shot::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--screen-accent-1, #1463ff), var(--screen-accent-2, #7bb5ff));
+    }
+    .screen-shot.manager { --screen-accent-1: #1463ff; --screen-accent-2: #7bb5ff; }
+    .screen-shot.clerk { --screen-accent-1: #20a779; --screen-accent-2: #78d7b6; }
+    .screen-shot.customer { --screen-accent-1: #1463ff; --screen-accent-2: #9ed1ff; }
+    .screen-shot.company { --screen-accent-1: #7b5cff; --screen-accent-2: #b9abff; }
+    .screen-shot-head {
+      display: flex;
+      align-items: start;
+      gap: 14px;
+    }
+    .screen-shot-index {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--screen-accent-1, #1463ff), var(--screen-accent-2, #7bb5ff));
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 0.84rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      box-shadow: 0 12px 24px rgba(20,99,255,0.18);
+    }
+    .screen-shot-head h4 {
+      margin: 2px 0 0;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      line-height: 1.14;
+    }
+    .screen-shot-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.58;
+      font-size: 0.9rem;
+    }
+    .screen-shot-pills { margin-top: 14px; }
+    .screen-mock {
+      margin-top: 18px;
+      min-height: 138px;
+      padding: 16px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(20,99,255,0.06), rgba(20,99,255,0.1));
+      border: 1px solid rgba(20,99,255,0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.82);
+      display: grid;
+      gap: 12px;
+    }
+    .screen-shot.clerk .screen-mock { background: linear-gradient(180deg, rgba(32,167,121,0.07), rgba(32,167,121,0.12)); }
+    .screen-shot.company .screen-mock { background: linear-gradient(180deg, rgba(123,92,255,0.07), rgba(123,92,255,0.12)); }
+    .screen-mock-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .screen-mock-toolbar span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(20,99,255,0.3);
+    }
+    .screen-mock-layout {
+      display: grid;
+      grid-template-columns: 78px minmax(0, 1fr);
+      gap: 12px;
+      flex: 1;
+    }
+    .screen-mock-side,
+    .screen-mock-card,
+    .screen-mock-line {
+      border-radius: 16px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid rgba(20,99,255,0.06);
+    }
+    .screen-mock-side { min-height: 92px; }
+    .screen-mock-content {
+      display: grid;
+      gap: 10px;
+    }
+    .screen-mock-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .screen-mock-chip {
+      min-height: 28px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: rgba(20,99,255,0.1);
+      color: #42516b;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+    .screen-mock-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .screen-mock-card {
+      min-height: 58px;
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+    }
+    .screen-mock-line {
+      height: 8px;
+      background: rgba(20,99,255,0.12);
+      border: 0;
+    }
+    .screen-mock-line.short { width: 56%; }
+
     .progress {
       position: fixed;
       left: 0;
@@ -3201,16 +3897,19 @@
       .hero { min-height: 980px; padding-top: 58px; padding-bottom: 92px; }
       .hero-dashboard { grid-template-columns: 1fr; }
       .grid-2, .grid-3, .workflow { grid-template-columns: 1fr; }
-      .narrative-panel, .feature-showcase, .limitations-grid, .next-grid, .snapshot-stage, .database-stage, .database-panels, .database-relations, .spotlight-grid, .process-stage, .architecture-stage, .security-shell { grid-template-columns: 1fr; }
+      .narrative-panel, .feature-showcase, .limitations-grid, .next-grid, .snapshot-stage, .database-stage, .database-panels, .database-relations, .spotlight-grid, .process-stage, .architecture-stage, .security-shell, .snapshot-refresh, .schema-refresh, .modal-body { grid-template-columns: 1fr; }
       .feature-tile.wide, .next-tile-wide { grid-column: auto; }
       .next-tile-wide { flex-direction: column; }
-      .wide-feature-layout, .stack-mosaic, .stack-service-grid, .outcome-grid, .edge-grid, .architecture-principles { grid-template-columns: 1fr; }
+      .wide-feature-layout, .stack-mosaic, .stack-service-grid, .outcome-grid, .edge-grid, .architecture-principles, .snapshot-metric-grid, .schema-principle-row { grid-template-columns: 1fr; }
       .build-grid, .upgrade-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .stack-tile.large, .stack-tile.wide, .database-panel.wide { grid-column: auto; }
       .stack-service.primary { grid-column: auto; }
       .build-card, .build-card.medium, .upgrade-card { grid-column: span 1; }
       .build-card.wide, .upgrade-card.featured { grid-column: span 2; }
       .upgrade-card.featured { grid-template-columns: 1fr; }
+      .capability-card, .capability-hero { grid-column: span 1; }
+      .gallery-track { grid-template-columns: 1fr; width: min(760px, calc(100% - 32px)); }
       .snapshot-network, .database-canvas { min-height: auto; }
       .snapshot-hub-pill, .snapshot-node-card, .db-table {
         position: relative;
@@ -3254,6 +3953,25 @@
       .snapshot-hub-pill { justify-self: start; }
       .snapshot-curve, .snapshot-dot, .db-curve, .db-dot { display: none; }
       .next-icon-light { margin-bottom: 18px; }
+      .schema-link { display: none; }
+      .schema-map-lite {
+        min-height: auto;
+        display: grid;
+        gap: 14px;
+      }
+      .schema-core,
+      .schema-node {
+        position: relative;
+        inset: auto !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: 100%;
+        height: auto;
+      }
+      .schema-core { min-height: 190px; border-radius: 30px; }
       .role-strip { grid-template-columns: repeat(2, 1fr); }
       .sticky-copy { position: relative; top: auto; }
       .limitations-banner { position: relative; }
@@ -3266,7 +3984,6 @@
       .section-head { display: block; }
       .section-note { margin-top: 14px; }
       .toc-wrap { top: 88px; }
-      .gallery-track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .gallery-card { transform: none !important; }
       .gallery-button { min-height: 390px; }
       .screen-grid { grid-template-columns: 1fr; }
@@ -3288,10 +4005,19 @@
       .section { padding-top: 74px; }
       .snapshot-brief, .stack-board, .database-brief, .database-panel, .database-relation { padding: 20px; border-radius: 22px; }
       .snapshot-network, .database-canvas, .wide-feature-visual { border-radius: 22px; }
-      .spotlight-panel, .delivery-map, .stack-showcase, .stack-service, .outcome-card, .build-card, .process-summary, .process-flow, .edge-card, .architecture-copy, .architecture-map, .architecture-principle, .security-hero, .security-card, .upgrade-card { padding: 20px; border-radius: 22px; }
-      .spotlight-stat-row, .build-grid, .upgrade-grid { grid-template-columns: 1fr; }
+      .spotlight-panel, .delivery-map, .stack-showcase, .stack-service, .outcome-card, .build-card, .process-summary, .process-flow, .edge-card, .architecture-copy, .architecture-map, .architecture-principle, .security-hero, .security-card, .upgrade-card, .snapshot-summary-card, .snapshot-compact-card, .capability-card, .schema-summary-card, .schema-map-lite, .schema-principle-card, .workflow-role-card, .modal-summary, .screen-shot { padding: 20px; border-radius: 22px; }
+      .spotlight-stat-row, .build-grid, .upgrade-grid, .capability-grid { grid-template-columns: 1fr; }
       .build-card, .build-card.wide, .build-card.medium, .upgrade-card, .upgrade-card.featured { grid-column: auto; }
       .build-flow-grid { grid-template-columns: 1fr; }
+      .snapshot-summary-card h3,
+      .schema-summary-card h3,
+      .capability-hero h3 { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+      .capability-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .modal-panel { padding: 16px; }
+      .modal-body { gap: 14px; }
+      .screen-grid { max-height: calc(100vh - 250px); }
+      .screen-mock-layout,
+      .screen-mock-card-grid { grid-template-columns: 1fr; }
       .delivery-core, .architecture-core {
         min-height: 170px;
         padding: 24px;
@@ -3345,9 +4071,14 @@
       .role-strip { grid-template-columns: 1fr; }
       .gallery-track { grid-template-columns: 1fr; width: calc(100% - 24px); }
       .gallery-button { min-height: 360px; }
-      .screenshot-art { min-height: 220px; }
+      .workflow-role-preview { min-height: 214px; }
+      .workflow-preview-deck { height: 132px; }
+      .workflow-preview-window { width: 70%; min-height: 84px; }
       .modal { padding: 12px; }
       .modal-panel { border-radius: 22px; padding: 16px; }
+      .modal-head h3 { font-size: clamp(1.35rem, 7vw, 2rem); }
+      .screen-shot-head { display: block; }
+      .screen-shot-index { margin-bottom: 12px; }
       .data-diagram { min-height: 520px; }
       .data-node { position: relative; inset: auto !important; transform: none !important; width: 100%; margin-bottom: 12px; }
       .conclusion-card { padding: 2rem; }
@@ -3457,71 +4188,62 @@
           <span class="kicker"><i data-lucide="briefcase" class="icon"></i>Project Snapshot</span>
           <h2>Context, ownership, and delivery state</h2>
         </div>
-        <p class="section-note">This first snapshot now reads like a modern product case study: quick context, clear ownership, and honest delivery state without overloading smaller screens.</p>
+        <p class="section-note">Quick context, ownership, and current build state.</p>
       </div>
-      <div class="spotlight-grid">
-        <article class="spotlight-panel">
-          <span class="spotlight-badge">Quick project snapshot</span>
-          <h3>QuickStay now opens with clear context before the reader reaches the deeper technical sections.</h3>
-          <p>The build is framed as a real hotel operations system: reservations, room availability, billing, payments, and role-based actions all move through one shared workflow instead of disconnected admin pages.</p>
-          <div class="spotlight-stat-row">
-            <div class="spotlight-stat">
+      <div class="snapshot-refresh">
+        <article class="snapshot-summary-card">
+          <span class="snapshot-summary-tag">Quick snapshot</span>
+          <h3>One hotel workflow, four role-based views.</h3>
+          <p>Bookings, room state, payments, and front-desk actions stay inside one shared system.</p>
+          <div class="snapshot-metric-grid">
+            <div class="snapshot-metric">
               <span>Use case</span>
-              <strong>Single-property hotel booking, billing, and front-desk operations in one connected platform.</strong>
+              <strong>Hotel booking plus desk operations.</strong>
             </div>
-            <div class="spotlight-stat">
+            <div class="snapshot-metric">
               <span>Audience</span>
-              <strong>Managers, clerks, customers, and company accounts using the same reservation source of truth.</strong>
+              <strong>Managers, clerks, guests, and companies.</strong>
             </div>
-            <div class="spotlight-stat">
+            <div class="snapshot-metric">
               <span>Scope</span>
-              <strong>Best suited to small and medium hotel workflows where room state and access control both matter.</strong>
+              <strong>Small and medium hotel workflow coverage.</strong>
             </div>
           </div>
         </article>
-        <div class="delivery-map" aria-label="Project context, ownership, and delivery view">
-          <div class="delivery-core">
-            <div>
-              <strong>QuickStay build</strong>
-              <span>Portfolio case study showing the product story, workflow ownership, and current maturity.</span>
-            </div>
-          </div>
-          <article class="delivery-card context">
-            <span class="delivery-card-tag">Project context</span>
-            <h4>Operational hotel workflow</h4>
-            <p>Reservations, room state, invoices, services, and payments stay connected instead of living in separate tools.</p>
+        <div class="snapshot-aside-grid">
+          <article class="snapshot-compact-card snapshot-compact-primary">
+            <span class="snapshot-card-tag">Project context</span>
+            <h4>Operational hotel flow</h4>
+            <p>Reservations, invoices, services, and payments stay linked instead of spreading across separate tools.</p>
           </article>
-          <article class="delivery-card ownership">
-            <span class="delivery-card-tag">Ownership</span>
-            <h4>Full-stack implementation</h4>
-            <p>Frontend presentation, PHP booking logic, MySQL structure, and Stripe checkout belong to the same project build.</p>
-            <div class="delivery-mini-pills">
-              <span>HTML/CSS/JS</span>
-              <span>PHP</span>
-              <span>MySQL</span>
-              <span>Stripe</span>
+          <article class="snapshot-compact-card">
+            <span class="snapshot-card-tag">Ownership</span>
+            <h4>Full-stack build</h4>
+            <p>UI, PHP booking logic, MySQL structure, and Stripe checkout all belong to the same project build.</p>
+            <div class="snapshot-pill-row">
+              <span class="snapshot-pill">HTML/CSS/JS</span>
+              <span class="snapshot-pill">PHP</span>
+              <span class="snapshot-pill">MySQL</span>
+              <span class="snapshot-pill">Stripe</span>
             </div>
           </article>
-          <article class="delivery-card state">
-            <span class="delivery-card-tag">Delivery state</span>
-            <h4>Functional case study</h4>
-            <p>Portfolio-ready and working locally today, with webhook verification, notifications, and responsive admin polish as the next hardening steps.</p>
-            <div class="delivery-mini-pills">
-              <span>Prototype</span>
-              <span>Local runtime</span>
-              <span>Next: production hardening</span>
+          <article class="snapshot-compact-card">
+            <span class="snapshot-card-tag">Delivery state</span>
+            <h4>Working case study</h4>
+            <p>Usable today, with webhook verification, notifications, and admin responsiveness as the next polish layer.</p>
+            <div class="snapshot-pill-row">
+              <span class="snapshot-pill">Prototype</span>
+              <span class="snapshot-pill">Local runtime</span>
+              <span class="snapshot-pill">Hardening next</span>
             </div>
           </article>
-          <span class="delivery-link one"></span>
-          <span class="delivery-link two"></span>
-          <span class="delivery-link three"></span>
         </div>
       </div>
       <div class="stack-showcase">
         <div class="stack-showcase-copy">
           <span class="kicker"><i data-lucide="layers" class="icon"></i>Tech Stack</span>
           <h3>Stack used in the QuickStay build</h3>
-          <p>Instead of a flat list of technologies, the stack is grouped by responsibility so the reader can quickly understand where interface work, workflow logic, persistence, payments, and runtime live.</p>
+          <p>Stack grouped by responsibility instead of a flat tech list.</p>
         </div>
         <div class="stack-service-grid">
           <article class="stack-service primary">
@@ -3774,76 +4496,56 @@
           <span class="kicker"><i data-lucide="sparkles" class="icon"></i>Features</span>
           <h2>What is built</h2>
         </div>
-        <p class="section-note">The build is now framed as grouped product capabilities instead of a flat six-card checklist.</p>
+        <p class="section-note">Grouped capabilities, not a long checklist.</p>
       </div>
-      <div class="build-grid">
-        <article class="build-card wide">
-          <div class="build-card-header">
-            <span class="card-icon" style="background:rgba(255,255,255,0.14);color:#fff;"><i data-lucide="calendar-check" class="icon"></i></span>
-            <h3>Reservations and checkout stay connected</h3>
-          </div>
-          <p>Search, booking creation, invoice updates, and payment handling all point back to the same stay record, which keeps the flow coherent for both guests and staff.</p>
-          <div class="build-visual">
-            <div class="build-flow-top">
-              <div class="build-flow-pill">Search</div>
-              <div class="build-flow-pill">Book</div>
-              <div class="build-flow-pill">Pay</div>
-            </div>
-            <div class="build-flow-grid">
-              <div class="build-flow-column">
-                <span class="build-flow-bar"></span>
-                <span class="build-flow-bar mid"></span>
-                <span class="build-flow-bar short"></span>
-              </div>
-              <div class="build-flow-column">
-                <div class="build-mini-row"><span>Reservation record</span><span>Live</span></div>
-                <div class="build-mini-row"><span>Invoice state</span><span>Linked</span></div>
-              </div>
-            </div>
+      <div class="capability-grid">
+        <article class="capability-card capability-hero">
+          <span class="capability-eyebrow">Core journey</span>
+          <h3>Search, book, pay, stay.</h3>
+          <p>Guest booking and staff follow-up stay attached to one reservation record from first search to final checkout.</p>
+          <div class="capability-flow">
+            <div class="capability-flow-step"><span>01</span><strong>Search</strong></div>
+            <div class="capability-flow-step"><span>02</span><strong>Book</strong></div>
+            <div class="capability-flow-step"><span>03</span><strong>Pay</strong></div>
+            <div class="capability-flow-step"><span>04</span><strong>Checkout</strong></div>
           </div>
         </article>
-        <article class="build-card">
-          <div class="build-card-header">
-            <span class="card-icon"><i data-lucide="search" class="icon"></i></span>
-            <h3>Room search and availability</h3>
-          </div>
-          <p>Guests can filter by dates, guests, room type, and current availability without leaving the booking flow.</p>
-          <div class="build-visual">
-            <div class="build-mini-row"><span>Date and guest filters</span><span>Active</span></div>
-            <div class="build-mini-row"><span>Available room states</span><span>Live</span></div>
+        <article class="capability-card">
+          <span class="card-icon"><i data-lucide="search" class="icon"></i></span>
+          <h3>Room search</h3>
+          <p>Filter by date, guest count, room type, and live availability.</p>
+          <div class="capability-mini-ui">
+            <div class="capability-mini-row"><span>Date filters</span><span>Active</span></div>
+            <div class="capability-mini-row"><span>Room state</span><span>Live</span></div>
           </div>
         </article>
-        <article class="build-card">
-          <div class="build-card-header">
-            <span class="card-icon"><i data-lucide="shield-check" class="icon"></i></span>
-            <h3>Role-based workspaces</h3>
-          </div>
-          <p>Managers, clerks, customers, and company users land in the right workspace with the actions they actually need.</p>
-          <div class="build-visual">
-            <div class="build-mini-row"><span>Manager</span><span>Rooms + billing</span></div>
-            <div class="build-mini-row"><span>Clerk</span><span>Desk operations</span></div>
-          </div>
-        </article>
-        <article class="build-card medium">
-          <div class="build-card-header">
-            <span class="card-icon"><i data-lucide="door-open" class="icon"></i></span>
-            <h3>Front-desk operations</h3>
-          </div>
-          <p>Walk-in reservations, check-in, checkout, room assignment, and service updates are handled from the same operational lane.</p>
-          <div class="build-visual">
-            <div class="build-mini-row"><span>Walk-ins and reservations</span><span>Fast desk flow</span></div>
-            <div class="build-mini-row"><span>Room assignment</span><span>During check-in</span></div>
+        <article class="capability-card">
+          <span class="card-icon"><i data-lucide="shield-check" class="icon"></i></span>
+          <h3>Role workspaces</h3>
+          <p>Each user lands in the right interface with the right actions.</p>
+          <div class="capability-meta">
+            <span>Manager</span>
+            <span>Clerk</span>
+            <span>Customer</span>
+            <span>Company</span>
           </div>
         </article>
-        <article class="build-card medium">
-          <div class="build-card-header">
-            <span class="card-icon"><i data-lucide="file-text" class="icon"></i></span>
-            <h3>Billing, services, and invoices</h3>
+        <article class="capability-card">
+          <span class="card-icon"><i data-lucide="door-open" class="icon"></i></span>
+          <h3>Front-desk flow</h3>
+          <p>Walk-ins, check-in, checkout, room assignment, and service edits stay together.</p>
+          <div class="capability-mini-ui">
+            <div class="capability-mini-row"><span>Walk-ins</span><span>Fast desk flow</span></div>
+            <div class="capability-mini-row"><span>Room assign</span><span>Check-in</span></div>
           </div>
-          <p>Charges, taxes, discounts, services, and payment history stay attached to the reservation instead of drifting into manual notes.</p>
-          <div class="build-visual">
-            <div class="build-mini-row"><span>Service charges</span><span>Tracked</span></div>
-            <div class="build-mini-row"><span>Final invoice</span><span>Checkout ready</span></div>
+        </article>
+        <article class="capability-card">
+          <span class="card-icon"><i data-lucide="file-text" class="icon"></i></span>
+          <h3>Billing and invoices</h3>
+          <p>Services, tax, discounts, and final totals stay attached to the stay record.</p>
+          <div class="capability-mini-ui">
+            <div class="capability-mini-row"><span>Service charges</span><span>Tracked</span></div>
+            <div class="capability-mini-row"><span>Invoice state</span><span>Linked</span></div>
           </div>
         </article>
       </div>
@@ -3947,16 +4649,92 @@
         <div>
           <span class="kicker"><i data-lucide="panels-top-left" class="icon"></i>Workflow Walkthrough</span>
           <h2>Role-based workflow walkthrough</h2>
-          <p class="section-note" style="margin:18px auto 0;">These visuals are structured interface previews mapped to each role flow. Replace them with captured screens from the running PHP app before final portfolio publishing.</p>
+          <p class="section-note" style="margin:18px auto 0;">Pick a role to open a scrollable set of screens for that workspace.</p>
         </div>
       </header>
       <section class="gallery-track-container">
         <div class="gallery-sticky">
           <ul class="gallery-track" id="galleryTrack">
-            <li class="gallery-card"><button class="gallery-button" type="button" data-role="manager"><div class="screenshot-art manager"><span class="screen-label"><i data-lucide="user-cog" class="icon"></i>Manager workflow</span><div class="mock-rows"><div class="mock-row"><span class="mock-dot"></span><span class="mock-bar"></span><span class="mock-tag"></span></div><div class="mock-row"><span class="mock-dot" style="background:rgba(245,216,76,0.8)"></span><span class="mock-bar" style="width:55%"></span><span class="mock-tag"></span></div><div class="mock-row"><span class="mock-dot" style="background:rgba(32,167,121,0.8)"></span><span class="mock-bar" style="width:70%"></span><span class="mock-tag"></span></div></div></div><div class="gallery-meta"><h3>Manager workflow</h3><p>Reports, rooms, billing, users, services, and company accounts.</p></div></button></li>
-            <li class="gallery-card"><button class="gallery-button" type="button" data-role="clerk"><div class="screenshot-art clerk"><span class="screen-label"><i data-lucide="monitor-check" class="icon"></i>Clerk workflow</span><div class="mock-rows"><div class="mock-row"><span class="mock-dot"></span><span class="mock-bar"></span><span class="mock-tag"></span></div><div class="mock-row"><span class="mock-dot" style="background:rgba(255,255,255,0.9)"></span><span class="mock-bar" style="width:62%"></span><span class="mock-tag"></span></div><div class="mock-row"><span class="mock-dot" style="background:rgba(123,181,255,0.8)"></span><span class="mock-bar" style="width:48%"></span><span class="mock-tag"></span></div></div></div><div class="gallery-meta"><h3>Clerk workflow</h3><p>Reservations, walk-ins, check-in, checkout, services, and invoices.</p></div></button></li>
-            <li class="gallery-card"><button class="gallery-button" type="button" data-role="customer"><div class="screenshot-art customer"><span class="screen-label"><i data-lucide="user-round-check" class="icon"></i>Customer workflow</span><div class="mock-rows"><div class="mock-row"><span class="mock-dot"></span><span class="mock-bar"></span><span class="mock-tag"></span></div><div class="mock-row"><span class="mock-dot" style="background:rgba(32,167,121,0.8)"></span><span class="mock-bar" style="width:68%"></span><span class="mock-tag"></span></div><div class="mock-row"><span class="mock-dot" style="background:rgba(255,255,255,0.7)"></span><span class="mock-bar" style="width:44%"></span><span class="mock-tag"></span></div></div></div><div class="gallery-meta"><h3>Customer workflow</h3><p>Room search, booking flow, Stripe payment, profile, and history.</p></div></button></li>
-            <li class="gallery-card"><button class="gallery-button" type="button" data-role="company"><div class="screenshot-art company"><span class="screen-label"><i data-lucide="building-2" class="icon"></i>Company workflow</span><div class="mock-rows"><div class="mock-row"><span class="mock-dot"></span><span class="mock-bar"></span><span class="mock-tag"></span></div><div class="mock-row"><span class="mock-dot" style="background:rgba(123,92,255,0.9)"></span><span class="mock-bar" style="width:57%"></span><span class="mock-tag"></span></div><div class="mock-row"><span class="mock-dot" style="background:rgba(255,255,255,0.6)"></span><span class="mock-bar" style="width:75%"></span><span class="mock-tag"></span></div></div></div><div class="gallery-meta"><h3>Travel company workflow</h3><p>Corporate bookings, guest assignments, payments, and company billing.</p></div></button></li>
+            <li class="gallery-card">
+              <button class="gallery-button workflow-role-card" type="button" data-role="manager">
+                <div class="workflow-role-preview manager">
+                  <span class="workflow-count">4 screens</span>
+                  <div class="workflow-preview-deck">
+                    <div class="workflow-preview-window one"><strong>Dashboard</strong><span></span><span class="short"></span></div>
+                    <div class="workflow-preview-window two"><strong>Rooms</strong><span></span><span class="short"></span></div>
+                    <div class="workflow-preview-window three"><strong>Billing</strong><span></span><span class="short"></span></div>
+                  </div>
+                </div>
+                <div class="gallery-meta workflow-role-copy">
+                  <h3>Manager</h3>
+                  <p>Reports, rooms, services, and billing control.</p>
+                  <div class="workflow-role-pills">
+                    <span>Admin role</span>
+                    <span>Scroll set</span>
+                  </div>
+                </div>
+              </button>
+            </li>
+            <li class="gallery-card">
+              <button class="gallery-button workflow-role-card" type="button" data-role="clerk">
+                <div class="workflow-role-preview clerk">
+                  <span class="workflow-count">4 screens</span>
+                  <div class="workflow-preview-deck">
+                    <div class="workflow-preview-window one"><strong>Queue</strong><span></span><span class="short"></span></div>
+                    <div class="workflow-preview-window two"><strong>Check-in</strong><span></span><span class="short"></span></div>
+                    <div class="workflow-preview-window three"><strong>Checkout</strong><span></span><span class="short"></span></div>
+                  </div>
+                </div>
+                <div class="gallery-meta workflow-role-copy">
+                  <h3>Clerk</h3>
+                  <p>Reservations, walk-ins, check-in, and checkout.</p>
+                  <div class="workflow-role-pills">
+                    <span>Desk role</span>
+                    <span>Scroll set</span>
+                  </div>
+                </div>
+              </button>
+            </li>
+            <li class="gallery-card">
+              <button class="gallery-button workflow-role-card" type="button" data-role="customer">
+                <div class="workflow-role-preview customer">
+                  <span class="workflow-count">4 screens</span>
+                  <div class="workflow-preview-deck">
+                    <div class="workflow-preview-window one"><strong>Search</strong><span></span><span class="short"></span></div>
+                    <div class="workflow-preview-window two"><strong>Booking</strong><span></span><span class="short"></span></div>
+                    <div class="workflow-preview-window three"><strong>History</strong><span></span><span class="short"></span></div>
+                  </div>
+                </div>
+                <div class="gallery-meta workflow-role-copy">
+                  <h3>Customer</h3>
+                  <p>Room discovery, payment, and booking history.</p>
+                  <div class="workflow-role-pills">
+                    <span>Guest role</span>
+                    <span>Scroll set</span>
+                  </div>
+                </div>
+              </button>
+            </li>
+            <li class="gallery-card">
+              <button class="gallery-button workflow-role-card" type="button" data-role="company">
+                <div class="workflow-role-preview company">
+                  <span class="workflow-count">4 screens</span>
+                  <div class="workflow-preview-deck">
+                    <div class="workflow-preview-window one"><strong>Overview</strong><span></span><span class="short"></span></div>
+                    <div class="workflow-preview-window two"><strong>Group stay</strong><span></span><span class="short"></span></div>
+                    <div class="workflow-preview-window three"><strong>Billing</strong><span></span><span class="short"></span></div>
+                  </div>
+                </div>
+                <div class="gallery-meta workflow-role-copy">
+                  <h3>Travel company</h3>
+                  <p>Corporate bookings, guest assignment, and billing.</p>
+                  <div class="workflow-role-pills">
+                    <span>Company role</span>
+                    <span>Scroll set</span>
+                  </div>
+                </div>
+              </button>
+            </li>
           </ul>
         </div>
       </section>
@@ -3971,7 +4749,15 @@
           </div>
           <button class="modal-close" type="button" id="modalClose" aria-label="Close workflow gallery"><i data-lucide="x" class="icon"></i></button>
         </div>
-        <div class="screen-grid" id="modalScreens"></div>
+        <div class="modal-body">
+          <aside class="modal-summary">
+            <span class="modal-summary-tag" id="modalRoleTag">Role set</span>
+            <h4 id="modalRoleHeading">Manager screens</h4>
+            <p id="modalRoleText">Scroll through the main screens used by this role.</p>
+            <div class="modal-summary-pills" id="modalRoleMeta"></div>
+          </aside>
+          <div class="screen-grid" id="modalScreens"></div>
+        </div>
       </div>
     </div>
 
@@ -3981,60 +4767,69 @@
           <span class="kicker"><i data-lucide="database" class="icon"></i>Database</span>
           <h2>Data structure</h2>
         </div>
-        <p class="section-note">This view keeps only the high-level relationships behind the case study, not a dense field-by-field schema dump.</p>
+        <p class="section-note">High-level relationship map only.</p>
       </div>
-      <div class="architecture-stage">
-        <article class="architecture-copy">
-          <span class="kicker"><i data-lucide="database" class="icon"></i>Relationship view</span>
-          <h3>One reservation spine keeps hotel state consistent.</h3>
-          <p>The database story is simpler when it stays at the relationship level: account information starts the booking, room inventory supplies availability, invoices collect charges, and payments settle the stay.</p>
-          <ul class="architecture-list">
-            <li><strong>Booking is the center</strong> Operational state resolves back to the reservation instead of being duplicated across separate helper records.</li>
-            <li><strong>Rooms stay operational</strong> Inventory, room state, and pricing are attached to the stay, so availability remains meaningful for the front desk.</li>
-            <li><strong>Billing extends the stay</strong> Charges, services, and payment events follow the reservation instead of branching into disconnected flows.</li>
-          </ul>
-        </article>
-        <div class="architecture-map" aria-label="High-level data relationship view">
-          <div class="architecture-core">
-            <div>
-              <strong>reservations</strong>
-              <span>Core record linking guest or company, room, stay window, invoice state, and final checkout.</span>
+      <div class="schema-refresh">
+        <article class="schema-summary-card">
+          <span class="schema-summary-tag">Relationship view</span>
+          <h3>Reservations stay at the center.</h3>
+          <p>Every important state change points back to the stay record, which keeps booking, room, and billing logic clean.</p>
+          <div class="schema-note-list">
+            <div class="schema-note-item">
+              <strong>Accounts start the booking</strong>
+              <span>Users or companies own the stay.</span>
+            </div>
+            <div class="schema-note-item">
+              <strong>Rooms stay operational</strong>
+              <span>Availability and room state stay meaningful for staff.</span>
+            </div>
+            <div class="schema-note-item">
+              <strong>Billing follows the stay</strong>
+              <span>Charges and payments do not drift away from the reservation.</span>
             </div>
           </div>
-          <article class="architecture-node accounts">
-            <strong>users and companies</strong>
-            <span>Identity, role access, and booking ownership start here.</span>
+        </article>
+        <div class="schema-map-lite" aria-label="High-level data relationship view">
+          <div class="schema-core">
+            <div>
+              <strong>reservations</strong>
+              <span>Guest, room, dates, invoice state, and checkout all connect here.</span>
+            </div>
+          </div>
+          <article class="schema-node accounts">
+            <strong>users + companies</strong>
+            <span>Booking identity and ownership.</span>
           </article>
-          <article class="architecture-node rooms">
-            <strong>rooms and availability</strong>
-            <span>Room inventory, pricing, and operational state support the stay.</span>
+          <article class="schema-node rooms">
+            <strong>rooms</strong>
+            <span>Inventory, price, and room state.</span>
           </article>
-          <article class="architecture-node billing">
-            <strong>invoices and services</strong>
-            <span>Charges, tax, discount, and add-on services remain attached to the reservation.</span>
+          <article class="schema-node billing">
+            <strong>invoices + services</strong>
+            <span>Charges, tax, and extras.</span>
           </article>
-          <article class="architecture-node payments">
+          <article class="schema-node payments">
             <strong>payments</strong>
-            <span>Checkout sessions and payment state close the billing path.</span>
+            <span>Checkout session and payment state.</span>
           </article>
-          <span class="architecture-connector one"></span>
-          <span class="architecture-connector two"></span>
-          <span class="architecture-connector three"></span>
-          <span class="architecture-connector four"></span>
+          <span class="schema-link one"></span>
+          <span class="schema-link two"></span>
+          <span class="schema-link three"></span>
+          <span class="schema-link four"></span>
         </div>
       </div>
-      <div class="architecture-principles">
-        <article class="architecture-principle">
-          <h3>Reservation links people and rooms</h3>
-          <p>The stay record connects who booked with what room was assigned, which keeps room state and booking ownership aligned.</p>
+      <div class="schema-principle-row">
+        <article class="schema-principle-card">
+          <h3>People and rooms meet in the stay</h3>
+          <p>The reservation is where booking ownership and room assignment stay aligned.</p>
         </article>
-        <article class="architecture-principle">
-          <h3>Invoices follow the stay</h3>
-          <p>Charges and payment state remain attached to the reservation so revenue reporting still points back to the same operational record.</p>
+        <article class="schema-principle-card">
+          <h3>Invoices stay attached</h3>
+          <p>Revenue reporting still points back to the same operational record.</p>
         </article>
-        <article class="architecture-principle">
+        <article class="schema-principle-card">
           <h3>Extensions avoid duplication</h3>
-          <p>Company bookings, guest assignments, and service add-ons should extend the reservation model instead of creating parallel sources of truth.</p>
+          <p>Company bookings and guest assignment extend the core model instead of splitting it.</p>
         </article>
       </div>
     </section>
@@ -4242,40 +5037,64 @@
 
     const gallerySets = {
       manager: {
+        theme: "manager",
         title: "Manager workflow",
+        tag: "Admin role",
+        summary: "High-level control across reporting, rooms, pricing, services, and billing review.",
+        meta: ["4 screens", "scroll to browse", "operations overview"],
         screens: [
-          ["Dashboard overview", "Purpose: gives managers a quick read on bookings, rooms, billing, and activity."],
-          ["Room management", "Purpose: keeps room details, rates, images, and availability under manager control."],
-          ["Reports and billing", "Purpose: supports decisions with invoices, revenue, services, and booking totals."]
+          { title: "Dashboard overview", note: "Revenue, occupancy, and alerts are visible in one first screen.", pills: ["occupancy", "billing", "alerts"] },
+          { title: "Room management", note: "Rooms, rates, media, and availability can be edited from one admin area.", pills: ["inventory", "pricing", "status"] },
+          { title: "Services and pricing", note: "Add-on services and room-side costs stay easy to adjust without leaving the manager flow.", pills: ["services", "rate rules"] },
+          { title: "Reports and invoices", note: "Financial review, invoice totals, and operational summaries stay close together.", pills: ["reports", "invoices", "totals"] }
         ]
       },
       clerk: {
+        theme: "clerk",
         title: "Clerk workflow",
+        tag: "Desk role",
+        summary: "Fast front-desk handling for reservations, arrivals, live updates, and checkout billing.",
+        meta: ["4 screens", "scroll to browse", "front desk flow"],
         screens: [
-          ["Reservation desk", "Purpose: lets staff search, filter, and confirm daily bookings quickly."],
-          ["Check-in workflow", "Purpose: connects arrival, room assignment, guest details, and services."],
-          ["Checkout invoice", "Purpose: finalizes stay charges and updates the room status for the next guest."]
+          { title: "Reservation desk", note: "Daily bookings can be searched, filtered, and confirmed quickly.", pills: ["queue", "filters", "status"] },
+          { title: "Check-in workflow", note: "Arrival, room assignment, guest details, and service edits stay in one desk screen.", pills: ["arrival", "room assign"] },
+          { title: "In-stay updates", note: "Clerks can keep service changes and status updates inside the live reservation.", pills: ["services", "status"] },
+          { title: "Checkout invoice", note: "Final billing settles the stay and reopens the room for the next guest.", pills: ["invoice", "room release"] }
         ]
       },
       customer: {
+        theme: "customer",
         title: "Customer workflow",
+        tag: "Guest role",
+        summary: "A simpler guest path for room discovery, booking, payment, and reservation history.",
+        meta: ["4 screens", "scroll to browse", "guest journey"],
         screens: [
-          ["Room search", "Purpose: helps customers find available rooms by dates, guests, and room type."],
-          ["Booking and payment", "Purpose: turns selected rooms into reservations with Stripe checkout."],
-          ["Booking history", "Purpose: gives customers a clear record of upcoming and past stays."]
+          { title: "Room search", note: "Guests browse available rooms using dates, guest count, and room type filters.", pills: ["search", "filters"] },
+          { title: "Room details", note: "Selected rooms show rate and stay details before the booking step.", pills: ["details", "price"] },
+          { title: "Booking and payment", note: "Booking data moves straight into Stripe checkout without breaking the flow.", pills: ["booking", "stripe"] },
+          { title: "Booking history", note: "Upcoming and past stays remain visible in one customer account area.", pills: ["history", "profile"] }
         ]
       },
       company: {
+        theme: "company",
         title: "Travel company workflow",
+        tag: "Company role",
+        summary: "Corporate booking flow for group reservations, guest mapping, and billing visibility.",
+        meta: ["4 screens", "scroll to browse", "group bookings"],
         screens: [
-          ["Company dashboard", "Purpose: separates corporate booking work from regular customer actions."],
-          ["Group booking", "Purpose: supports multiple guests and assigned rooms in one company request."],
-          ["Corporate billing", "Purpose: tracks company invoices, payments, guest assignments, and totals."]
+          { title: "Company dashboard", note: "Corporate booking work stays separate from the normal guest dashboard.", pills: ["overview", "company"] },
+          { title: "Group booking", note: "Multiple guests and room needs can be prepared inside one booking request.", pills: ["group", "rooms"] },
+          { title: "Guest assignment", note: "Named guests are mapped into the reservation instead of being tracked outside the system.", pills: ["guests", "mapping"] },
+          { title: "Corporate billing", note: "Invoices, payment state, and company totals stay easy to review.", pills: ["billing", "payments"] }
         ]
       }
     };
     const galleryModal = document.getElementById("galleryModal");
     const modalTitle = document.getElementById("modalTitle");
+    const modalRoleTag = document.getElementById("modalRoleTag");
+    const modalRoleHeading = document.getElementById("modalRoleHeading");
+    const modalRoleText = document.getElementById("modalRoleText");
+    const modalRoleMeta = document.getElementById("modalRoleMeta");
     const modalScreens = document.getElementById("modalScreens");
     const modalClose = document.getElementById("modalClose");
     const closeGalleryModal = () => {
@@ -4286,11 +5105,37 @@
       button.addEventListener("click", () => {
         const set = gallerySets[button.dataset.role];
         modalTitle.textContent = set.title;
-        modalScreens.innerHTML = set.screens.map(([title, reason], index) => `
-          <article class="screen-shot">
-            <h4>${String(index + 1).padStart(2, "0")} ${title}</h4>
-            <span class="line"></span><span class="line"></span><span class="line"></span>
-            <p>${reason}</p>
+        modalRoleTag.textContent = set.tag;
+        modalRoleHeading.textContent = `${set.title} screens`;
+        modalRoleText.textContent = set.summary;
+        modalRoleMeta.innerHTML = set.meta.map((item) => `<span>${item}</span>`).join("");
+        modalScreens.innerHTML = set.screens.map((screen, index) => `
+          <article class="screen-shot ${set.theme}">
+            <div class="screen-shot-head">
+              <div class="screen-shot-index">${String(index + 1).padStart(2, "0")}</div>
+              <div>
+                <h4>${screen.title}</h4>
+                <p>${screen.note}</p>
+                <div class="screen-shot-pills">
+                  ${screen.pills.map((pill) => `<span>${pill}</span>`).join("")}
+                </div>
+              </div>
+            </div>
+            <div class="screen-mock">
+              <div class="screen-mock-toolbar"><span></span><span></span><span></span></div>
+              <div class="screen-mock-layout">
+                <div class="screen-mock-side"></div>
+                <div class="screen-mock-content">
+                  <div class="screen-mock-chip-row">
+                    ${screen.pills.map((pill) => `<span class="screen-mock-chip">${pill}</span>`).join("")}
+                  </div>
+                  <div class="screen-mock-card-grid">
+                    <div class="screen-mock-card"><span class="screen-mock-line"></span><span class="screen-mock-line short"></span></div>
+                    <div class="screen-mock-card"><span class="screen-mock-line"></span><span class="screen-mock-line short"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </article>
         `).join("");
         galleryModal.classList.add("open");
