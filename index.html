@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ashrif Rihan Blogs - Software Engineering Student</title>
+  <title>Ashrif Rihan Blogs - Software Engineering</title>
   <meta name="description" content="Ashrif Rihan builds real-world systems with clean design, structured logic, and complete frontend and backend workflows." />
   <meta name="author" content="Ashrif Rihan" />
   <link rel="canonical" href="https://ashrifrihan.dev/index.html" />
@@ -222,6 +222,28 @@
       font-weight: 800;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+    }
+    .eyebrow-icon,
+    .eyebrow-role-text {
+      display: inline-flex;
+      align-items: center;
+      will-change: opacity, transform;
+    }
+    .eyebrow-icon.swap-out,
+    .eyebrow-role-text.swap-out {
+      animation: eyebrowSlideOut 0.18s ease forwards;
+    }
+    .eyebrow-icon.swap-in,
+    .eyebrow-role-text.swap-in {
+      animation: eyebrowSlideIn 0.24s ease forwards;
+    }
+    @keyframes eyebrowSlideOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-8px); }
+    }
+    @keyframes eyebrowSlideIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     h1 {
       margin: 22px 0 0;
@@ -918,10 +940,10 @@
     <header class="hero shell">
       <div class="hero-panel">
         <div class="hero-copy">
-          <span class="eyebrow">
-  <i data-lucide="code" class="icon"></i>
-  Software Engineering
-</span>
+          <span class="eyebrow" id="heroRoleEyebrow" aria-live="polite">
+            <span class="eyebrow-icon" id="heroRoleIcon"><i data-lucide="code-2" class="icon"></i></span>
+            <span class="eyebrow-role-text" id="heroRoleText">Software Engineer</span>
+          </span>
           <h1>Hi, I'm Ashrif Rihan</h1>
           <p class="subtitle">Building real-world systems with clean design and structured logic</p>
           <div class="hero-actions">
@@ -1245,6 +1267,46 @@
         menuButton.setAttribute("aria-expanded", "false");
       });
     });
+
+    const roleItems = [
+      { text: "Software Engineer", icon: "code-2" },
+      { text: "Graphic Designer", icon: "pen-tool" },
+      { text: "UI/UX Designer", icon: "palette" },
+      { text: "Frontend Developer", icon: "monitor-smartphone" }
+    ];
+
+    const roleIcon = document.getElementById("heroRoleIcon");
+    const roleText = document.getElementById("heroRoleText");
+    let roleIndex = 0;
+
+    const renderRole = (role) => {
+      roleText.textContent = role.text;
+      roleIcon.innerHTML = `<i data-lucide="${role.icon}" class="icon"></i>`;
+      lucide.createIcons();
+    };
+
+    const rotateRole = () => {
+      roleIcon.classList.add("swap-out");
+      roleText.classList.add("swap-out");
+
+      setTimeout(() => {
+        roleIndex = (roleIndex + 1) % roleItems.length;
+        renderRole(roleItems[roleIndex]);
+
+        roleIcon.classList.remove("swap-out");
+        roleText.classList.remove("swap-out");
+        roleIcon.classList.add("swap-in");
+        roleText.classList.add("swap-in");
+
+        setTimeout(() => {
+          roleIcon.classList.remove("swap-in");
+          roleText.classList.remove("swap-in");
+        }, 250);
+      }, 180);
+    };
+
+    renderRole(roleItems[0]);
+    setInterval(rotateRole, 2400);
   </script>
 </body>
 </html>
