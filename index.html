@@ -223,12 +223,14 @@
       letter-spacing: 0.04em;
       line-height: 1;
       text-transform: uppercase;
+      transition: background 0.45s ease, box-shadow 0.45s ease;
     }
     .eyebrow-icon,
     .eyebrow-role-text {
       display: inline-flex;
       align-items: center;
       will-change: opacity, transform;
+      backface-visibility: hidden;
     }
     .eyebrow-icon {
       justify-content: center;
@@ -240,23 +242,47 @@
       overflow: hidden;
       text-overflow: clip;
       width: auto;
-      transition: width 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: width 0.44s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .eyebrow-icon.swap-out,
+    .eyebrow-icon.swap-out {
+      animation: eyebrowIconOut 0.24s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
     .eyebrow-role-text.swap-out {
-      animation: eyebrowSlideOut 0.18s ease forwards;
+      animation: eyebrowTextOut 0.24s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
-    .eyebrow-icon.swap-in,
+    .eyebrow-icon.swap-in {
+      animation: eyebrowIconIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
     .eyebrow-role-text.swap-in {
-      animation: eyebrowSlideIn 0.24s ease forwards;
+      animation: eyebrowTextIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
-    @keyframes eyebrowSlideOut {
+    @keyframes eyebrowIconOut {
+      from { opacity: 1; transform: translateY(0) scale(1); }
+      to { opacity: 0; transform: translateY(-4px) scale(0.96); }
+    }
+    @keyframes eyebrowTextOut {
       from { opacity: 1; transform: translateY(0); }
-      to { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 0; transform: translateY(-4px); }
     }
-    @keyframes eyebrowSlideIn {
-      from { opacity: 0; transform: translateY(8px); }
+    @keyframes eyebrowIconIn {
+      from { opacity: 0; transform: translateY(4px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes eyebrowTextIn {
+      from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .eyebrow,
+      .eyebrow-role-text {
+        transition: none;
+      }
+      .eyebrow-icon.swap-out,
+      .eyebrow-role-text.swap-out,
+      .eyebrow-icon.swap-in,
+      .eyebrow-role-text.swap-in {
+        animation: none;
+      }
     }
     h1 {
       margin: 22px 0 0;
@@ -1291,6 +1317,9 @@
     const roleIcon = document.getElementById("heroRoleIcon");
     const roleText = document.getElementById("heroRoleText");
     let roleIndex = 0;
+    const SWAP_OUT_MS = 160;
+    const SWAP_IN_MS = 320;
+    const ROTATE_EVERY_MS = 2600;
 
     const roleTextMeasure = document.createElement("span");
     roleTextMeasure.style.position = "absolute";
@@ -1347,14 +1376,14 @@
         setTimeout(() => {
           roleIcon.classList.remove("swap-in");
           roleText.classList.remove("swap-in");
-          roleText.style.width = "auto";
-        }, 250);
-      }, 180);
+        }, SWAP_IN_MS);
+      }, SWAP_OUT_MS);
     };
 
     if (roleIcon && roleText) {
       renderRole(roleItems[0]);
-      setInterval(rotateRole, 2400);
+      roleText.style.width = `${measureRoleTextWidth(roleItems[0].text)}px`;
+      setInterval(rotateRole, ROTATE_EVERY_MS);
     }
   </script>
 </body>
