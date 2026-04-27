@@ -70,6 +70,10 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    html, body {
+      -webkit-user-select: none;
+      user-select: none;
+    }
     body {
       margin: 0;
       font-family: var(--font-body);
@@ -2987,6 +2991,20 @@
   </script>
   <script>
     window.lucide?.createIcons();
+
+    // Discourage copying or selecting text on this page.
+    ["copy", "cut", "contextmenu", "selectstart", "dragstart"].forEach((eventName) => {
+      document.addEventListener(eventName, (event) => {
+        event.preventDefault();
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const key = event.key.toLowerCase();
+      if ((event.ctrlKey || event.metaKey) && ["c", "x", "a"].includes(key)) {
+        event.preventDefault();
+      }
+    });
 
     const menuButton = document.getElementById("menuButton");
     const mobileMenu = document.getElementById("mobileMenu");
