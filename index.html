@@ -720,6 +720,18 @@
       .hero-ui { grid-template-columns: 1fr; }
       .card-list, .contact-band { grid-template-columns: 1fr; }
       .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid.why-stack {
+        display: block;
+        padding-bottom: 10px;
+      }
+      .why-grid.why-stack .why-card {
+        position: sticky;
+        top: 84px;
+        margin-bottom: 14px;
+      }
+      .why-grid.why-stack .why-card:nth-child(2) { top: 98px; }
+      .why-grid.why-stack .why-card:nth-child(3) { top: 112px; }
+      .why-grid.why-stack .why-card:nth-child(4) { top: 126px; }
       .section-head { display: block; }
       .section-note { margin-top: 14px; }
     }
@@ -747,6 +759,13 @@
       .glass-card { min-height: 108px; padding: 15px; border-radius: 18px; }
       .section { padding: 74px 0 0; }
       .why-grid { grid-template-columns: 1fr; }
+      .why-grid.why-stack .why-card {
+        top: 76px;
+        margin-bottom: 12px;
+      }
+      .why-grid.why-stack .why-card:nth-child(2) { top: 88px; }
+      .why-grid.why-stack .why-card:nth-child(3) { top: 100px; }
+      .why-grid.why-stack .why-card:nth-child(4) { top: 112px; }
       .project-card, .project-card:nth-child(even) { min-height: 390px; border-radius: 22px; }
       .project-content { padding: 22px; }
       .project-actions { flex-direction: column; }
@@ -861,7 +880,7 @@
             <h2>Why Hire Me</h2>
           </div>
         </div>
-        <div class="why-grid">
+        <div class="why-grid why-stack">
           <article class="why-card reveal">
             <span class="why-icon"><i data-lucide="blocks" class="icon"></i></span>
             <h3>Build complete systems</h3>
