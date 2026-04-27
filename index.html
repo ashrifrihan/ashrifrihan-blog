@@ -221,6 +221,7 @@
       font-size: 0.78rem;
       font-weight: 800;
       letter-spacing: 0.04em;
+      line-height: 1;
       text-transform: uppercase;
     }
     .eyebrow-icon,
@@ -228,6 +229,18 @@
       display: inline-flex;
       align-items: center;
       will-change: opacity, transform;
+    }
+    .eyebrow-icon {
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .eyebrow-role-text {
+      justify-content: flex-start;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: clip;
+      width: auto;
+      transition: width 0.36s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .eyebrow-icon.swap-out,
     .eyebrow-role-text.swap-out {
@@ -1279,34 +1292,70 @@
     const roleText = document.getElementById("heroRoleText");
     let roleIndex = 0;
 
+    const roleTextMeasure = document.createElement("span");
+    roleTextMeasure.style.position = "absolute";
+    roleTextMeasure.style.visibility = "hidden";
+    roleTextMeasure.style.pointerEvents = "none";
+    roleTextMeasure.style.whiteSpace = "nowrap";
+    document.body.appendChild(roleTextMeasure);
+
+    const measureRoleTextWidth = (text) => {
+      const textStyles = window.getComputedStyle(roleText);
+      roleTextMeasure.style.font = textStyles.font;
+      roleTextMeasure.style.fontSize = textStyles.fontSize;
+      roleTextMeasure.style.fontWeight = textStyles.fontWeight;
+      roleTextMeasure.style.letterSpacing = textStyles.letterSpacing;
+      roleTextMeasure.style.textTransform = textStyles.textTransform;
+      roleTextMeasure.textContent = text;
+      return Math.ceil(roleTextMeasure.getBoundingClientRect().width) + 1;
+    };
+
     const renderRole = (role) => {
       roleText.textContent = role.text;
       roleIcon.innerHTML = `<i data-lucide="${role.icon}" class="icon"></i>`;
       lucide.createIcons();
     };
 
+    const restartSwapClass = (element, className) => {
+      element.classList.remove(className);
+      void element.offsetWidth;
+      element.classList.add(className);
+    };
+
     const rotateRole = () => {
-      roleIcon.classList.add("swap-out");
-      roleText.classList.add("swap-out");
+      const nextIndex = (roleIndex + 1) % roleItems.length;
+      const nextRole = roleItems[nextIndex];
+      const currentWidth = Math.ceil(roleText.getBoundingClientRect().width);
+      const nextWidth = measureRoleTextWidth(nextRole.text);
+
+      restartSwapClass(roleIcon, "swap-out");
+      restartSwapClass(roleText, "swap-out");
 
       setTimeout(() => {
-        roleIndex = (roleIndex + 1) % roleItems.length;
-        renderRole(roleItems[roleIndex]);
+        roleText.style.width = `${currentWidth}px`;
+        void roleText.offsetWidth;
+
+        roleIndex = nextIndex;
+        renderRole(nextRole);
+        roleText.style.width = `${nextWidth}px`;
 
         roleIcon.classList.remove("swap-out");
         roleText.classList.remove("swap-out");
-        roleIcon.classList.add("swap-in");
-        roleText.classList.add("swap-in");
+        restartSwapClass(roleIcon, "swap-in");
+        restartSwapClass(roleText, "swap-in");
 
         setTimeout(() => {
           roleIcon.classList.remove("swap-in");
           roleText.classList.remove("swap-in");
+          roleText.style.width = "auto";
         }, 250);
       }, 180);
     };
 
-    renderRole(roleItems[0]);
-    setInterval(rotateRole, 2400);
+    if (roleIcon && roleText) {
+      renderRole(roleItems[0]);
+      setInterval(rotateRole, 2400);
+    }
   </script>
 </body>
 </html>
