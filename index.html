@@ -504,17 +504,60 @@
     .why-card {
       min-height: 230px;
       padding: 22px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(216,226,240,0.95);
       border-radius: 24px;
-      background: var(--white);
-      box-shadow: 0 14px 40px rgba(13,17,23,0.05);
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+      box-shadow: 0 16px 46px rgba(13,17,23,0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      --tilt: 0deg;
+    }
+    .why-card:hover {
+      transform: translateY(-6px) rotate(0deg);
+      box-shadow: 0 28px 70px rgba(20,99,255,0.15);
+    }
+    .why-card:nth-child(1) { --tilt: -1.5deg; }
+    .why-card:nth-child(2) { --tilt: 1deg; }
+    .why-card:nth-child(3) { --tilt: -0.8deg; }
+    .why-card:nth-child(4) { --tilt: 1.6deg; }
+    .why-card.reveal { transform: translateY(24px) rotate(var(--tilt)); }
+    .why-card.reveal.visible { transform: translateY(0) rotate(var(--tilt)); }
+    .why-head {
+      min-height: 104px;
+      margin-bottom: 18px;
+      padding: 16px;
+      border-radius: 22px;
+      background: #edf5ff;
+      position: relative;
+      overflow: hidden;
+    }
+    .why-head::before,
+    .why-head::after {
+      content: "";
+      display: block;
+      height: 11px;
+      border-radius: 999px;
+      background: #d9e7fb;
+      margin-bottom: 10px;
+    }
+    .why-head::after { width: 64%; }
+    .why-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 30px;
+      padding: 0 11px;
+      border-radius: 999px;
+      color: #fff;
+      background: #07111f;
+      font-size: 0.75rem;
+      font-weight: 900;
     }
     .why-icon {
       width: 48px;
       height: 48px;
       display: grid;
       place-items: center;
-      margin-bottom: 32px;
+      margin-bottom: 0;
       color: var(--blue);
       border-radius: 15px;
       background: #edf5ff;
@@ -632,7 +675,7 @@
     .footer { padding: 56px 0 30px; }
     .footer-card {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, auto);
       align-items: end;
       gap: 20px;
       border: 1px solid var(--line);
@@ -643,9 +686,10 @@
     }
     .footer-name {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 4.4rem);
+      font-size: clamp(1.8rem, 4.4vw, 4.4rem);
       letter-spacing: -0.06em;
-      line-height: 0.95;
+      line-height: 0.98;
+      overflow-wrap: anywhere;
     }
     .footer-text { color: var(--muted); font-weight: 700; margin-top: 8px; }
     .footer-links { display: flex; flex-wrap: wrap; gap: 9px; justify-content: flex-end; }
@@ -662,6 +706,7 @@
       font-size: 0.86rem;
       font-weight: 700;
       text-align: right;
+      overflow-wrap: anywhere;
     }
 
     .modal-overlay {
@@ -732,6 +777,9 @@
       .why-grid.why-stack .why-card:nth-child(2) { top: 98px; }
       .why-grid.why-stack .why-card:nth-child(3) { top: 112px; }
       .why-grid.why-stack .why-card:nth-child(4) { top: 126px; }
+      .footer-card { grid-template-columns: 1fr; align-items: start; padding: 24px; border-radius: 24px; }
+      .footer-links { justify-content: flex-start; margin-top: 16px; }
+      .copyright { margin-top: 10px; text-align: left; }
       .section-head { display: block; }
       .section-note { margin-top: 14px; }
     }
@@ -882,22 +930,30 @@
         </div>
         <div class="why-grid why-stack">
           <article class="why-card reveal">
-            <span class="why-icon"><i data-lucide="blocks" class="icon"></i></span>
+            <div class="why-head">
+              <span class="why-chip"><i data-lucide="blocks" class="icon"></i>System Build</span>
+            </div>
             <h3>Build complete systems</h3>
             <p>Frontend, backend, database structure, and workflow logic in one connected product.</p>
           </article>
           <article class="why-card reveal">
-            <span class="why-icon"><i data-lucide="pen-tool" class="icon"></i></span>
+            <div class="why-head">
+              <span class="why-chip"><i data-lucide="pen-tool" class="icon"></i>UI and UX</span>
+            </div>
             <h3>Strong in UI/UX design</h3>
             <p>Interfaces are planned around clarity, structure, responsive behavior, and user flow.</p>
           </article>
           <article class="why-card reveal">
-            <span class="why-icon"><i data-lucide="route" class="icon"></i></span>
+            <div class="why-head">
+              <span class="why-chip"><i data-lucide="route" class="icon"></i>Workflows</span>
+            </div>
             <h3>Understand workflows</h3>
             <p>I map how people actually use a system before turning it into screens and code.</p>
           </article>
           <article class="why-card reveal">
-            <span class="why-icon"><i data-lucide="sparkles" class="icon"></i></span>
+            <div class="why-head">
+              <span class="why-chip"><i data-lucide="sparkles" class="icon"></i>Scalable Code</span>
+            </div>
             <h3>Clean, scalable solutions</h3>
             <p>I care about maintainable structure, readable logic, and room for future features.</p>
           </article>
