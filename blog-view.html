@@ -630,15 +630,13 @@
     .sticky-copy p { position: relative; z-index: 1; color: rgba(255,255,255,0.72); line-height: 1.72; margin-top: 12px; }
     .problem-lane {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
       align-content: start;
       padding-top: 4px;
     }
     .problem-card {
       --problem-transform: none;
-      width: 100%;
-      max-width: 480px;
+      width: min(100%, 480px);
       padding: 18px;
       border: 1px solid rgba(20,99,255,0.12);
       border-radius: 30px;
@@ -4707,10 +4705,12 @@
       .role-strip { grid-template-columns: repeat(2, 1fr); }
       .sticky-copy { position: relative; top: auto; }
       .limitations-banner { position: relative; }
-      .problem-lane { grid-template-columns: 1fr; }
       .problem-card {
         width: 100%;
-        max-width: 100%;
+        justify-self: stretch;
+        --problem-transform: none;
+      }
+      .problem-card:nth-child(2) {
         justify-self: stretch;
         --problem-transform: none;
       }
@@ -4786,16 +4786,9 @@
       }
       .wide-feature-line.horizontal-left { top: 112px; height: 24px; }
       .wide-feature-line.horizontal-right { top: 166px; height: 24px; }
-      .problem-lane { grid-template-columns: 1fr; gap: 12px; }
-      .problem-card { 
-        width: 100%; 
-        max-width: 100%; 
-        padding: 14px; 
-        border-radius: 24px;
-        --problem-transform: none;
-      }
+      .problem-card { padding: 14px; border-radius: 24px; }
       .problem-card-visual { min-height: auto; padding: 14px; border-radius: 20px; }
-      .problem-window { min-height: auto; border-radius: 18px; padding: 12px; gap: 10px; }
+      .problem-window { min-height: auto; border-radius: 18px; }
       .risk-stack { padding: 10px; border-radius: 24px; }
       .risk-stack::before,
       .risk-item::before { display: none; }
