@@ -1452,10 +1452,10 @@
     }
     .modal.open { display: flex; }
     .modal-panel {
-      width: min(1200px, calc(100% - 40px));
-      max-height: min(90vh, calc(100vh - 40px));
+      width: min(1300px, calc(100% - 30px));
+      max-height: min(92vh, calc(100vh - 30px));
       overflow: auto;
-      padding: 22px;
+      padding: 28px;
       border-radius: 28px;
       background: #fff;
       box-shadow: 0 34px 90px rgba(7,17,31,0.28);
@@ -1472,7 +1472,7 @@
       background: #eef4fb;
       cursor: pointer;
     }
-    .screen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-height: calc(100vh - 280px); overflow-y: auto; padding-right: 8px; }
+    .screen-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-height: calc(100vh - 280px); overflow-y: auto; padding-right: 8px; }
     .screen-shot {
       min-height: 190px;
       padding: 14px;
@@ -1503,17 +1503,29 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0);
+      backdrop-filter: blur(0px);
+      opacity: 0;
+      transition: opacity 0.3s ease, background 0.3s ease, backdrop-filter 0.3s ease;
     }
     .image-preview.open {
       display: flex;
+      opacity: 1;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(12px);
     }
     .image-preview-content {
       position: relative;
       width: 100%;
       max-width: 90vw;
       max-height: 90vh;
+      transform: scale(0.9) translateY(20px);
+      opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), opacity 0.3s ease;
+    }
+    .image-preview.open .image-preview-content {
+      transform: scale(1) translateY(0);
+      opacity: 1;
     }
     .image-preview-img {
       width: 100%;
@@ -1524,24 +1536,26 @@
     }
     .image-preview-close {
       position: absolute;
-      top: -48px;
+      top: -50px;
       right: 0;
       width: 44px;
       height: 44px;
       border: 0;
       border-radius: 8px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.15);
       color: #fff;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
-      transition: background 0.2s ease;
+      transition: all 0.2s ease;
       backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
     }
     .image-preview-close:hover {
-      background: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.25);
+      transform: scale(1.05);
     }
     .screen-shot h4 { margin: 0 0 8px; font-size: 1.1rem; }
     .screen-shot .line { background: rgba(255,255,255,0.62); }
@@ -4718,6 +4732,7 @@
       .upgrade-card.featured { grid-template-columns: 1fr; }
       .capability-card, .capability-hero { grid-column: span 1; }
       .gallery-track { grid-template-columns: 1fr; width: min(760px, calc(100% - 32px)); }
+      .screen-grid { grid-template-columns: repeat(2, 1fr); }
       .snapshot-network, .database-canvas { min-height: auto; }
       .snapshot-hub-pill, .snapshot-node-card, .db-table {
         position: relative;
@@ -4827,7 +4842,7 @@
       .capability-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .modal-panel { padding: 16px; }
       .modal-body { gap: 14px; }
-      .screen-grid { max-height: calc(100vh - 250px); }
+      .screen-grid { grid-template-columns: 1fr; max-height: calc(100vh - 250px); }
       .screen-mock-layout,
       .screen-mock-card-grid { grid-template-columns: 1fr; }
       .delivery-core, .architecture-core {
@@ -6212,7 +6227,7 @@
         const active = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
         if (active) active.classList.add("active");
       });
-    }, { threshold: 0.35, rootMargin: "-18% 0px -58% 0px" });
+    }, { threshold: 0.25, rootMargin: "-20% 0px -60% 0px" });
     sections.forEach((section) => tocObserver.observe(section));
   </script>
 </body>
