@@ -1481,9 +1481,18 @@
       background: linear-gradient(135deg, #1463ff, #0d5f73);
       overflow: hidden;
     }
-    .screen-shot h4 { margin: 0 0 44px; }
+    .screen-img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+      object-fit: cover;
+      max-height: 420px;
+    }
+    .screen-shot h4 { margin: 0 0 8px; font-size: 1.1rem; }
     .screen-shot .line { background: rgba(255,255,255,0.62); }
-    .screen-shot p { margin: 12px 0 0; color: rgba(255,255,255,0.78); font-size: 0.84rem; line-height: 1.5; }
+    .screen-shot p { margin: 6px 0 0; color: rgba(255,255,255,0.78); font-size: 0.9rem; line-height: 1.4; }
+    .screen-shot h6 { margin: 8px 0 6px; font-size: 0.92rem; }
     .database-stage {
       display: grid;
       grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
@@ -2932,7 +2941,7 @@
       border-radius: 999px;
       background: rgba(20,99,255,0.08);
       border: 1px solid rgba(20,99,255,0.08);
-      color: var(--blue);
+      color: white;
       font-size: 0.74rem;
       font-weight: 900;
       letter-spacing: 0.06em;
@@ -5961,10 +5970,10 @@
         summary: "High-level control across reporting, rooms, pricing, services, and billing review.",
         meta: ["4 screens", "scroll to browse", "operations overview"],
         screens: [
-          { title: "Dashboard overview", note: "Revenue, occupancy, and alerts are visible in one first screen.", pills: ["occupancy", "billing", "alerts"] },
-          { title: "Room management", note: "Rooms, rates, media, and availability can be edited from one admin area.", pills: ["inventory", "pricing", "status"] },
-          { title: "Services and pricing", note: "Add-on services and room-side costs stay easy to adjust without leaving the manager flow.", pills: ["services", "rate rules"] },
-          { title: "Reports and invoices", note: "Financial review, invoice totals, and operational summaries stay close together.", pills: ["reports", "invoices", "totals"] }
+          { title: "Dashboard overview", note: "Revenue, occupancy, and alerts are visible in one first screen.", image: "Dashboard.jpg", pills: ["occupancy", "billing", "alerts"] },
+          { title: "Room management", note: "Rooms, rates, media, and availability can be edited from one admin area.", image: "Room.jpg", pills: ["inventory", "pricing", "status"] },
+          { title: "Services and pricing", note: "Add-on services and room-side costs stay easy to adjust without leaving the manager flow.", image: "Services.jpg", pills: ["services", "rate rules"] },
+          { title: "Reports and invoices", note: "Financial review, invoice totals, and operational summaries stay close together.", image: "Reports.jpg", pills: ["reports", "invoices", "totals"] }
         ]
       },
       clerk: {
@@ -5974,10 +5983,10 @@
         summary: "Fast front-desk handling for reservations, arrivals, live updates, and checkout billing.",
         meta: ["4 screens", "scroll to browse", "front desk flow"],
         screens: [
-          { title: "Reservation desk", note: "Daily bookings can be searched, filtered, and confirmed quickly.", pills: ["queue", "filters", "status"] },
-          { title: "Check-in workflow", note: "Arrival, room assignment, guest details, and service edits stay in one desk screen.", pills: ["arrival", "room assign"] },
-          { title: "In-stay updates", note: "Clerks can keep service changes and status updates inside the live reservation.", pills: ["services", "status"] },
-          { title: "Checkout invoice", note: "Final billing settles the stay and reopens the room for the next guest.", pills: ["invoice", "room release"] }
+          { title: "Reservation desk", note: "Daily bookings can be searched, filtered, and confirmed quickly.", image: "Reservation_desk.jpg", pills: ["queue", "filters", "status"] },
+          { title: "Check-in workflow", note: "Arrival, room assignment, guest details, and service edits stay in one desk screen.", image: "Check-in.jpg", pills: ["arrival", "room assign"] },
+          { title: "In-stay updates", note: "Clerks can keep service changes and status updates inside the live reservation.", image: "dashboard.jpg", pills: ["services", "status"] },
+          { title: "Checkout invoice", note: "Final billing settles the stay and reopens the room for the next guest.", image: "Checkout.jpg", pills: ["invoice", "room release"] }
         ]
       },
       customer: {
@@ -5987,10 +5996,10 @@
         summary: "A simpler guest path for room discovery, booking, payment, and reservation history.",
         meta: ["4 screens", "scroll to browse", "guest journey"],
         screens: [
-          { title: "Room search", note: "Guests browse available rooms using dates, guest count, and room type filters.", pills: ["search", "filters"] },
-          { title: "Room details", note: "Selected rooms show rate and stay details before the booking step.", pills: ["details", "price"] },
-          { title: "Booking and payment", note: "Booking data moves straight into Stripe checkout without breaking the flow.", pills: ["booking", "stripe"] },
-          { title: "Booking history", note: "Upcoming and past stays remain visible in one customer account area.", pills: ["history", "profile"] }
+          { title: "Room search", note: "Guests browse available rooms using dates, guest count, and room type filters.", image: "Room_search.jpg", pills: ["search", "filters"] },
+          { title: "Room details", note: "Selected rooms show rate and stay details before the booking step.", image: "Room_details.jpg", pills: ["details", "price"] },
+          { title: "Booking and payment", note: "Booking data moves straight into Stripe checkout without breaking the flow.", image: "Booking_and_payment.jpg", pills: ["booking", "stripe"] },
+          { title: "Booking history", note: "Upcoming and past stays remain visible in one customer account area.", image: "Booking_history.jpg", pills: ["history", "profile"] }
         ]
       },
       company: {
@@ -6000,10 +6009,10 @@
         summary: "Corporate booking flow for group reservations, guest mapping, and billing visibility.",
         meta: ["4 screens", "scroll to browse", "group bookings"],
         screens: [
-          { title: "Company dashboard", note: "Corporate booking work stays separate from the normal guest dashboard.", pills: ["overview", "company"] },
-          { title: "Group booking", note: "Multiple guests and room needs can be prepared inside one booking request.", pills: ["group", "rooms"] },
-          { title: "Guest assignment", note: "Named guests are mapped into the reservation instead of being tracked outside the system.", pills: ["guests", "mapping"] },
-          { title: "Corporate billing", note: "Invoices, payment state, and company totals stay easy to review.", pills: ["billing", "payments"] }
+          { title: "Company dashboard", note: "Corporate booking work stays separate from the normal guest dashboard.", image: "dashboard.jpg", pills: ["overview", "company"] },
+          { title: "Group booking", note: "Multiple guests and room needs can be prepared inside one booking request.", image: "Group_booking.jpg", pills: ["group", "rooms"] },
+          { title: "Guest assignment", note: "Named guests are mapped into the reservation instead of being tracked outside the system.", image: "Guest_assignment.jpg", pills: ["guests", "mapping"] },
+          { title: "Corporate billing", note: "Invoices, payment state, and company totals stay easy to review.", image: "billing.jpg", pills: ["billing", "payments"] }
         ]
       }
     };
@@ -6027,35 +6036,22 @@
         modalRoleHeading.textContent = `${set.title} screens`;
         modalRoleText.textContent = set.summary;
         modalRoleMeta.innerHTML = set.meta.map((item) => `<span>${item}</span>`).join("");
-        modalScreens.innerHTML = set.screens.map((screen, index) => `
-          <article class="screen-shot ${set.theme}">
-            <div class="screen-shot-head">
-              <div class="screen-shot-index">${String(index + 1).padStart(2, "0")}</div>
-              <div>
+        modalScreens.innerHTML = set.screens.map((screen, index) => {
+          const folder = set.theme.charAt(0).toUpperCase() + set.theme.slice(1);
+          const imgSrc = `images/${folder}/${screen.image}`;
+          return `
+            <article class="screen-shot ${set.theme}">
+              <img src="${imgSrc}" alt="${screen.title}" class="screen-img" />
+              <div style="padding-top:12px;">
                 <h4>${screen.title}</h4>
                 <p>${screen.note}</p>
                 <div class="screen-shot-pills">
                   ${screen.pills.map((pill) => `<span>${pill}</span>`).join("")}
                 </div>
               </div>
-            </div>
-            <div class="screen-mock">
-              <div class="screen-mock-toolbar"><span></span><span></span><span></span></div>
-              <div class="screen-mock-layout">
-                <div class="screen-mock-side"></div>
-                <div class="screen-mock-content">
-                  <div class="screen-mock-chip-row">
-                    ${screen.pills.map((pill) => `<span class="screen-mock-chip">${pill}</span>`).join("")}
-                  </div>
-                  <div class="screen-mock-card-grid">
-                    <div class="screen-mock-card"><span class="screen-mock-line"></span><span class="screen-mock-line short"></span></div>
-                    <div class="screen-mock-card"><span class="screen-mock-line"></span><span class="screen-mock-line short"></span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-        `).join("");
+            </article>
+          `;
+        }).join("");
         galleryModal.classList.add("open");
         galleryModal.setAttribute("aria-hidden", "false");
         window.lucide?.createIcons();
