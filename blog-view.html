@@ -1325,12 +1325,12 @@
     }
     .gallery-track {
       height: auto;
-      width: min(1180px, calc(100% - 32px));
+      width: min(1240px, calc(100% - 32px));
       display: grid;
       grid-template-columns: repeat(4, minmax(230px, 1fr));
       gap: 20px;
       padding: 0 0 20px;
-      margin: 0;
+      margin: 0 auto;
       list-style: none;
     }
     .gallery-card {
@@ -6024,9 +6024,18 @@
     const modalRoleMeta = document.getElementById("modalRoleMeta");
     const modalScreens = document.getElementById("modalScreens");
     const modalClose = document.getElementById("modalClose");
+    let _savedScrollY = 0;
     const closeGalleryModal = () => {
       galleryModal.classList.remove("open");
       galleryModal.setAttribute("aria-hidden", "true");
+      // restore page scroll and body styles
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.documentElement.style.overflow = "";
+      window.scrollTo(0, _savedScrollY || 0);
+      _savedScrollY = 0;
     };
     document.querySelectorAll(".gallery-button").forEach((button) => {
       button.addEventListener("click", () => {
@@ -6052,6 +6061,14 @@
             </article>
           `;
         }).join("");
+        // lock background scroll and preserve scroll position
+        _savedScrollY = window.scrollY || window.pageYOffset || 0;
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${_savedScrollY}px`;
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+        document.documentElement.style.overflow = "hidden";
+
         galleryModal.classList.add("open");
         galleryModal.setAttribute("aria-hidden", "false");
         window.lucide?.createIcons();
