@@ -118,11 +118,14 @@
       color: #fff;
       border-radius: 11px;
       background: var(--ink);
+      overflow: hidden;
     }
     .brand-mark img {
-      width: 22px;
-      height: 22px;
+      width: 68%;
+      height: 68%;
       display: block;
+      object-fit: contain;
+      object-position: center;
     }
     .nav-links { display: flex; align-items: center; gap: 10px; }
     .nav-links a, .menu-link {
@@ -1492,8 +1495,8 @@
       height: auto;
       border-radius: 12px;
       display: block;
-      object-fit: cover;
-      max-height: 420px;
+      object-fit: contain;
+      max-height: none;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -3502,12 +3505,11 @@
     }
     .workflow-role-pills { margin-top: 14px; }
     .modal-panel {
-      width: min(1120px, 100%);
-      max-height: min(760px, calc(100vh - 40px));
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      padding: 22px;
+      width: min(1300px, calc(100% - 30px));
+      max-height: min(92vh, calc(100vh - 30px));
+      overflow: auto;
+      display: block;
+      padding: 24px;
     }
     .modal-body {
       min-height: 0;
@@ -3537,11 +3539,11 @@
       font-size: 0.92rem;
     }
     .screen-grid {
-      max-height: calc(100vh - 200px);
-      overflow: auto;
-      padding-right: 6px;
+      max-height: none;
+      overflow: visible;
+      padding-right: 0;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
     .screen-shot {
@@ -4848,7 +4850,7 @@
       .capability-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .modal-panel { padding: 16px; }
       .modal-body { gap: 14px; }
-      .screen-grid { grid-template-columns: 1fr; max-height: calc(100vh - 250px); }
+      .screen-grid { grid-template-columns: 1fr; max-height: none; overflow: visible; }
       .screen-mock-layout,
       .screen-mock-card-grid { grid-template-columns: 1fr; }
       .delivery-core, .architecture-core {
