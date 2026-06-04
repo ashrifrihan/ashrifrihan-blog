@@ -594,9 +594,12 @@
     .project-content {
       position: relative;
       z-index: 1;
-      display: grid;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       gap: 20px;
       padding: 0 28px 28px;
+      min-height: 220px;
     }
     .project-top {
       display: flex;
