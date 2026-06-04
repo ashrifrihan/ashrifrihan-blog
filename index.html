@@ -531,104 +531,302 @@
 
     .card-list {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
-      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
       padding: 0;
       margin: 0;
       list-style: none;
     }
+    #projects .section-head {
+      justify-content: center;
+      text-align: center;
+    }
+    #projects .section-head > div { margin: 0 auto; }
     .project-card {
-      display: block;
+      display: grid;
+      grid-template-rows: minmax(230px, 1fr) auto;
       position: relative;
-      min-height: 430px;
-      padding: 0;
-      border: 0;
-      border-radius: 28px;
+      min-height: 500px;
+      border: 1px solid rgba(255,255,255,0.84);
+      border-radius: 30px;
       overflow: hidden;
-      color: #fff;
-      background: #0d1117;
-      box-shadow: 0 22px 60px rgba(13,17,23,0.12);
+      color: var(--ink);
+      background: linear-gradient(180deg, #fbfdff 0%, #f3f7fe 100%);
+      box-shadow: 0 28px 80px rgba(70, 91, 128, 0.12);
       cursor: pointer;
+      isolation: isolate;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .card-list li:nth-child(2) .project-card {
+      background: linear-gradient(180deg, #fffafa 0%, #f5f2ff 100%);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(20,99,255,0.18);
+      box-shadow: 0 34px 96px rgba(70, 91, 128, 0.18);
     }
     .project-card:focus-visible {
       outline: 3px solid rgba(20, 99, 255, 0.38);
       outline-offset: 4px;
     }
-    .project-card:nth-child(even) { min-height: 330px; }
+    .card-list li:nth-child(even) .project-card { min-height: 500px; }
     .project-bg {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(145deg, rgba(7, 17, 31, 0.2), rgba(7, 17, 31, 0.82)),
-        radial-gradient(circle at 24% 26%, rgba(110,168,255,0.9), transparent 28%),
-        linear-gradient(135deg, #1463ff, #21a67a);
+        radial-gradient(circle at 22% 18%, rgba(20,99,255,0.15), transparent 28%),
+        radial-gradient(circle at 86% 20%, rgba(33,166,122,0.13), transparent 24%),
+        radial-gradient(circle at 52% 115%, rgba(110,168,255,0.18), transparent 30%);
+      pointer-events: none;
     }
     .project-pattern {
       position: absolute;
-      inset: 0;
-      opacity: 0.24;
+      inset: 22px 22px auto auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      opacity: 0.7;
       background-image:
-        linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.22) 1px, transparent 1px);
-      background-size: 44px 44px;
+        radial-gradient(circle, rgba(20,99,255,0.16) 0 1.5px, transparent 1.5px);
+      background-size: 13px 13px;
+      pointer-events: none;
     }
     .project-content {
       position: relative;
       z-index: 1;
-      min-height: inherit;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      display: grid;
+      gap: 20px;
+      padding: 0 28px 28px;
     }
     .project-top {
       display: flex;
       justify-content: space-between;
-      gap: 16px;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .project-heading {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
     }
     .pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       width: fit-content;
-      min-height: 34px;
-      padding: 0 12px;
+      min-height: 30px;
+      padding: 0 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.28);
-      backdrop-filter: blur(12px);
-      font-size: 0.78rem;
-      font-weight: 800;
+      color: #1c4fb1;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(214,228,251,0.96);
+      box-shadow: 0 10px 26px rgba(70,91,128,0.08);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .project-eyebrow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
     }
     .round-icon {
-      width: 42px;
-      height: 42px;
+      flex: 0 0 auto;
+      width: 44px;
+      height: 44px;
       display: grid;
       place-items: center;
       border-radius: 50%;
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.26);
+      color: #07111f;
+      background: #ffffff;
+      border: 1px solid rgba(220,231,243,0.9);
+      box-shadow: 0 14px 32px rgba(70,91,128,0.11);
     }
     .project-title {
       display: block;
-      max-width: 650px;
-      margin: 0 0 12px;
+      max-width: 12ch;
+      margin: 0;
       font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 4.2rem);
+      font-size: clamp(2rem, 3.2vw, 3.15rem);
       line-height: 0.98;
-      letter-spacing: -0.055em;
+      letter-spacing: -0.045em;
     }
     .project-desc {
       display: block;
-      max-width: 570px;
-      margin: 0 0 22px;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.7;
+      max-width: 44ch;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-weight: 600;
+    }
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .project-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      color: #344158;
+      background: rgba(255,255,255,0.64);
+      border: 1px solid rgba(221,232,244,0.92);
+      font-size: 0.72rem;
+      font-weight: 800;
     }
     .project-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      margin-top: 2px;
+    }
+    .project-actions .btn-light {
+      color: #07111f;
+      background: #ffffff;
+      border-color: #dbe6f2;
+      box-shadow: 0 10px 24px rgba(13,17,23,0.06);
+    }
+    .project-actions .btn-dark {
+      background: #07111f;
+      box-shadow: 0 14px 32px rgba(7,17,31,0.18);
+    }
+    .project-visual {
+      position: relative;
+      z-index: 1;
+      min-height: 252px;
+      margin: 22px 22px 0;
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.82);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0.34)),
+        linear-gradient(145deg, #dbeafe 0%, #eff6ff 48%, #dcfce7 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 22px 60px rgba(70,91,128,0.14);
+      overflow: hidden;
+    }
+    .card-list li:nth-child(2) .project-visual {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.78), rgba(255,255,255,0.42)),
+        linear-gradient(145deg, #ede9fe 0%, #eff6ff 50%, #ffe4e6 100%);
+    }
+    .project-visual::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.64);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.42) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.42) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: 0.72;
+    }
+    .mock-window {
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 26px;
+      min-height: 158px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(255,255,255,0.92);
+      box-shadow: 0 22px 50px rgba(37,59,93,0.16);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+    }
+    .mock-bar {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 14px;
+      border-bottom: 1px solid rgba(222,231,244,0.85);
+    }
+    .mock-bar span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+    .mock-grid {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 12px;
+      padding: 14px;
+    }
+    .mock-side,
+    .mock-main {
+      display: grid;
+      gap: 8px;
+    }
+    .mock-line {
+      height: 10px;
+      border-radius: 999px;
+      background: #dbe7f7;
+    }
+    .mock-line.short { width: 62%; }
+    .mock-panel {
+      min-height: 42px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #eef6ff, #ffffff);
+      border: 1px solid #e3edf9;
+    }
+    .mock-chart {
+      height: 64px;
+      border-radius: 14px;
+      background:
+        linear-gradient(180deg, transparent 0 38%, rgba(20,99,255,0.1) 38%),
+        linear-gradient(90deg, #1463ff 0 16%, transparent 16% 22%, #6ea8ff 22% 39%, transparent 39% 45%, #21a67a 45% 65%, transparent 65% 71%, #dbeafe 71%);
+      border: 1px solid #dfeafa;
+    }
+    .floating-chip {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 0 13px;
+      border-radius: 999px;
+      color: #172033;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.95);
+      box-shadow: 0 18px 36px rgba(70,91,128,0.14);
+      font-size: 0.76rem;
+      font-weight: 900;
+      backdrop-filter: blur(14px);
+    }
+    .floating-chip.one { left: 28px; top: 30px; }
+    .floating-chip.two { right: 28px; top: 72px; }
+    .floating-chip.three { left: 50%; transform: translateX(-50%); bottom: 28px; }
+    .coming-tiles {
+      position: absolute;
+      inset: 34px 30px 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .coming-tile {
+      display: grid;
+      align-content: end;
+      gap: 8px;
+      min-height: 92px;
+      padding: 14px;
+      border-radius: 18px;
+      color: #172033;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 18px 42px rgba(70,91,128,0.13);
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+    .coming-tile .icon {
+      color: #1463ff;
+      width: 20px;
+      height: 20px;
     }
 
     .why-grid {
@@ -834,28 +1032,36 @@
       display: none;
       padding: 24px;
       place-items: center;
-      background: rgba(10, 20, 34, 0.52);
-      backdrop-filter: blur(8px);
+      background: rgba(244, 247, 252, 0.72);
+      backdrop-filter: blur(18px);
     }
     .modal-overlay.open { display: grid; }
     .project-modal {
-      width: min(700px, 100%);
-      max-height: min(760px, calc(100vh - 48px));
+      width: min(980px, 100%);
+      max-height: min(820px, calc(100vh - 48px));
       overflow: auto;
-      border-radius: 24px;
+      border-radius: 32px;
       color: #172033;
-      background: #ffffff;
-      border: 1px solid #e4eaf3;
-      box-shadow: 0 24px 80px rgba(13, 17, 23, 0.22);
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+      border: 1px solid rgba(255,255,255,0.9);
+      box-shadow: 0 34px 110px rgba(37, 59, 93, 0.24);
     }
     .modal-hero {
-      min-height: auto;
-      padding: 22px 22px 18px;
-      border-bottom: 1px solid #edf2f9;
-      background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+      position: relative;
+      min-height: 300px;
+      padding: 28px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(223,232,244,0.76);
+      background:
+        radial-gradient(circle at 18% 20%, rgba(20,99,255,0.14), transparent 24%),
+        radial-gradient(circle at 86% 8%, rgba(33,166,122,0.13), transparent 22%),
+        linear-gradient(135deg, #fbfdff 0%, #eff6ff 100%);
     }
     .modal-close {
-      float: right;
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      z-index: 3;
       width: 38px;
       height: 38px;
       display: grid;
@@ -865,6 +1071,7 @@
       color: #1e2b42;
       background: #ffffff;
       cursor: pointer;
+      box-shadow: 0 12px 26px rgba(70,91,128,0.12);
     }
     .modal-kicker {
       display: inline-flex;
@@ -882,25 +1089,122 @@
       text-transform: uppercase;
     }
     #modalTitle {
-      margin: 14px 0 0;
+      width: min(560px, calc(100% - 54px));
+      margin: 18px 0 0;
       color: #0d1528;
       font-family: var(--font-display);
-      font-size: clamp(1.55rem, 3.2vw, 2.25rem);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
+      font-size: clamp(2.3rem, 6vw, 4.6rem);
+      line-height: 0.94;
+      letter-spacing: -0.055em;
     }
-    .modal-body { padding: 20px 22px 24px; }
+    .modal-visual {
+      position: absolute;
+      right: 26px;
+      bottom: 24px;
+      width: min(360px, 44%);
+      min-height: 210px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.86);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.78), rgba(255,255,255,0.36)),
+        linear-gradient(145deg, #dbeafe 0%, #eff6ff 52%, #dcfce7 100%);
+      box-shadow: 0 26px 70px rgba(70,91,128,0.16);
+      overflow: hidden;
+    }
+    .modal-visual::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 20px;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .modal-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+      gap: 22px;
+      padding: 24px 28px 28px;
+    }
+    .modal-summary {
+      display: grid;
+      gap: 18px;
+    }
     .modal-body p {
       margin: 0;
       color: #4e5d74;
-      line-height: 1.7;
-      font-size: 0.95rem;
+      line-height: 1.75;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .modal-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .modal-stat {
+      min-height: 96px;
+      padding: 14px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid #e4ecf7;
+      box-shadow: 0 14px 32px rgba(70,91,128,0.08);
+    }
+    .modal-stat strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+    .modal-stat span {
+      display: block;
+      margin-top: 8px;
+      color: #637086;
+      font-size: 0.75rem;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .modal-detail-panel {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 22px;
+      background: #ffffff;
+      border: 1px solid #e4ecf7;
+      box-shadow: 0 14px 34px rgba(70,91,128,0.08);
+    }
+    .modal-detail {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      border-radius: 16px;
+      background: #f7faff;
+    }
+    .modal-detail .icon {
+      width: 19px;
+      height: 19px;
+      color: #1463ff;
+    }
+    .modal-detail strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 0.92rem;
+    }
+    .modal-detail span {
+      color: #647188;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      font-weight: 700;
     }
     .modal-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 16px;
+      margin-top: 0;
     }
     .modal-tag {
       display: inline-flex;
@@ -919,7 +1223,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 18px;
+      margin-top: 0;
     }
     .modal-action-btn {
       display: inline-flex;
@@ -971,6 +1275,15 @@
       .why-grid.why-stack .why-card:nth-child(2) { top: 98px; }
       .why-grid.why-stack .why-card:nth-child(3) { top: 112px; }
       .why-grid.why-stack .why-card:nth-child(4) { top: 126px; }
+      .project-card, .card-list li:nth-child(even) .project-card { min-height: 0; }
+      .modal-body { grid-template-columns: 1fr; }
+      .modal-visual {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: 100%;
+        margin-top: 22px;
+      }
       .footer-card { grid-template-columns: 1fr; align-items: start; padding: 24px; border-radius: 24px; }
       .footer-links { justify-content: flex-start; margin-top: 16px; }
       .copyright { margin-top: 10px; text-align: left; }
@@ -1008,17 +1321,51 @@
       .why-grid.why-stack .why-card:nth-child(2) { top: 88px; }
       .why-grid.why-stack .why-card:nth-child(3) { top: 100px; }
       .why-grid.why-stack .why-card:nth-child(4) { top: 112px; }
-      .project-card, .project-card:nth-child(even) { min-height: 390px; border-radius: 22px; }
-      .project-content { padding: 22px; }
+      #projects .section-head { margin-bottom: 22px; }
+      .project-card, .card-list li:nth-child(even) .project-card {
+        grid-template-rows: minmax(210px, auto) auto;
+        border-radius: 24px;
+      }
+      .project-visual {
+        min-height: 220px;
+        margin: 14px 14px 0;
+        border-radius: 20px;
+      }
+      .mock-window {
+        left: 16px;
+        right: 16px;
+        bottom: 18px;
+      }
+      .coming-tiles {
+        inset: 24px 18px 22px;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .coming-tile { min-height: 64px; }
+      .floating-chip { display: none; }
+      .project-content {
+        gap: 18px;
+        padding: 0 18px 18px;
+      }
+      .project-title { max-width: 12ch; font-size: clamp(1.85rem, 11vw, 2.8rem); }
       .project-actions { flex-direction: column; }
       .contact-panel { padding: 22px; border-radius: 22px; }
       .footer-card { grid-template-columns: 1fr; align-items: start; padding: 22px; border-radius: 22px; }
       .footer-links { justify-content: flex-start; margin-top: 22px; }
       .copyright { text-align: left; }
       .modal-overlay { padding: 12px; }
-      .project-modal { width: 100%; border-radius: 18px; }
-      .modal-hero { padding: 16px 16px 14px; }
-      .modal-body { padding: 14px 16px 18px; }
+      .project-modal { width: 100%; border-radius: 22px; }
+      .modal-hero {
+        min-height: auto;
+        padding: 18px;
+      }
+      #modalTitle {
+        width: calc(100% - 48px);
+        font-size: clamp(2rem, 12vw, 3rem);
+      }
+      .modal-visual { min-height: 190px; }
+      .modal-body { padding: 18px; }
+      .modal-stat-grid { grid-template-columns: 1fr; }
       .modal-actions { flex-direction: column; }
       .modal-action-btn { width: 100%; }
     }
@@ -1231,6 +1578,7 @@
         </button>
         <span class="modal-kicker"><i data-lucide="file-text" class="icon"></i>Case Study</span>
         <h2 id="modalTitle">QuickStay</h2>
+        <div class="modal-visual" id="modalVisual" aria-hidden="true"></div>
       </div>
       <div class="modal-body" id="modalBody"></div>
     </article>
@@ -1249,6 +1597,16 @@
         summary: "Multi-user booking system with real-time workflow and role-based access",
         details: "QuickStay connects customer booking, front-desk operations, manager controls, payments, invoices, and database-backed workflows into one hotel management system.",
         tags: ["PHP", "MySQL", "Stripe", "Role Access", "System Design"],
+        stats: [
+          ["4", "role-based user areas"],
+          ["Live", "room and booking workflow"],
+          ["Stripe", "payment-ready checkout"]
+        ],
+        highlights: [
+          ["Workflow", "Customer booking, clerk operations, manager controls, and company booking are connected."],
+          ["Backend", "PHP and MySQL handle reservations, payments, invoices, and state changes."],
+          ["UX", "The case study explains the system clearly with screens, roles, and production notes."]
+        ],
         caseUrl: "blog-view/",
         liveUrl: "#",
         icon: "hotel"
@@ -1260,6 +1618,16 @@
         summary: "Currently building and refining real-world systems. New projects will be published soon.",
         details: "I am actively working on multiple projects focused on solving practical problems with scalable architecture, clean UI/UX, and structured workflows. Detailed case studies will be added as they are completed.",
         tags: ["In Progress", "System Design", "UI/UX", "Full Stack"],
+        stats: [
+          ["New", "case studies in progress"],
+          ["UI", "workflow-first screens"],
+          ["Full", "stack implementation focus"]
+        ],
+        highlights: [
+          ["Planning", "Upcoming projects will be documented with problem, process, and outcome."],
+          ["Design", "Each case study will use cleaner product storytelling and structured UI sections."],
+          ["Build", "The focus stays on practical systems with real workflows and maintainable code."]
+        ],
         caseUrl: "#",
         liveUrl: "#",
         icon: "clock"
@@ -1269,11 +1637,45 @@
     const projectList = document.getElementById("projectList");
     const modal = document.getElementById("projectModal");
     const modalTitle = document.getElementById("modalTitle");
+    const modalVisual = document.getElementById("modalVisual");
     const modalBody = document.getElementById("modalBody");
     const modalClose = document.getElementById("modalClose");
 
     function icon(name) {
       return `<i data-lucide="${name}" class="icon"></i>`;
+    }
+
+    function renderProjectMockup(project) {
+      if (project.id === "quickstay") {
+        return `
+          <span class="floating-chip one">${icon("bed-double")}Rooms</span>
+          <span class="floating-chip two">${icon("credit-card")}Payments</span>
+          <span class="floating-chip three">${icon("users")}Roles</span>
+          <span class="mock-window">
+            <span class="mock-bar"><span></span><span></span><span></span></span>
+            <span class="mock-grid">
+              <span class="mock-side">
+                <span class="mock-line"></span>
+                <span class="mock-line short"></span>
+                <span class="mock-panel"></span>
+              </span>
+              <span class="mock-main">
+                <span class="mock-panel"></span>
+                <span class="mock-chart"></span>
+              </span>
+            </span>
+          </span>
+        `;
+      }
+
+      return `
+        <span class="coming-tiles">
+          <span class="coming-tile">${icon("layout-dashboard")}Dashboard systems</span>
+          <span class="coming-tile">${icon("workflow")}Workflow design</span>
+          <span class="coming-tile">${icon("database")}Database logic</span>
+          <span class="coming-tile">${icon("sparkles")}Case study polish</span>
+        </span>
+      `;
     }
 
     function renderProjects() {
@@ -1282,18 +1684,28 @@
           <article class="project-card pressable" tabindex="0" role="button" data-project-id="${project.id}" aria-label="Open ${project.title}">
             <span class="project-bg"></span>
             <span class="project-pattern"></span>
+            <span class="project-visual" aria-hidden="true">
+              ${renderProjectMockup(project)}
+            </span>
             <span class="project-content">
               <span class="project-top">
-                <span class="pill">${icon(project.icon)}${project.type}</span>
+                <span class="project-heading">
+                  <span class="project-eyebrow">
+                    <span class="pill">${icon(project.id === "quickstay" ? "check-circle-2" : "clock")}${project.type}</span>
+                  </span>
+                  <span class="project-title">${project.title}</span>
+                </span>
                 <span class="round-icon">${icon("arrow-up-right")}</span>
               </span>
               <span>
-                <span class="project-title">${project.title}</span>
                 <span class="project-desc">${project.summary}</span>
-                <span class="project-actions">
-                  <a class="btn btn-light" href="${project.caseUrl}" onclick="event.stopPropagation()">${icon("file-text")}View Case Study</a>
-                  <a class="btn btn-dark" href="${project.liveUrl}" onclick="event.stopPropagation()">${icon("external-link")}Explore System</a>
+                <span class="project-meta">
+                  ${project.tags.slice(0, 4).map((tag) => `<span class="project-tag">${tag}</span>`).join("")}
                 </span>
+              </span>
+              <span class="project-actions">
+                <button class="btn btn-light" type="button" data-project-action="details">${icon("file-text")}View Case Study</button>
+                <a class="btn btn-dark" href="${project.liveUrl}" onclick="event.stopPropagation()">${icon("external-link")}Explore System</a>
               </span>
             </span>
           </article>
@@ -1301,15 +1713,28 @@
       `).join("");
       lucide.createIcons();
     }
-
     function openProject(project) {
       modalTitle.textContent = project.title;
+      modalVisual.innerHTML = renderProjectMockup(project);
       modalBody.innerHTML = `
-        <p>${project.details}</p>
-        <div class="modal-tags">${project.tags.map((tag) => `<span class="modal-tag">${icon("tag")}${tag}</span>`).join("")}</div>
-        <div class="modal-actions">
-          <a class="modal-action-btn" href="${project.caseUrl}">${icon("file-text")}View Case Study</a>
-          <a class="modal-action-btn primary" href="${project.liveUrl}">${icon("external-link")}Explore System</a>
+        <div class="modal-summary">
+          <p>${project.details}</p>
+          <div class="modal-stat-grid">
+            ${project.stats.map(([value, label]) => `<span class="modal-stat"><strong>${value}</strong><span>${label}</span></span>`).join("")}
+          </div>
+          <div class="modal-tags">${project.tags.map((tag) => `<span class="modal-tag">${icon("tag")}${tag}</span>`).join("")}</div>
+          <div class="modal-actions">
+            <a class="modal-action-btn primary" href="${project.caseUrl}">${icon("file-text")}Open Full Case Study</a>
+            <a class="modal-action-btn" href="${project.liveUrl}">${icon("external-link")}Explore System</a>
+          </div>
+        </div>
+        <div class="modal-detail-panel">
+          ${project.highlights.map(([title, text]) => `
+            <span class="modal-detail">
+              ${icon("circle-check")}
+              <span><strong>${title}</strong><span>${text}</span></span>
+            </span>
+          `).join("")}
         </div>
       `;
       modal.classList.add("open");
@@ -1328,6 +1753,14 @@
     }
 
     renderProjects();
+    document.querySelectorAll("[data-project-action='details']").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const card = button.closest("[data-project-id]");
+        openProject(projects.find((project) => project.id === card.dataset.projectId));
+      });
+    });
     document.querySelectorAll("[data-project-id]").forEach((card) => {
       const open = () => openProject(projects.find((project) => project.id === card.dataset.projectId));
       card.addEventListener("click", open);
