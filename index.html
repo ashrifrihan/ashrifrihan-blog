@@ -1682,11 +1682,6 @@
       projectList.innerHTML = projects.map((project) => `
         <li>
           <article class="project-card pressable" tabindex="0" role="button" data-project-id="${project.id}" aria-label="Open ${project.title}">
-            <span class="project-bg"></span>
-            <span class="project-pattern"></span>
-            <span class="project-visual" aria-hidden="true">
-              ${renderProjectMockup(project)}
-            </span>
             <span class="project-content">
               <span class="project-top">
                 <span class="project-heading">
