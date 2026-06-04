@@ -598,7 +598,7 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 20px;
-      padding: 22px 48px 36px;
+      padding: 22px 120px 36px;
       min-height: 240px;
     }
     .project-top {
@@ -646,6 +646,9 @@
       background: #ffffff;
       border: 1px solid rgba(220,231,243,0.9);
       box-shadow: 0 14px 32px rgba(70,91,128,0.11);
+      position: absolute;
+      top: 28px;
+      right: 28px;
     }
     .project-title {
       display: block;
@@ -1330,8 +1333,9 @@
       .why-grid.why-stack .why-card:nth-child(4) { top: 112px; }
       #projects .section-head { margin-bottom: 22px; }
       .project-card, .card-list li:nth-child(even) .project-card {
-        grid-template-rows: minmax(210px, auto) auto;
-        border-radius: 24px;
+        grid-template-rows: minmax(180px, auto) auto;
+        border-radius: 18px;
+        box-shadow: 0 14px 36px rgba(70,91,128,0.08);
       }
       .project-visual {
         min-height: 220px;
@@ -1351,17 +1355,20 @@
       .coming-tile { min-height: 64px; }
       .floating-chip { display: none; }
       .project-content {
-        gap: 18px;
-        padding: 0 18px 18px;
+        gap: 14px;
+        padding: 12px 18px 18px;
       }
-      .project-title { max-width: 12ch; font-size: clamp(1.85rem, 11vw, 2.8rem); }
-      .project-actions { flex-direction: column; }
+      .project-title { max-width: 22ch; font-size: 1.6rem; line-height: 1.05; }
+      .project-actions { flex-direction: column; justify-content: center; align-items: center; }
+      .project-actions .btn { width: 100%; max-width: 320px; }
+
+      .round-icon { position: static; margin: 12px 0; transform: none; }
       .contact-panel { padding: 22px; border-radius: 22px; }
       .footer-card { grid-template-columns: 1fr; align-items: start; padding: 22px; border-radius: 22px; }
       .footer-links { justify-content: flex-start; margin-top: 22px; }
       .copyright { text-align: left; }
-      .modal-overlay { padding: 12px; }
-      .project-modal { width: 100%; border-radius: 22px; }
+      .modal-overlay { padding: 0; }
+      .project-modal { width: 100%; border-radius: 0; height: 100vh; }
       .modal-hero {
         min-height: auto;
         padding: 18px;
@@ -1800,19 +1807,6 @@
   <script>
     lucide.createIcons();
 
-    // Discourage copying or selecting text on this page.
-    ["copy", "cut", "contextmenu", "selectstart", "dragstart"].forEach((eventName) => {
-      document.addEventListener(eventName, (event) => {
-        event.preventDefault();
-      });
-    });
-
-    document.addEventListener("keydown", (event) => {
-      const key = event.key.toLowerCase();
-      if ((event.ctrlKey || event.metaKey) && ["c", "x", "a"].includes(key)) {
-        event.preventDefault();
-      }
-    });
 
     const menuButton = document.getElementById("menuButton");
     const mobileMenu = document.getElementById("mobileMenu");
